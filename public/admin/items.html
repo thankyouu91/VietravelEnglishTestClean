@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vietravel Exam Admin · Quản lý ngân hàng câu hỏi</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">VTV</div>
+      <div>
+        <div class="brand-name">Vietravel</div>
+        <div class="brand-sub">Exam Admin · Quản lý ngân hàng</div>
+      </div>
+    </div>
+    <nav class="nav-tabs">
+      <a class="nav-tab" href="index.html">Phiên thi</a>
+      <a class="nav-tab" href="review.html">Chấm Viết <span id="navPendingBadge" class="nav-badge" hidden>0</span></a>
+      <a class="nav-tab active" href="items.html">Ngân hàng</a>
+    </nav>
+    <div class="right">
+      <span id="userBadge" class="user-badge"></span>
+      <button class="btn btn-ghost" onclick="logout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <main class="container container-wide">
+    <section class="card">
+      <div class="card-head">
+        <h2>Ngân hàng câu hỏi</h2>
+        <div class="filters">
+          <select id="fBank">
+            <option value="BANK_STAFF">BANK_STAFF (nhân viên)</option>
+            <option value="BANK_OFFICE_MGR">BANK_OFFICE_MGR (quản lý)</option>
+          </select>
+          <select id="fTrack">
+            <option value="listening">Listening</option>
+            <option value="reading">Reading</option>
+            <option value="writing">Writing</option>
+          </select>
+          <select id="fLevel">
+            <option value="">Tất cả CEFR</option>
+            <option>A2</option><option>B1</option><option>B2</option>
+            <option>C1</option><option>C2</option>
+          </select>
+          <input id="fSearch" placeholder="Tìm theo id, topic, nội dung…" />
+          <button class="btn btn-primary" onclick="openEditor(null)">+ Thêm câu hỏi</button>
+        </div>
+      </div>
+
+      <div class="bank-summary" id="bankSummary"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px">ID</th>
+              <th style="width:60px">Cấp</th>
+              <th style="width:200px">Chủ đề</th>
+              <th>Nội dung</th>
+              <th style="width:130px"></th>
+            </tr>
+          </thead>
+          <tbody id="itemRows"><tr><td colspan="5" class="loading">Đang tải…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="editorModal" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeEditor()"></div>
+    <div class="modal-body modal-body-wide">
+      <div class="modal-head">
+        <h3 id="editorTitle">Thêm câu hỏi</h3>
+        <button class="close" onclick="closeEditor()">✕</button>
+      </div>
+      <div id="editorContent"></div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" id="btnPreview" onclick="previewItem()">Xem trước</button>
+        <button class="btn btn-danger" id="btnDelete" onclick="deleteItem()" hidden>Xóa</button>
+        <button class="btn btn-primary" onclick="saveItem()">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+<script src="items.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Speaking Test · Vietravel English</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Be Vietnam Pro','sans-serif']},colors:{brand:{DEFAULT:'#1F4E79',light:'#2E75B6',pale:'#EFF6FF'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Be Vietnam Pro',sans-serif}
+.screen{display:none}.screen.active{display:block}
+@keyframes pulse-ring{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.4);opacity:0}}
+.pulse-ring{animation:pulse-ring 1.5s infinite}
+@keyframes wave{0%,100%{height:8px}50%{height:24px}}
+.wave-bar{animation:wave .6s ease-in-out infinite;width:3px;border-radius:2px}
+.wave-bar:nth-child(2){animation-delay:.1s}
+.wave-bar:nth-child(3){animation-delay:.2s}
+.wave-bar:nth-child(4){animation-delay:.3s}
+.wave-bar:nth-child(5){animation-delay:.1s}
+</style>
+</head>
+<body class="bg-slate-100 text-gray-800 min-h-screen">
+
+<!-- SCREEN: INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="min-h-screen flex items-center justify-center p-6" style="background:radial-gradient(circle at 15% 20%,rgba(46,117,182,.12) 0%,transparent 40%),#F1F5F9">
+    <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-lg text-center">
+      <img src="/logo-vietravel.svg" alt="Vietravel" class="h-10 mx-auto mb-6">
+      <h1 class="text-2xl font-black text-brand mb-2">🎤 Speaking Test</h1>
+      <p class="text-sm text-gray-500 mb-6">Bài kiểm tra kỹ năng nói tiếng Anh — Phỏng vấn 1-on-1 với AI</p>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 text-left">
+        <div class="text-xs text-blue-800 space-y-2">
+          <p><strong>📋 Cấu trúc bài thi:</strong></p>
+          <ul class="list-disc pl-4 space-y-1">
+            <li><strong>Part 1</strong> — Giới thiệu bản thân (1 phút)</li>
+            <li><strong>Part 2</strong> — Thảo luận chủ đề (2 phút)</li>
+            <li><strong>Part 3</strong> — Đóng vai tình huống (2 phút)</li>
+          </ul>
+          <p class="mt-2"><strong>⚙️ Yêu cầu:</strong> Microphone + Google Chrome</p>
+        </div>
+      </div>
+
+      <div id="mic-status" class="mb-4 text-xs"></div>
+      <div id="intro-error" class="hidden bg-red-50 text-red-700 rounded-xl px-4 py-3 text-xs mb-4"></div>
+
+      <button id="btn-start" onclick="startSpeakingTest()" class="w-full py-3 rounded-xl font-bold text-white text-sm transition hover:-translate-y-0.5 hover:shadow-lg" style="background:linear-gradient(135deg,#1F4E79,#2E75B6)">
+        🎤 Bắt đầu Speaking Test
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: TEST -->
+<div id="screen-test" class="screen">
+  <div class="max-w-2xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <img src="/logo-vietravel.svg" alt="" class="h-7">
+        <div>
+          <div class="text-xs font-bold text-brand">Speaking Test</div>
+          <div id="test-part" class="text-[10px] text-gray-400">Part 1 — Introduction</div>
+        </div>
+      </div>
+      <div id="test-timer" class="text-lg font-black text-brand tabular-nums">05:00</div>
+    </div>
+
+    <!-- AI Interviewer Card -->
+    <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-4 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white text-sm font-bold">AI</div>
+        <div>
+          <div class="text-sm font-bold text-gray-800">Ruth — AI Interviewer</div>
+          <div id="ai-status" class="text-[11px] text-gray-400">Ready</div>
+        </div>
+        <!-- Wave animation -->
+        <div id="ai-wave" class="hidden flex items-center gap-0.5 ml-auto">
+          <div class="wave-bar bg-brand"></div>
+          <div class="wave-bar bg-brand"></div>
+          <div class="wave-bar bg-brand"></div>
+          <div class="wave-bar bg-brand"></div>
+          <div class="wave-bar bg-brand"></div>
+        </div>
+      </div>
+      <div id="ai-message" class="text-sm text-gray-700 leading-relaxed bg-blue-50 rounded-xl p-4">
+        Waiting to start...
+      </div>
+    </div>
+
+    <!-- Candidate Response Area -->
+    <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm mb-4">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white text-sm font-bold">You</div>
+        <div>
+          <div class="text-sm font-bold text-gray-800">Your Response</div>
+          <div id="candidate-status" class="text-[11px] text-gray-400">Waiting...</div>
+        </div>
+        <div id="mic-indicator" class="hidden ml-auto relative">
+          <div class="w-4 h-4 rounded-full bg-red-500"></div>
+          <div class="absolute inset-0 w-4 h-4 rounded-full bg-red-500 pulse-ring"></div>
+        </div>
+      </div>
+      <div id="candidate-transcript" class="text-sm text-gray-600 leading-relaxed bg-gray-50 rounded-xl p-4 min-h-[60px]">
+        <span class="text-gray-400 italic">Your speech will appear here...</span>
+      </div>
+      <!-- Fallback text input -->
+      <div id="text-fallback" class="hidden mt-3">
+        <textarea id="text-input" rows="3" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-light" placeholder="Type your response here (fallback mode)..."></textarea>
+        <button onclick="submitTextResponse()" class="mt-2 px-4 py-2 bg-brand text-white rounded-xl text-xs font-bold">Submit Response</button>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center justify-center gap-3">
+      <button id="btn-record" onclick="toggleRecording()" class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition disabled:opacity-50" disabled>
+        🎤 Start Speaking
+      </button>
+      <button id="btn-stop" onclick="stopRecording()" class="hidden flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm hover:bg-red-700 transition">
+        ⏹ Done
+      </button>
+      <button id="btn-skip" onclick="skipTurn()" class="px-4 py-3 border border-gray-200 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50 transition">
+        Skip →
+      </button>
+    </div>
+
+    <!-- Conversation History -->
+    <div class="mt-6">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Conversation History</h3>
+      <div id="history" class="space-y-2 max-h-[200px] overflow-y-auto"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: RESULT -->
+<div id="screen-result" class="screen">
+  <div class="min-h-screen flex items-center justify-center p-6 bg-slate-100">
+    <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md">
+      <div class="text-center mb-6">
+        <img src="/logo-vietravel.svg" alt="" class="h-8 mx-auto mb-4">
+        <h2 class="text-xl font-black text-brand">Speaking Test Results</h2>
+      </div>
+
+      <div id="result-score" class="text-center mb-6">
+        <div class="w-24 h-24 rounded-full bg-brand/10 flex items-center justify-center mx-auto mb-2">
+          <span id="r-score" class="text-3xl font-black text-brand">—</span>
+        </div>
+        <div id="r-band" class="text-sm font-bold text-gray-500">—</div>
+      </div>
+
+      <div id="result-criteria" class="space-y-2 mb-6"></div>
+
+      <div id="result-feedback" class="bg-gray-50 rounded-xl p-4 text-xs text-gray-600 mb-6"></div>
+
+      <div class="flex gap-3">
+        <a href="/exam/" class="flex-1 text-center py-2.5 border border-gray-200 rounded-xl text-xs font-bold text-brand hover:bg-gray-50">← Về bài thi</a>
+        <a href="/" class="flex-1 text-center py-2.5 border border-gray-200 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50">Trang chủ</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="hidden fixed inset-0 z-50 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center gap-4">
+  <div class="w-10 h-10 border-4 border-gray-200 border-t-brand rounded-full animate-spin"></div>
+  <div id="loading-text" class="text-sm font-bold text-brand">Processing...</div>
+</div>
+
+<script src="speaking.js"></script>
+</body>
+</html>

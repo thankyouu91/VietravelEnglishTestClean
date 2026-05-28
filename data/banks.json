@@ -1,0 +1,2103 @@
+{
+  "BANK_STAFF": {
+    "listening": [
+      {
+        "id": "L001",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much.",
+        "question": "What is the guest's name?",
+        "options": [
+          "Mr. Tanaka",
+          "Mr. Honda",
+          "Mr. Suzuki",
+          "Mr. Yamada"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "L002",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "question": "How many nights did the guest book?",
+        "options": [
+          "One night",
+          "Two nights",
+          "Three nights",
+          "Four nights"
+        ],
+        "correct": 1,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L003",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "question": "What is the room number?",
+        "options": [
+          "307",
+          "407",
+          "507",
+          "607"
+        ],
+        "correct": 2,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L004",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "question": "What time does breakfast start?",
+        "options": [
+          "6 AM",
+          "7 AM",
+          "8 AM",
+          "9 AM"
+        ],
+        "correct": 1,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L005",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "question": "Where is the restaurant located?",
+        "options": [
+          "Ground floor",
+          "Second floor",
+          "Third floor",
+          "Rooftop"
+        ],
+        "correct": 1,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L006",
+        "audioFile": "l1c",
+        "level": "B1",
+        "topic": "Hotel Check-in",
+        "question": "What time is check-out?",
+        "options": [
+          "10 AM",
+          "11 AM",
+          "12 noon",
+          "1 PM"
+        ],
+        "correct": 2,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L007",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "question": "What is the name of the restaurant?",
+        "options": [
+          "Sunrise",
+          "Lotus",
+          "Garden",
+          "Ocean"
+        ],
+        "correct": 1,
+        "audio": "Good afternoon and welcome to The Sunrise Resort. May I have your name please? Yes, my name is Tanaka. I have a room booked for two nights. Perfect, Mr. Tanaka. You are in room five hundred and seven. Breakfast is served from seven AM to ten AM at the Lotus restaurant on the second floor. Great, thank you. And what time is check-out? Check-out is at twelve noon. Is there anything else I can help you with? No, that's all. Thank you very much."
+      },
+      {
+        "id": "L008",
+        "audioFile": "l2c",
+        "level": "A2",
+        "topic": "Restaurant Ordering",
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes.",
+        "question": "How many people are dining?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L009",
+        "audioFile": "l2c",
+        "level": "A2",
+        "topic": "Restaurant Ordering",
+        "question": "What is the restaurant's special today?",
+        "options": [
+          "Grilled chicken",
+          "Grilled sea bass with lemongrass",
+          "Pad thai",
+          "Beef steak"
+        ],
+        "correct": 1,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L010",
+        "audioFile": "l2c",
+        "level": "A2",
+        "topic": "Restaurant Ordering",
+        "question": "Where does the customer want to sit?",
+        "options": [
+          "By the door",
+          "By the window",
+          "At the bar",
+          "Outside"
+        ],
+        "correct": 1,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L011",
+        "audioFile": "l2c",
+        "level": "B1",
+        "topic": "Restaurant Ordering",
+        "question": "How many specials did they order?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "Four"
+        ],
+        "correct": 1,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L012",
+        "audioFile": "l2c",
+        "level": "A2",
+        "topic": "Restaurant Ordering",
+        "question": "What drinks did they order?",
+        "options": [
+          "Beer and juice",
+          "Red wine and water",
+          "White wine and sparkling water",
+          "Coffee and tea"
+        ],
+        "correct": 2,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L013",
+        "audioFile": "l2c",
+        "level": "B1",
+        "topic": "Restaurant Ordering",
+        "question": "How long will the food take?",
+        "options": [
+          "10 minutes",
+          "15 minutes",
+          "20 minutes",
+          "30 minutes"
+        ],
+        "correct": 2,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L014",
+        "audioFile": "l2c",
+        "level": "A2",
+        "topic": "Restaurant Ordering",
+        "question": "What is the name of the restaurant?",
+        "options": [
+          "Riverside",
+          "Lotus Garden",
+          "Sunrise",
+          "Ocean View"
+        ],
+        "correct": 1,
+        "audio": "Good evening. Welcome to the Lotus Garden. Table for how many? For four, please. Do you have a table by the window? Yes, right this way. Here's the menu. Our special today is grilled sea bass with lemongrass. That sounds lovely. We'll have two of those, one pad thai, and one chicken curry. Excellent choices. And for drinks? Two glasses of white wine and two sparkling waters, please. Perfect. Your food will be ready in about twenty minutes."
+      },
+      {
+        "id": "L015",
+        "audioFile": "l3c",
+        "level": "A2",
+        "topic": "Tour Booking",
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details.",
+        "question": "Which tour does the customer want to book?",
+        "options": [
+          "Ha Long Bay",
+          "Cu Chi Tunnels",
+          "Mekong Delta",
+          "Phu Quoc"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L016",
+        "audioFile": "l3c",
+        "level": "A2",
+        "topic": "Tour Booking",
+        "question": "When does the customer want to go?",
+        "options": [
+          "Today",
+          "Tomorrow",
+          "This Saturday",
+          "Next week"
+        ],
+        "correct": 2,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L017",
+        "audioFile": "l3c",
+        "level": "B1",
+        "topic": "Tour Booking",
+        "question": "How many adults are going?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct": 2,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L018",
+        "audioFile": "l3c",
+        "level": "B1",
+        "topic": "Tour Booking",
+        "question": "How many children are going?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "None"
+        ],
+        "correct": 1,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L019",
+        "audioFile": "l3c",
+        "level": "B1",
+        "topic": "Tour Booking",
+        "question": "What time does the tour depart?",
+        "options": [
+          "6:30 AM",
+          "7:00 AM",
+          "7:30 AM",
+          "8:00 AM"
+        ],
+        "correct": 2,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L020",
+        "audioFile": "l3c",
+        "level": "B1",
+        "topic": "Tour Booking",
+        "question": "How much is the adult price?",
+        "options": [
+          "$35",
+          "$40",
+          "$45",
+          "$50"
+        ],
+        "correct": 2,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L021",
+        "audioFile": "l3c",
+        "level": "A2",
+        "topic": "Tour Booking",
+        "question": "What is NOT included in the tour?",
+        "options": [
+          "Boat ride",
+          "Lunch",
+          "Dinner",
+          "Coconut candy workshop"
+        ],
+        "correct": 2,
+        "audio": "Good morning, Vietravel. How can I help you today? Hi, I'd like to book the Mekong Delta day tour for this Saturday. Certainly. How many people will be joining? Four adults and two children. The tour departs at seven thirty AM from your hotel. It includes a boat ride, a coconut candy workshop visit, and lunch. The price is forty-five dollars per adult and twenty-five for children under twelve. That's fine. Can we pay by credit card? Yes, of course. I'll send you a confirmation email with all the details."
+      },
+      {
+        "id": "L022",
+        "audioFile": "l4c",
+        "level": "B1",
+        "topic": "Customer Complaint",
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly.",
+        "question": "What is the guest's main complaint?",
+        "options": [
+          "Noisy room",
+          "Room not cleaned",
+          "No hot water",
+          "Broken AC"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L023",
+        "audioFile": "l4c",
+        "level": "B1",
+        "topic": "Customer Complaint",
+        "question": "What was on the floor?",
+        "options": [
+          "Dirty towels",
+          "Broken glass",
+          "Food",
+          "Luggage"
+        ],
+        "correct": 0,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L024",
+        "audioFile": "l4c",
+        "level": "B1",
+        "topic": "Customer Complaint",
+        "question": "How long did the guest wait?",
+        "options": [
+          "10 minutes",
+          "20 minutes",
+          "30 minutes",
+          "1 hour"
+        ],
+        "correct": 2,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L026",
+        "audioFile": "l4c",
+        "level": "B1",
+        "topic": "Customer Complaint",
+        "question": "What type of hotel is this?",
+        "options": [
+          "Three-star",
+          "Four-star",
+          "Five-star",
+          "Budget"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L028",
+        "audioFile": "l4c",
+        "level": "B1",
+        "topic": "Customer Complaint",
+        "question": "What was wrong with the bed?",
+        "options": [
+          "Too small",
+          "Not made",
+          "Broken",
+          "Uncomfortable"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L036",
+        "audioFile": "l6c",
+        "level": "A2",
+        "topic": "Restaurant Reservation",
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!",
+        "question": "How many guests are coming?",
+        "options": [
+          "Four",
+          "Five",
+          "Six",
+          "Eight"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L037",
+        "audioFile": "l6c",
+        "level": "A2",
+        "topic": "Restaurant Reservation",
+        "question": "What is the occasion?",
+        "options": [
+          "Anniversary",
+          "Birthday",
+          "Graduation",
+          "Business dinner"
+        ],
+        "correct": 1,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L038",
+        "audioFile": "l6c",
+        "level": "B1",
+        "topic": "Restaurant Reservation",
+        "question": "What time is the reservation?",
+        "options": [
+          "6:30 PM",
+          "7:00 PM",
+          "7:30 PM",
+          "8:00 PM"
+        ],
+        "correct": 3,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L039",
+        "audioFile": "l6c",
+        "level": "B1",
+        "topic": "Restaurant Reservation",
+        "question": "Where will they sit?",
+        "options": [
+          "Main dining room",
+          "Private room",
+          "Garden terrace",
+          "Bar area"
+        ],
+        "correct": 2,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L040",
+        "audioFile": "l6c",
+        "level": "A2",
+        "topic": "Restaurant Reservation",
+        "question": "What flavor cake is requested?",
+        "options": [
+          "Vanilla",
+          "Strawberry",
+          "Chocolate",
+          "Lemon"
+        ],
+        "correct": 2,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L041",
+        "audioFile": "l6c",
+        "level": "A2",
+        "topic": "Restaurant Reservation",
+        "question": "What is the caller's name?",
+        "options": [
+          "Watson",
+          "Wilson",
+          "Williams",
+          "Walker"
+        ],
+        "correct": 1,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L042",
+        "audioFile": "l6c",
+        "level": "A2",
+        "topic": "Restaurant Reservation",
+        "question": "When is the reservation for?",
+        "options": [
+          "Tonight",
+          "Tomorrow evening",
+          "This weekend",
+          "Next week"
+        ],
+        "correct": 1,
+        "audio": "Good evening, Riverside Restaurant. How may I help you? Hello, I'd like to make a reservation for tomorrow evening, please. Certainly. For how many guests? Six people. We're celebrating a birthday. Lovely! What time would you prefer? We have availability at six thirty or eight PM. Eight PM would be perfect. Could we have a private area? Yes, our garden terrace is available. Would you like us to prepare a birthday cake? That would be wonderful. Chocolate, please. The name is Wilson. Perfect, Mr. Wilson. Six guests, eight PM, garden terrace, chocolate cake. We look forward to seeing you tomorrow!"
+      },
+      {
+        "id": "L043",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!",
+        "question": "What is the tour destination?",
+        "options": [
+          "War Museum",
+          "Cu Chi Tunnels",
+          "Mekong Delta",
+          "Jade Emperor Pagoda"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L044",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "question": "How long is the tour?",
+        "options": [
+          "2 hours",
+          "3 hours",
+          "4 hours",
+          "5 hours"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L045",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "question": "What should visitors bring?",
+        "options": [
+          "Camera and hat",
+          "Water and comfortable shoes",
+          "Passport and money",
+          "Umbrella and jacket"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L046",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "question": "What time does the bus depart for return?",
+        "options": [
+          "1 PM",
+          "2 PM",
+          "3 PM",
+          "4 PM"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L047",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "question": "What is the guide's name?",
+        "options": [
+          "Lan",
+          "Linh",
+          "Ly",
+          "Loan"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L049",
+        "audioFile": "l7c",
+        "level": "B1",
+        "topic": "Tour Guide Briefing",
+        "question": "How long is the break at the souvenir shop?",
+        "options": [
+          "5 minutes",
+          "10 minutes",
+          "15 minutes",
+          "20 minutes"
+        ],
+        "correct": 2,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L050",
+        "audioFile": "l8c",
+        "level": "A2",
+        "topic": "Concierge Directions",
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!",
+        "question": "Where does the guest want to go?",
+        "options": [
+          "Museum",
+          "Night market",
+          "Restaurant",
+          "Temple"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L051",
+        "audioFile": "l8c",
+        "level": "A2",
+        "topic": "Concierge Directions",
+        "question": "How long is the walk?",
+        "options": [
+          "5 minutes",
+          "10 minutes",
+          "15 minutes",
+          "20 minutes"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L052",
+        "audioFile": "l8c",
+        "level": "B1",
+        "topic": "Concierge Directions",
+        "question": "Which direction should the guest turn first?",
+        "options": [
+          "Right",
+          "Left",
+          "Straight",
+          "Back"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L053",
+        "audioFile": "l8c",
+        "level": "B1",
+        "topic": "Concierge Directions",
+        "question": "What street should the guest turn right onto?",
+        "options": [
+          "Le Loi Street",
+          "Nguyen Hue Street",
+          "Dong Khoi Street",
+          "Hai Ba Trung Street"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L054",
+        "audioFile": "l8c",
+        "level": "A2",
+        "topic": "Concierge Directions",
+        "question": "How far is it to the traffic light?",
+        "options": [
+          "100 meters",
+          "200 meters",
+          "300 meters",
+          "500 meters"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L055",
+        "audioFile": "l8c",
+        "level": "B1",
+        "topic": "Concierge Directions",
+        "question": "What advice does the concierge give?",
+        "options": [
+          "Take a taxi",
+          "Bring a map",
+          "Watch your belongings",
+          "Go with a group"
+        ],
+        "correct": 2,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L056",
+        "audioFile": "l8c",
+        "level": "A2",
+        "topic": "Concierge Directions",
+        "question": "Is the area safe at night?",
+        "options": [
+          "No, it is dangerous",
+          "Yes, it is popular with tourists",
+          "Only with a guide",
+          "Only before 9 PM"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, could you tell me how to get to the night market from here? Of course! It's about a ten-minute walk. Go out the main entrance and turn left. Left at the entrance, okay. Walk straight for about two hundred meters until you reach the traffic light. Then turn right onto Nguyen Hue Street. Right at the traffic light. Yes. Continue for another five minutes and you'll see the market on your left. You can't miss it — there are lots of lights and food stalls. Is it safe to walk there at night? Absolutely. It's a very popular tourist area. But do keep an eye on your belongings. Would you like me to write down the directions? No, I think I've got it. Thank you so much!"
+      },
+      {
+        "id": "L057",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!",
+        "question": "What is the most popular treatment?",
+        "options": [
+          "Thai massage",
+          "Vietnamese herbal massage",
+          "Hot stone therapy",
+          "Facial treatment"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L058",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "question": "How long is the herbal massage?",
+        "options": [
+          "60 minutes",
+          "75 minutes",
+          "90 minutes",
+          "120 minutes"
+        ],
+        "correct": 2,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L059",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "question": "How much does the herbal massage cost?",
+        "options": [
+          "$55",
+          "$65",
+          "$75",
+          "$80"
+        ],
+        "correct": 3,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L060",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "question": "What treatment does the guest choose?",
+        "options": [
+          "Herbal massage",
+          "Aromatherapy massage",
+          "Hot stone",
+          "Facial"
+        ],
+        "correct": 1,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L061",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "question": "What time is the booking?",
+        "options": [
+          "3 PM",
+          "4 PM",
+          "5 PM",
+          "6 PM"
+        ],
+        "correct": 2,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L062",
+        "audioFile": "l9c",
+        "level": "B1",
+        "topic": "Spa Booking",
+        "question": "Why does the guest want a shorter treatment?",
+        "options": [
+          "Budget limit",
+          "Has dinner at 7",
+          "Leaving hotel",
+          "Meeting someone"
+        ],
+        "correct": 1,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L1101",
+        "audioFile": "l11c",
+        "level": "B1",
+        "topic": "Company Travel Policy Update",
+        "audio": "Good morning team. I want to quickly update you on the new company travel policy starting next month. First, all domestic flights must be booked at least two weeks in advance. If you book later, you will need manager approval. Second, the daily food allowance has been increased to forty-five dollars. You must submit all receipts within five days of returning from your trip. Third, for hotel bookings, please use our partner hotels listed on the intranet. We have secured a fifteen percent discount with them. Finally, taxi fares to and from the airport are fully reimbursable, but please use ride-sharing apps when possible to save costs. If you have any questions, please contact the finance department. Thank you.",
+        "question": "What is the main topic of the announcement?",
+        "options": [
+          "New office layout and desk assignments",
+          "Company travel policy update starting next month",
+          "Finance department software training",
+          "Intranet website design changes"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1102",
+        "audioFile": "l11c",
+        "level": "B1",
+        "topic": "Company Travel Policy Update",
+        "audio": "Good morning team. I want to quickly update you on the new company travel policy starting next month. First, all domestic flights must be booked at least two weeks in advance. If you book later, you will need manager approval. Second, the daily food allowance has been increased to forty-five dollars. You must submit all receipts within five days of returning from your trip. Third, for hotel bookings, please use our partner hotels listed on the intranet. We have secured a fifteen percent discount with them. Finally, taxi fares to and from the airport are fully reimbursable, but please use ride-sharing apps when possible to save costs. If you have any questions, please contact the finance department. Thank you.",
+        "question": "How far in advance must domestic flights be booked without manager approval?",
+        "options": [
+          "One week in advance",
+          "Two weeks in advance",
+          "Three weeks in advance",
+          "Four weeks in advance"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1103",
+        "audioFile": "l11c",
+        "level": "B1",
+        "topic": "Company Travel Policy Update",
+        "audio": "Good morning team. I want to quickly update you on the new company travel policy starting next month. First, all domestic flights must be booked at least two weeks in advance. If you book later, you will need manager approval. Second, the daily food allowance has been increased to forty-five dollars. You must submit all receipts within five days of returning from your trip. Third, for hotel bookings, please use our partner hotels listed on the intranet. We have secured a fifteen percent discount with them. Finally, taxi fares to and from the airport are fully reimbursable, but please use ride-sharing apps when possible to save costs. If you have any questions, please contact the finance department. Thank you.",
+        "question": "What is the new daily food allowance under the updated policy?",
+        "options": [
+          "Thirty-five dollars",
+          "Forty dollars",
+          "Forty-five dollars",
+          "Fifty dollars"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L1104",
+        "audioFile": "l11c",
+        "level": "B1",
+        "topic": "Company Travel Policy Update",
+        "audio": "Good morning team. I want to quickly update you on the new company travel policy starting next month. First, all domestic flights must be booked at least two weeks in advance. If you book later, you will need manager approval. Second, the daily food allowance has been increased to forty-five dollars. You must submit all receipts within five days of returning from your trip. Third, for hotel bookings, please use our partner hotels listed on the intranet. We have secured a fifteen percent discount with them. Finally, taxi fares to and from the airport are fully reimbursable, but please use ride-sharing apps when possible to save costs. If you have any questions, please contact the finance department. Thank you.",
+        "question": "Within how many days must receipts be submitted after returning from a trip?",
+        "options": [
+          "Three days",
+          "Five days",
+          "Seven days",
+          "Ten days"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1105",
+        "audioFile": "l11c",
+        "level": "B1",
+        "topic": "Company Travel Policy Update",
+        "audio": "Good morning team. I want to quickly update you on the new company travel policy starting next month. First, all domestic flights must be booked at least two weeks in advance. If you book later, you will need manager approval. Second, the daily food allowance has been increased to forty-five dollars. You must submit all receipts within five days of returning from your trip. Third, for hotel bookings, please use our partner hotels listed on the intranet. We have secured a fifteen percent discount with them. Finally, taxi fares to and from the airport are fully reimbursable, but please use ride-sharing apps when possible to save costs. If you have any questions, please contact the finance department. Thank you.",
+        "question": "What discount has been secured with the partner hotels listed on the intranet?",
+        "options": [
+          "Ten percent discount",
+          "Fifteen percent discount",
+          "Twenty percent discount",
+          "Twenty-five percent discount"
+        ],
+        "correct": 1
+      }
+    ],
+    "reading": [
+      {
+        "id": "P1_1",
+        "passageId": "P1",
+        "topic": "Vietnam Tourism 2026",
+        "passage": "By early 2026, the landscape of Vietnam's tourism industry underwent a radical transformation. Following a series of strategic investments in sustainable infrastructure, the country positioned itself as the premier \"green-luxury\" destination in Southeast Asia. The initiative, dubbed \"Vision 2026,\" focused on decentralizing tourist hubs and promoting high-value experiences in previously underserved provinces such as Ha Giang and the Central Highlands.\n\nOne of the most significant shifts was the implementation of the Smart Visa 2.0 system, which utilized blockchain technology to streamline arrivals. This digital-first approach not only reduced processing times by 65% but also allowed for more granular data collection on traveler preferences. Consequently, the Vietnam National Authority of Tourism (VNAT) could tailor marketing campaigns to specific micro-segments, resulting in a 22% increase in the average length of stay.\n\nEconomic analysts have noted that the sector's contribution to the national GDP has reached an all-time high of 14.5%. This growth, however, has not come without challenges. The rapid expansion of eco-resorts has sparked debates regarding environmental conservation, prompting the government to enforce strict \"net-zero\" operational guidelines for all new developments within three years of opening.",
+        "question": "What was the primary focus of the \"Vision 2026\" initiative?",
+        "options": [
+          "Expanding existing tourist hubs in major cities",
+          "Promoting green-luxury and decentralizing hubs",
+          "Eliminating all luxury resorts for environmental reasons",
+          "Focusing exclusively on the Con Dao archipelago"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P1_2",
+        "passageId": "P1",
+        "topic": "Vietnam Tourism 2026",
+        "passage": "By early 2026, the landscape of Vietnam's tourism industry underwent a radical transformation. Following a series of strategic investments in sustainable infrastructure, the country positioned itself as the premier \"green-luxury\" destination in Southeast Asia. The initiative, dubbed \"Vision 2026,\" focused on decentralizing tourist hubs and promoting high-value experiences in previously underserved provinces such as Ha Giang and the Central Highlands.\n\nOne of the most significant shifts was the implementation of the Smart Visa 2.0 system, which utilized blockchain technology to streamline arrivals. This digital-first approach not only reduced processing times by 65% but also allowed for more granular data collection on traveler preferences. Consequently, the Vietnam National Authority of Tourism (VNAT) could tailor marketing campaigns to specific micro-segments, resulting in a 22% increase in the average length of stay.\n\nEconomic analysts have noted that the sector's contribution to the national GDP has reached an all-time high of 14.5%. This growth, however, has not come without challenges. The rapid expansion of eco-resorts has sparked debates regarding environmental conservation, prompting the government to enforce strict \"net-zero\" operational guidelines for all new developments within three years of opening.",
+        "question": "The Smart Visa 2.0 system significantly reduced the time required for tourist processing.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 0,
+        "level": "B1"
+      },
+      {
+        "id": "P1_3",
+        "passageId": "P1",
+        "topic": "Vietnam Tourism 2026",
+        "passage": "By early 2026, the landscape of Vietnam's tourism industry underwent a radical transformation. Following a series of strategic investments in sustainable infrastructure, the country positioned itself as the premier \"green-luxury\" destination in Southeast Asia. The initiative, dubbed \"Vision 2026,\" focused on decentralizing tourist hubs and promoting high-value experiences in previously underserved provinces such as Ha Giang and the Central Highlands.\n\nOne of the most significant shifts was the implementation of the Smart Visa 2.0 system, which utilized blockchain technology to streamline arrivals. This digital-first approach not only reduced processing times by 65% but also allowed for more granular data collection on traveler preferences. Consequently, the Vietnam National Authority of Tourism (VNAT) could tailor marketing campaigns to specific micro-segments, resulting in a 22% increase in the average length of stay.\n\nEconomic analysts have noted that the sector's contribution to the national GDP has reached an all-time high of 14.5%. This growth, however, has not come without challenges. The rapid expansion of eco-resorts has sparked debates regarding environmental conservation, prompting the government to enforce strict \"net-zero\" operational guidelines for all new developments within three years of opening.",
+        "question": "What environmental requirement must new resort developers now meet?",
+        "options": [
+          "Using only wooden materials for construction",
+          "Operating at net-zero within three years",
+          "Planting 1,000 trees per hectare",
+          "Banning all plastic bottles"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P1_4",
+        "passageId": "P1",
+        "topic": "Vietnam Tourism 2026",
+        "passage": "By early 2026, the landscape of Vietnam's tourism industry underwent a radical transformation. Following a series of strategic investments in sustainable infrastructure, the country positioned itself as the premier \"green-luxury\" destination in Southeast Asia. The initiative, dubbed \"Vision 2026,\" focused on decentralizing tourist hubs and promoting high-value experiences in previously underserved provinces such as Ha Giang and the Central Highlands.\n\nOne of the most significant shifts was the implementation of the Smart Visa 2.0 system, which utilized blockchain technology to streamline arrivals. This digital-first approach not only reduced processing times by 65% but also allowed for more granular data collection on traveler preferences. Consequently, the Vietnam National Authority of Tourism (VNAT) could tailor marketing campaigns to specific micro-segments, resulting in a 22% increase in the average length of stay.\n\nEconomic analysts have noted that the sector's contribution to the national GDP has reached an all-time high of 14.5%. This growth, however, has not come without challenges. The rapid expansion of eco-resorts has sparked debates regarding environmental conservation, prompting the government to enforce strict \"net-zero\" operational guidelines for all new developments within three years of opening.",
+        "question": "Digital nomads typically stay in Vietnam for shorter periods compared to traditional tourists.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 2,
+        "level": "B1"
+      },
+      {
+        "id": "P1_5",
+        "passageId": "P1",
+        "topic": "Vietnam Tourism 2026",
+        "passage": "By early 2026, the landscape of Vietnam's tourism industry underwent a radical transformation. Following a series of strategic investments in sustainable infrastructure, the country positioned itself as the premier \"green-luxury\" destination in Southeast Asia. The initiative, dubbed \"Vision 2026,\" focused on decentralizing tourist hubs and promoting high-value experiences in previously underserved provinces such as Ha Giang and the Central Highlands.\n\nOne of the most significant shifts was the implementation of the Smart Visa 2.0 system, which utilized blockchain technology to streamline arrivals. This digital-first approach not only reduced processing times by 65% but also allowed for more granular data collection on traveler preferences. Consequently, the Vietnam National Authority of Tourism (VNAT) could tailor marketing campaigns to specific micro-segments, resulting in a 22% increase in the average length of stay.\n\nEconomic analysts have noted that the sector's contribution to the national GDP has reached an all-time high of 14.5%. This growth, however, has not come without challenges. The rapid expansion of eco-resorts has sparked debates regarding environmental conservation, prompting the government to enforce strict \"net-zero\" operational guidelines for all new developments within three years of opening.",
+        "question": "Complete the sentence: The tourism sector's contribution to the national GDP ____________.",
+        "options": [
+          "has declined to 14.5%",
+          "has reached an all-time high of 14.5%",
+          "will reach 22% next year",
+          "remained stable at 10%"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P2_1",
+        "passageId": "P2",
+        "topic": "Future of Airline Operations",
+        "passage": "The commercial aviation industry is currently navigating one of its most transformative periods since the introduction of the jet engine. As airlines face mounting pressure to reduce carbon emissions and optimize operational efficiency, artificial intelligence (AI) has emerged as a cornerstone of modernization strategies. By integrating machine learning algorithms into flight planning systems, airlines can now analyze complex meteorological data, air traffic patterns, and aircraft performance metrics in real-time. This capability allows for dynamic route adjustments, minimizing fuel consumption and significantly lowering greenhouse gas emissions.\n\nFurthermore, predictive maintenance has revolutionized how airlines manage their fleets. Sensors embedded throughout the aircraft continuously monitor the health of critical components, transmitting data back to maintenance hubs. AI models predict potential failures before they occur, enabling proactive servicing. This shift from reactive to proactive maintenance has reduced aircraft downtime by an estimated 30% globally, directly improving flight punctuality and reducing passenger delays.\n\nDespite these advancements, the transition to AI-driven operations presents substantial hurdles. The initial capital expenditure required to upgrade legacy systems is prohibitive for many smaller regional carriers. Additionally, there is a growing concern among aviation professionals regarding the potential deskilling of human operators as automation takes over increasingly complex tasks. Regulators are actively working to establish comprehensive frameworks to ensure that human oversight remains central to aviation safety protocols.",
+        "question": "Which of the following best describes the main idea of the passage?",
+        "options": [
+          "The history of the jet engine in commercial aviation.",
+          "How predictive maintenance reduces aircraft downtime.",
+          "The transformative impact of AI on airline operations and its challenges.",
+          "The financial difficulties faced by regional carriers."
+        ],
+        "correct": 2,
+        "level": "B1"
+      },
+      {
+        "id": "P2_2",
+        "passageId": "P2",
+        "topic": "Future of Airline Operations",
+        "passage": "The commercial aviation industry is currently navigating one of its most transformative periods since the introduction of the jet engine. As airlines face mounting pressure to reduce carbon emissions and optimize operational efficiency, artificial intelligence (AI) has emerged as a cornerstone of modernization strategies. By integrating machine learning algorithms into flight planning systems, airlines can now analyze complex meteorological data, air traffic patterns, and aircraft performance metrics in real-time. This capability allows for dynamic route adjustments, minimizing fuel consumption and significantly lowering greenhouse gas emissions.\n\nFurthermore, predictive maintenance has revolutionized how airlines manage their fleets. Sensors embedded throughout the aircraft continuously monitor the health of critical components, transmitting data back to maintenance hubs. AI models predict potential failures before they occur, enabling proactive servicing. This shift from reactive to proactive maintenance has reduced aircraft downtime by an estimated 30% globally, directly improving flight punctuality and reducing passenger delays.\n\nDespite these advancements, the transition to AI-driven operations presents substantial hurdles. The initial capital expenditure required to upgrade legacy systems is prohibitive for many smaller regional carriers. Additionally, there is a growing concern among aviation professionals regarding the potential deskilling of human operators as automation takes over increasingly complex tasks. Regulators are actively working to establish comprehensive frameworks to ensure that human oversight remains central to aviation safety protocols.",
+        "question": "Predictive maintenance has reduced global aircraft downtime by more than 40%.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P2_3",
+        "passageId": "P2",
+        "topic": "Future of Airline Operations",
+        "passage": "The commercial aviation industry is currently navigating one of its most transformative periods since the introduction of the jet engine. As airlines face mounting pressure to reduce carbon emissions and optimize operational efficiency, artificial intelligence (AI) has emerged as a cornerstone of modernization strategies. By integrating machine learning algorithms into flight planning systems, airlines can now analyze complex meteorological data, air traffic patterns, and aircraft performance metrics in real-time. This capability allows for dynamic route adjustments, minimizing fuel consumption and significantly lowering greenhouse gas emissions.\n\nFurthermore, predictive maintenance has revolutionized how airlines manage their fleets. Sensors embedded throughout the aircraft continuously monitor the health of critical components, transmitting data back to maintenance hubs. AI models predict potential failures before they occur, enabling proactive servicing. This shift from reactive to proactive maintenance has reduced aircraft downtime by an estimated 30% globally, directly improving flight punctuality and reducing passenger delays.\n\nDespite these advancements, the transition to AI-driven operations presents substantial hurdles. The initial capital expenditure required to upgrade legacy systems is prohibitive for many smaller regional carriers. Additionally, there is a growing concern among aviation professionals regarding the potential deskilling of human operators as automation takes over increasingly complex tasks. Regulators are actively working to establish comprehensive frameworks to ensure that human oversight remains central to aviation safety protocols.",
+        "question": "According to the passage, what is a major concern regarding the use of AI?",
+        "options": [
+          "It makes airplanes fly too fast.",
+          "The potential deskilling of human operators.",
+          "It requires more fuel than traditional methods.",
+          "It causes unpredictable weather patterns."
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P2_4",
+        "passageId": "P2",
+        "topic": "Future of Airline Operations",
+        "passage": "The commercial aviation industry is currently navigating one of its most transformative periods since the introduction of the jet engine. As airlines face mounting pressure to reduce carbon emissions and optimize operational efficiency, artificial intelligence (AI) has emerged as a cornerstone of modernization strategies. By integrating machine learning algorithms into flight planning systems, airlines can now analyze complex meteorological data, air traffic patterns, and aircraft performance metrics in real-time. This capability allows for dynamic route adjustments, minimizing fuel consumption and significantly lowering greenhouse gas emissions.\n\nFurthermore, predictive maintenance has revolutionized how airlines manage their fleets. Sensors embedded throughout the aircraft continuously monitor the health of critical components, transmitting data back to maintenance hubs. AI models predict potential failures before they occur, enabling proactive servicing. This shift from reactive to proactive maintenance has reduced aircraft downtime by an estimated 30% globally, directly improving flight punctuality and reducing passenger delays.\n\nDespite these advancements, the transition to AI-driven operations presents substantial hurdles. The initial capital expenditure required to upgrade legacy systems is prohibitive for many smaller regional carriers. Additionally, there is a growing concern among aviation professionals regarding the potential deskilling of human operators as automation takes over increasingly complex tasks. Regulators are actively working to establish comprehensive frameworks to ensure that human oversight remains central to aviation safety protocols.",
+        "question": "Smaller regional carriers find it easy to upgrade to AI-driven operations.",
+        "options": [
+          "YES",
+          "NO",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P2_5",
+        "passageId": "P2",
+        "topic": "Future of Airline Operations",
+        "passage": "The commercial aviation industry is currently navigating one of its most transformative periods since the introduction of the jet engine. As airlines face mounting pressure to reduce carbon emissions and optimize operational efficiency, artificial intelligence (AI) has emerged as a cornerstone of modernization strategies. By integrating machine learning algorithms into flight planning systems, airlines can now analyze complex meteorological data, air traffic patterns, and aircraft performance metrics in real-time. This capability allows for dynamic route adjustments, minimizing fuel consumption and significantly lowering greenhouse gas emissions.\n\nFurthermore, predictive maintenance has revolutionized how airlines manage their fleets. Sensors embedded throughout the aircraft continuously monitor the health of critical components, transmitting data back to maintenance hubs. AI models predict potential failures before they occur, enabling proactive servicing. This shift from reactive to proactive maintenance has reduced aircraft downtime by an estimated 30% globally, directly improving flight punctuality and reducing passenger delays.\n\nDespite these advancements, the transition to AI-driven operations presents substantial hurdles. The initial capital expenditure required to upgrade legacy systems is prohibitive for many smaller regional carriers. Additionally, there is a growing concern among aviation professionals regarding the potential deskilling of human operators as automation takes over increasingly complex tasks. Regulators are actively working to establish comprehensive frameworks to ensure that human oversight remains central to aviation safety protocols.",
+        "question": "Regulators want to ensure that AI completely replaces human operators.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P10_1",
+        "passageId": "P10",
+        "topic": "Sustainable Tourism Initiative",
+        "passage": "In recent years, the travel industry has seen a massive shift towards sustainability. Travelers are increasingly seeking out destinations that actively protect their local environments and support resident communities. In response, many hotels and tour operators have introduced eco-friendly practices, such as eliminating single-use plastics, using solar energy, and sourcing food from local farmers.\n\nGovernments are also playing a critical role by introducing green certifications for businesses that meet strict environmental standards. For example, a new initiative in Southeast Asia offers tax incentives to tour operators that reduce their carbon footprint by at least thirty percent.\n\nHowever, sustainability is not just about protecting nature. It also involves ensuring that tourism benefits local economies. Community-based tourism projects allow travelers to stay with local families, participate in traditional activities, and buy local crafts. This guarantees that the money spent by tourists goes directly to the people who live in the area, helping to reduce poverty and preserve cultural heritage.",
+        "question": "What is the main theme of the passage?",
+        "options": [
+          "The growth of luxury tourism in urban areas",
+          "The rise of sustainable tourism and community support",
+          "The history of travel agencies in Southeast Asia",
+          "The technology behind smart hotel operations"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P10_2",
+        "passageId": "P10",
+        "topic": "Sustainable Tourism Initiative",
+        "passage": "In recent years, the travel industry has seen a massive shift towards sustainability. Travelers are increasingly seeking out destinations that actively protect their local environments and support resident communities. In response, many hotels and tour operators have introduced eco-friendly practices, such as eliminating single-use plastics, using solar energy, and sourcing food from local farmers.\n\nGovernments are also playing a critical role by introducing green certifications for businesses that meet strict environmental standards. For example, a new initiative in Southeast Asia offers tax incentives to tour operators that reduce their carbon footprint by at least thirty percent.\n\nHowever, sustainability is not just about protecting nature. It also involves ensuring that tourism benefits local economies. Community-based tourism projects allow travelers to stay with local families, participate in traditional activities, and buy local crafts. This guarantees that the money spent by tourists goes directly to the people who live in the area, helping to reduce poverty and preserve cultural heritage.",
+        "question": "According to the passage, how do hotels promote eco-friendly practices?",
+        "options": [
+          "By lowering room prices during off-seasons",
+          "By using solar energy and avoiding single-use plastics",
+          "By building larger swimming pools to conserve water",
+          "By offering international cuisine instead of local food"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P10_3",
+        "passageId": "P10",
+        "topic": "Sustainable Tourism Initiative",
+        "passage": "In recent years, the travel industry has seen a massive shift towards sustainability. Travelers are increasingly seeking out destinations that actively protect their local environments and support resident communities. In response, many hotels and tour operators have introduced eco-friendly practices, such as eliminating single-use plastics, using solar energy, and sourcing food from local farmers.\n\nGovernments are also playing a critical role by introducing green certifications for businesses that meet strict environmental standards. For example, a new initiative in Southeast Asia offers tax incentives to tour operators that reduce their carbon footprint by at least thirty percent.\n\nHowever, sustainability is not just about protecting nature. It also involves ensuring that tourism benefits local economies. Community-based tourism projects allow travelers to stay with local families, participate in traditional activities, and buy local crafts. This guarantees that the money spent by tourists goes directly to the people who live in the area, helping to reduce poverty and preserve cultural heritage.",
+        "question": "What incentive is offered to Southeast Asian tour operators for reducing carbon footprint?",
+        "options": [
+          "Free marketing services from government agencies",
+          "Tax incentives for eligible businesses",
+          "Direct cash rewards based on carbon offsets",
+          "Discounts on aviation and international shipping fees"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P10_4",
+        "passageId": "P10",
+        "topic": "Sustainable Tourism Initiative",
+        "passage": "In recent years, the travel industry has seen a massive shift towards sustainability. Travelers are increasingly seeking out destinations that actively protect their local environments and support resident communities. In response, many hotels and tour operators have introduced eco-friendly practices, such as eliminating single-use plastics, using solar energy, and sourcing food from local farmers.\n\nGovernments are also playing a critical role by introducing green certifications for businesses that meet strict environmental standards. For example, a new initiative in Southeast Asia offers tax incentives to tour operators that reduce their carbon footprint by at least thirty percent.\n\nHowever, sustainability is not just about protecting nature. It also involves ensuring that tourism benefits local economies. Community-based tourism projects allow travelers to stay with local families, participate in traditional activities, and buy local crafts. This guarantees that the money spent by tourists goes directly to the people who live in the area, helping to reduce poverty and preserve cultural heritage.",
+        "question": "What is a key aspect of sustainability besides environmental protection?",
+        "options": [
+          "Expanding high-speed transport networks globally",
+          "Ensuring that tourism benefits local economies and residents",
+          "Increasing the density of hotel rooms per square mile",
+          "Developing faster online booking algorithms"
+        ],
+        "correct": 1,
+        "level": "B1"
+      },
+      {
+        "id": "P10_5",
+        "passageId": "P10",
+        "topic": "Sustainable Tourism Initiative",
+        "passage": "In recent years, the travel industry has seen a massive shift towards sustainability. Travelers are increasingly seeking out destinations that actively protect their local environments and support resident communities. In response, many hotels and tour operators have introduced eco-friendly practices, such as eliminating single-use plastics, using solar energy, and sourcing food from local farmers.\n\nGovernments are also playing a critical role by introducing green certifications for businesses that meet strict environmental standards. For example, a new initiative in Southeast Asia offers tax incentives to tour operators that reduce their carbon footprint by at least thirty percent.\n\nHowever, sustainability is not just about protecting nature. It also involves ensuring that tourism benefits local economies. Community-based tourism projects allow travelers to stay with local families, participate in traditional activities, and buy local crafts. This guarantees that the money spent by tourists goes directly to the people who live in the area, helping to reduce poverty and preserve cultural heritage.",
+        "question": "Community-based tourism helps to reduce poverty.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 0,
+        "level": "B1"
+      }
+    ],
+    "writing": [
+      {
+        "id": "W_1",
+        "type": "fill_blank",
+        "question": "The new marketing strategy ____ a significant increase in sales over the last quarter.",
+        "blanks": [
+          "has resulted in",
+          "resulted in",
+          "led to"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_2",
+        "type": "error_correction",
+        "question": "She have been working at the company for over five years.",
+        "original": "have",
+        "correction": "has",
+        "level": 1
+      },
+      {
+        "id": "W_3",
+        "type": "sentence_order",
+        "question": "Arrange the words to form a correct sentence.",
+        "words": [
+          "project",
+          "The",
+          "completed",
+          "time",
+          "was",
+          "on"
+        ],
+        "correctOrder": [
+          "The",
+          "project",
+          "was",
+          "completed",
+          "on",
+          "time"
+        ],
+        "level": 1
+      },
+      {
+        "id": "W_4",
+        "type": "sentence_transform",
+        "question": "Rewrite the sentence so it has the same meaning: 'They will finish the work by tomorrow.'",
+        "prompt": "The work",
+        "answers": [
+          "will be finished by tomorrow",
+          "will be finished by them tomorrow"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_5",
+        "type": "fill_blank",
+        "question": "Despite the heavy rain, the outdoor event ____ as planned.",
+        "blanks": [
+          "proceeded",
+          "went ahead",
+          "took place"
+        ],
+        "level": 3
+      },
+      {
+        "id": "W_6",
+        "type": "error_correction",
+        "question": "The manager asked me to quickly reviewing the report before the meeting.",
+        "original": "reviewing",
+        "correction": "review",
+        "level": 2
+      },
+      {
+        "id": "W_7",
+        "type": "sentence_order",
+        "question": "Arrange the words to form a correct sentence.",
+        "words": [
+          "to",
+          "We",
+          "forward",
+          "from",
+          "hearing",
+          "look",
+          "you"
+        ],
+        "correctOrder": [
+          "We",
+          "look",
+          "forward",
+          "to",
+          "hearing",
+          "from",
+          "you"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_8",
+        "type": "sentence_transform",
+        "question": "Rewrite the sentence: 'It's a pity I didn't study harder.'",
+        "prompt": "I wish",
+        "answers": [
+          "I had studied harder"
+        ],
+        "level": 3
+      },
+      {
+        "id": "W_9",
+        "type": "free_write",
+        "question": "Write an email (60-80 words) to your manager requesting a few days of annual leave. Include the dates and the reason for your request.",
+        "minLength": 50,
+        "level": 3
+      },
+      {
+        "id": "W_10",
+        "type": "free_write",
+        "question": "Some people believe that remote work is more productive than office work. Do you agree or disagree? Write a short essay (150-200 words) supporting your view.",
+        "minLength": 120,
+        "level": 4
+      }
+    ]
+  },
+  "BANK_OFFICE_MGR": {
+    "reading": [
+      {
+        "id": "P3_1",
+        "passageId": "P3",
+        "topic": "Vietravel Market Expansion Strategy 2026",
+        "passage": "Vietravel Market Expansion Strategy 2026\n\nIn early 2026, Vietravel launched its strategic market expansion plan, prioritizing high-growth international B2B sectors. To optimize performance, corporate sales managers began delivering detailed monthly business performance reviews. A key operational metric revealed a 15% increase in corporate incentive group bookings. Additionally, the business development team actively negotiated with local destination management companies (DMCs) to secure exclusive tariffs and allotment guarantees. This expansion strategy focuses on experiential tour packages for corporate clients rather than competing solely on price.",
+        "question": "What is the primary focus of Vietravel's market expansion plan in 2026?",
+        "options": [
+          "Low-cost consumer retail travel",
+          "High-growth international B2B sectors",
+          "Domestic budget hotel construction",
+          "Aviation regulatory compliance"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P3_2",
+        "passageId": "P3",
+        "topic": "Vietravel Market Expansion Strategy 2026",
+        "passage": "Vietravel Market Expansion Strategy 2026\n\nIn early 2026, Vietravel launched its strategic market expansion plan, prioritizing high-growth international B2B sectors. To optimize performance, corporate sales managers began delivering detailed monthly business performance reviews. A key operational metric revealed a 15% increase in corporate incentive group bookings. Additionally, the business development team actively negotiated with local destination management companies (DMCs) to secure exclusive tariffs and allotment guarantees. This expansion strategy focuses on experiential tour packages for corporate clients rather than competing solely on price.",
+        "question": "Negotiating with local DMCs is part of the strategy to secure exclusive tariffs.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 0,
+        "level": "B2"
+      },
+      {
+        "id": "P3_3",
+        "passageId": "P3",
+        "topic": "Vietravel Market Expansion Strategy 2026",
+        "passage": "Vietravel Market Expansion Strategy 2026\n\nIn early 2026, Vietravel launched its strategic market expansion plan, prioritizing high-growth international B2B sectors. To optimize performance, corporate sales managers began delivering detailed monthly business performance reviews. A key operational metric revealed a 15% increase in corporate incentive group bookings. Additionally, the business development team actively negotiated with local destination management companies (DMCs) to secure exclusive tariffs and allotment guarantees. This expansion strategy focuses on experiential tour packages for corporate clients rather than competing solely on price.",
+        "question": "What specific growth metric was highlighted in the monthly business reviews?",
+        "options": [
+          "A 15% increase in B2B corporate group bookings",
+          "A 22% reduction in staff operating costs",
+          "A 30% reduction in hotel room cancellations",
+          "A 5% decline in international flight ticket prices"
+        ],
+        "correct": 0,
+        "level": "B2"
+      },
+      {
+        "id": "P3_4",
+        "passageId": "P3",
+        "topic": "Vietravel Market Expansion Strategy 2026",
+        "passage": "Vietravel Market Expansion Strategy 2026\n\nIn early 2026, Vietravel launched its strategic market expansion plan, prioritizing high-growth international B2B sectors. To optimize performance, corporate sales managers began delivering detailed monthly business performance reviews. A key operational metric revealed a 15% increase in corporate incentive group bookings. Additionally, the business development team actively negotiated with local destination management companies (DMCs) to secure exclusive tariffs and allotment guarantees. This expansion strategy focuses on experiential tour packages for corporate clients rather than competing solely on price.",
+        "question": "Vietravel's strategy aims to win market share primarily by offering the lowest prices.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P3_5",
+        "passageId": "P3",
+        "topic": "Vietravel Market Expansion Strategy 2026",
+        "passage": "Vietravel Market Expansion Strategy 2026\n\nIn early 2026, Vietravel launched its strategic market expansion plan, prioritizing high-growth international B2B sectors. To optimize performance, corporate sales managers began delivering detailed monthly business performance reviews. A key operational metric revealed a 15% increase in corporate incentive group bookings. Additionally, the business development team actively negotiated with local destination management companies (DMCs) to secure exclusive tariffs and allotment guarantees. This expansion strategy focuses on experiential tour packages for corporate clients rather than competing solely on price.",
+        "question": "The expansion plan was designed by external international consultants.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 2,
+        "level": "B2"
+      },
+      {
+        "id": "P4_1",
+        "passageId": "P4",
+        "topic": "Hotel Allocation and Contract Negotiation",
+        "passage": "Hotel Allocation and Contract Negotiation\n\nProcurement directors at Vietravel frequently negotiate complex agreements with luxury resort chains to prepare for peak tourist seasons. These negotiations center around two primary structures: allotments with flexible release periods and commitment contracts (guaranteed buyouts). Commitment contracts offer the lowest room rates but carry higher financial risks because rooms must be paid for regardless of occupancy. On the other hand, allotments allow Vietravel to release unsold rooms back to the hotel 14 days before the arrival date without penalties. Yield management plays a key role in finding the optimal balance between these structures to maximize revenue and minimize risk.",
+        "question": "Which contract type carries the highest financial risk for the travel agency?",
+        "options": [
+          "Allotment contracts",
+          "Commitment contracts",
+          "Standard retail booking",
+          "Non-refundable group discounts"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P4_2",
+        "passageId": "P4",
+        "topic": "Hotel Allocation and Contract Negotiation",
+        "passage": "Hotel Allocation and Contract Negotiation\n\nProcurement directors at Vietravel frequently negotiate complex agreements with luxury resort chains to prepare for peak tourist seasons. These negotiations center around two primary structures: allotments with flexible release periods and commitment contracts (guaranteed buyouts). Commitment contracts offer the lowest room rates but carry higher financial risks because rooms must be paid for regardless of occupancy. On the other hand, allotments allow Vietravel to release unsold rooms back to the hotel 14 days before the arrival date without penalties. Yield management plays a key role in finding the optimal balance between these structures to maximize revenue and minimize risk.",
+        "question": "Commitment contracts offer higher room rates than allotment contracts.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P4_3",
+        "passageId": "P4",
+        "topic": "Hotel Allocation and Contract Negotiation",
+        "passage": "Hotel Allocation and Contract Negotiation\n\nProcurement directors at Vietravel frequently negotiate complex agreements with luxury resort chains to prepare for peak tourist seasons. These negotiations center around two primary structures: allotments with flexible release periods and commitment contracts (guaranteed buyouts). Commitment contracts offer the lowest room rates but carry higher financial risks because rooms must be paid for regardless of occupancy. On the other hand, allotments allow Vietravel to release unsold rooms back to the hotel 14 days before the arrival date without penalties. Yield management plays a key role in finding the optimal balance between these structures to maximize revenue and minimize risk.",
+        "question": "What is the release period for allotments mentioned in the passage?",
+        "options": [
+          "7 days before arrival",
+          "14 days before arrival",
+          "30 days before arrival",
+          "24 hours before arrival"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P4_4",
+        "passageId": "P4",
+        "topic": "Hotel Allocation and Contract Negotiation",
+        "passage": "Hotel Allocation and Contract Negotiation\n\nProcurement directors at Vietravel frequently negotiate complex agreements with luxury resort chains to prepare for peak tourist seasons. These negotiations center around two primary structures: allotments with flexible release periods and commitment contracts (guaranteed buyouts). Commitment contracts offer the lowest room rates but carry higher financial risks because rooms must be paid for regardless of occupancy. On the other hand, allotments allow Vietravel to release unsold rooms back to the hotel 14 days before the arrival date without penalties. Yield management plays a key role in finding the optimal balance between these structures to maximize revenue and minimize risk.",
+        "question": "Yield management is used to find the best balance between allotment and commitment contracts.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 0,
+        "level": "C1"
+      },
+      {
+        "id": "P4_5",
+        "passageId": "P4",
+        "topic": "Hotel Allocation and Contract Negotiation",
+        "passage": "Hotel Allocation and Contract Negotiation\n\nProcurement directors at Vietravel frequently negotiate complex agreements with luxury resort chains to prepare for peak tourist seasons. These negotiations center around two primary structures: allotments with flexible release periods and commitment contracts (guaranteed buyouts). Commitment contracts offer the lowest room rates but carry higher financial risks because rooms must be paid for regardless of occupancy. On the other hand, allotments allow Vietravel to release unsold rooms back to the hotel 14 days before the arrival date without penalties. Yield management plays a key role in finding the optimal balance between these structures to maximize revenue and minimize risk.",
+        "question": "Luxury resort chains prefer allotment contracts over commitment contracts.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 2,
+        "level": "C1"
+      },
+      {
+        "id": "P11_1",
+        "passageId": "P11",
+        "topic": "Digital Transformation in Travel",
+        "passage": "The global travel sector is undergoing a rapid digital transformation, driven by advancements in artificial intelligence (AI) and mobile technology. Today's travelers expect seamless, personalized experiences from the moment they begin researching a trip to the day they return home. Online travel agencies and airlines are leveraging machine learning algorithms to analyze customer data and offer tailored recommendations, resulting in higher booking rates.\n\nFurthermore, the integration of contactless technology has revolutionized the airport and hotel experience. Mobile check-in, digital boarding passes, and smart keyless room entry are now standard features across major travel hubs. This not only enhances convenience for travelers but also reduces operational overheads for businesses.\n\nHowever, this shift has also introduced challenges. As companies collect and store vast amounts of personal and financial data, cybersecurity has become a top priority. A single data breach can devastate a company's reputation and lead to severe financial penalties. Consequently, travel operators are investing heavily in secure cloud infrastructure and multi-factor authentication systems. In addition, the industry faces a growing digital divide, as smaller operators struggle to keep up with the high cost of implementing advanced technologies.",
+        "question": "What is driving the digital transformation in the travel sector?",
+        "options": [
+          "Changes in global climate and weather patterns",
+          "Advancements in artificial intelligence and mobile technology",
+          "Decreasing costs of printing physical advertising brochures",
+          "New international aviation security treaties"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P11_2",
+        "passageId": "P11",
+        "topic": "Digital Transformation in Travel",
+        "passage": "The global travel sector is undergoing a rapid digital transformation, driven by advancements in artificial intelligence (AI) and mobile technology. Today's travelers expect seamless, personalized experiences from the moment they begin researching a trip to the day they return home. Online travel agencies and airlines are leveraging machine learning algorithms to analyze customer data and offer tailored recommendations, resulting in higher booking rates.\n\nFurthermore, the integration of contactless technology has revolutionized the airport and hotel experience. Mobile check-in, digital boarding passes, and smart keyless room entry are now standard features across major travel hubs. This not only enhances convenience for travelers but also reduces operational overheads for businesses.\n\nHowever, this shift has also introduced challenges. As companies collect and store vast amounts of personal and financial data, cybersecurity has become a top priority. A single data breach can devastate a company's reputation and lead to severe financial penalties. Consequently, travel operators are investing heavily in secure cloud infrastructure and multi-factor authentication systems. In addition, the industry faces a growing digital divide, as smaller operators struggle to keep up with the high cost of implementing advanced technologies.",
+        "question": "How do travel businesses benefit from contactless technology?",
+        "options": [
+          "They can charge higher booking fees to premium customers",
+          "It significantly reduces their operational overheads",
+          "It completely eliminates the need for human customer service",
+          "They can track travelers in real time via satellite GPS"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P11_3",
+        "passageId": "P11",
+        "topic": "Digital Transformation in Travel",
+        "passage": "The global travel sector is undergoing a rapid digital transformation, driven by advancements in artificial intelligence (AI) and mobile technology. Today's travelers expect seamless, personalized experiences from the moment they begin researching a trip to the day they return home. Online travel agencies and airlines are leveraging machine learning algorithms to analyze customer data and offer tailored recommendations, resulting in higher booking rates.\n\nFurthermore, the integration of contactless technology has revolutionized the airport and hotel experience. Mobile check-in, digital boarding passes, and smart keyless room entry are now standard features across major travel hubs. This not only enhances convenience for travelers but also reduces operational overheads for businesses.\n\nHowever, this shift has also introduced challenges. As companies collect and store vast amounts of personal and financial data, cybersecurity has become a top priority. A single data breach can devastate a company's reputation and lead to severe financial penalties. Consequently, travel operators are investing heavily in secure cloud infrastructure and multi-factor authentication systems. In addition, the industry faces a growing digital divide, as smaller operators struggle to keep up with the high cost of implementing advanced technologies.",
+        "question": "Why has cybersecurity become a critical concern for travel companies?",
+        "options": [
+          "Governments are imposing taxes on digital transactions",
+          "They collect and store massive volumes of personal and financial data",
+          "Airlines need to track flight paths and flight duration",
+          "Travelers refuse to use online payment methods"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P11_4",
+        "passageId": "P11",
+        "topic": "Digital Transformation in Travel",
+        "passage": "The global travel sector is undergoing a rapid digital transformation, driven by advancements in artificial intelligence (AI) and mobile technology. Today's travelers expect seamless, personalized experiences from the moment they begin researching a trip to the day they return home. Online travel agencies and airlines are leveraging machine learning algorithms to analyze customer data and offer tailored recommendations, resulting in higher booking rates.\n\nFurthermore, the integration of contactless technology has revolutionized the airport and hotel experience. Mobile check-in, digital boarding passes, and smart keyless room entry are now standard features across major travel hubs. This not only enhances convenience for travelers but also reduces operational overheads for businesses.\n\nHowever, this shift has also introduced challenges. As companies collect and store vast amounts of personal and financial data, cybersecurity has become a top priority. A single data breach can devastate a company's reputation and lead to severe financial penalties. Consequently, travel operators are investing heavily in secure cloud infrastructure and multi-factor authentication systems. In addition, the industry faces a growing digital divide, as smaller operators struggle to keep up with the high cost of implementing advanced technologies.",
+        "question": "What is a major challenge faced by smaller travel operators in this digital era?",
+        "options": [
+          "They cannot access secure cloud storage systems at all",
+          "They struggle to afford the high implementation costs of advanced technologies",
+          "Travelers no longer trust small family-owned travel brands",
+          "They are legally restricted from using mobile applications"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P11_5",
+        "passageId": "P11",
+        "topic": "Digital Transformation in Travel",
+        "passage": "The global travel sector is undergoing a rapid digital transformation, driven by advancements in artificial intelligence (AI) and mobile technology. Today's travelers expect seamless, personalized experiences from the moment they begin researching a trip to the day they return home. Online travel agencies and airlines are leveraging machine learning algorithms to analyze customer data and offer tailored recommendations, resulting in higher booking rates.\n\nFurthermore, the integration of contactless technology has revolutionized the airport and hotel experience. Mobile check-in, digital boarding passes, and smart keyless room entry are now standard features across major travel hubs. This not only enhances convenience for travelers but also reduces operational overheads for businesses.\n\nHowever, this shift has also introduced challenges. As companies collect and store vast amounts of personal and financial data, cybersecurity has become a top priority. A single data breach can devastate a company's reputation and lead to severe financial penalties. Consequently, travel operators are investing heavily in secure cloud infrastructure and multi-factor authentication systems. In addition, the industry faces a growing digital divide, as smaller operators struggle to keep up with the high cost of implementing advanced technologies.",
+        "question": "Contactless technology is only implemented in hotels, not airports.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 1,
+        "level": "B2"
+      },
+      {
+        "id": "P12_1",
+        "passageId": "P12",
+        "topic": "Post-Pandemic Tourism Economics",
+        "passage": "The macroeconomic landscape of global tourism has altered fundamentally in the wake of recent global disruptions. While raw visitor numbers have rebounded close to historic peaks, the economic contribution of the sector is now characterized by a marked divergence in yield. Inflationary pressures, coupled with rising fuel costs, have driven up the baseline cost of long-haul travel. Consequently, travelers are either truncating their itineraries or opting for domestic destinations, altering traditional revenue streams for international operators.\n\nTo counter these challenges, destination management organizations are pivoting from volume-based metrics to value-based strategies. The focus is no longer purely on maximizing arrivals but rather on increasing the average spend per visitor. This paradigm shift requires a re-evaluation of infrastructure development. Capital investments are increasingly directed toward luxury ecotourism and niche cultural excursions, which attract high-net-worth individuals willing to pay a premium.\n\nHowever, this transition towards high-yield tourism is not without controversy. Critics argue that prioritizing luxury segments risks alienating middle-income travelers, potentially leading to the gentrification of popular destinations. Furthermore, it creates economic vulnerability, as luxury markets are highly sensitive to shifts in global financial stability. Sustainable economic resilience therefore requires a balanced portfolio, combining high-yield premium offerings with robust, accessible mass-tourism options that support a broader base of local employment.",
+        "question": "According to the passage, how has the economic contribution of tourism changed?",
+        "options": [
+          "It has declined to near-zero levels globally due to travel bans",
+          "It is characterized by a divergence in yield despite high visitor numbers",
+          "It is now entirely driven by budget regional airlines",
+          "It has shifted completely to local eco-farms and staycations"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P12_2",
+        "passageId": "P12",
+        "topic": "Post-Pandemic Tourism Economics",
+        "passage": "The macroeconomic landscape of global tourism has altered fundamentally in the wake of recent global disruptions. While raw visitor numbers have rebounded close to historic peaks, the economic contribution of the sector is now characterized by a marked divergence in yield. Inflationary pressures, coupled with rising fuel costs, have driven up the baseline cost of long-haul travel. Consequently, travelers are either truncating their itineraries or opting for domestic destinations, altering traditional revenue streams for international operators.\n\nTo counter these challenges, destination management organizations are pivoting from volume-based metrics to value-based strategies. The focus is no longer purely on maximizing arrivals but rather on increasing the average spend per visitor. This paradigm shift requires a re-evaluation of infrastructure development. Capital investments are increasingly directed toward luxury ecotourism and niche cultural excursions, which attract high-net-worth individuals willing to pay a premium.\n\nHowever, this transition towards high-yield tourism is not without controversy. Critics argue that prioritizing luxury segments risks alienating middle-income travelers, potentially leading to the gentrification of popular destinations. Furthermore, it creates economic vulnerability, as luxury markets are highly sensitive to shifts in global financial stability. Sustainable economic resilience therefore requires a balanced portfolio, combining high-yield premium offerings with robust, accessible mass-tourism options that support a broader base of local employment.",
+        "question": "Why are travelers truncating their itineraries or choosing domestic destinations?",
+        "options": [
+          "A total lack of available flights to popular international destinations",
+          "Rising baseline costs driven by inflation and elevated fuel prices",
+          "New visa restrictions imposed by most tourist-receiving countries",
+          "A general decline in interest in exploring foreign languages and cultures"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P12_3",
+        "passageId": "P12",
+        "topic": "Post-Pandemic Tourism Economics",
+        "passage": "The macroeconomic landscape of global tourism has altered fundamentally in the wake of recent global disruptions. While raw visitor numbers have rebounded close to historic peaks, the economic contribution of the sector is now characterized by a marked divergence in yield. Inflationary pressures, coupled with rising fuel costs, have driven up the baseline cost of long-haul travel. Consequently, travelers are either truncating their itineraries or opting for domestic destinations, altering traditional revenue streams for international operators.\n\nTo counter these challenges, destination management organizations are pivoting from volume-based metrics to value-based strategies. The focus is no longer purely on maximizing arrivals but rather on increasing the average spend per visitor. This paradigm shift requires a re-evaluation of infrastructure development. Capital investments are increasingly directed toward luxury ecotourism and niche cultural excursions, which attract high-net-worth individuals willing to pay a premium.\n\nHowever, this transition towards high-yield tourism is not without controversy. Critics argue that prioritizing luxury segments risks alienating middle-income travelers, potentially leading to the gentrification of popular destinations. Furthermore, it creates economic vulnerability, as luxury markets are highly sensitive to shifts in global financial stability. Sustainable economic resilience therefore requires a balanced portfolio, combining high-yield premium offerings with robust, accessible mass-tourism options that support a broader base of local employment.",
+        "question": "What is the main objective of destination management organizations' new value-based strategies?",
+        "options": [
+          "To maximize the total volume of raw arrival numbers",
+          "To increase the average spending yield per individual visitor",
+          "To construct more budget-friendly accommodation facilities",
+          "To place regulatory limits on the entry of high-net-worth individuals"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P12_4",
+        "passageId": "P12",
+        "topic": "Post-Pandemic Tourism Economics",
+        "passage": "The macroeconomic landscape of global tourism has altered fundamentally in the wake of recent global disruptions. While raw visitor numbers have rebounded close to historic peaks, the economic contribution of the sector is now characterized by a marked divergence in yield. Inflationary pressures, coupled with rising fuel costs, have driven up the baseline cost of long-haul travel. Consequently, travelers are either truncating their itineraries or opting for domestic destinations, altering traditional revenue streams for international operators.\n\nTo counter these challenges, destination management organizations are pivoting from volume-based metrics to value-based strategies. The focus is no longer purely on maximizing arrivals but rather on increasing the average spend per visitor. This paradigm shift requires a re-evaluation of infrastructure development. Capital investments are increasingly directed toward luxury ecotourism and niche cultural excursions, which attract high-net-worth individuals willing to pay a premium.\n\nHowever, this transition towards high-yield tourism is not without controversy. Critics argue that prioritizing luxury segments risks alienating middle-income travelers, potentially leading to the gentrification of popular destinations. Furthermore, it creates economic vulnerability, as luxury markets are highly sensitive to shifts in global financial stability. Sustainable economic resilience therefore requires a balanced portfolio, combining high-yield premium offerings with robust, accessible mass-tourism options that support a broader base of local employment.",
+        "question": "What potential threat of high-yield tourism does the author highlight?",
+        "options": [
+          "A rapid decrease in local employment and hotel vacancy rates",
+          "Alienating middle-income travelers and driving the gentrification of destinations",
+          "A sudden oversupply of low-budget hotels and home rentals",
+          "An increase in carbon emissions from high-end transportation channels"
+        ],
+        "correct": 1,
+        "level": "C1"
+      },
+      {
+        "id": "P12_5",
+        "passageId": "P12",
+        "topic": "Post-Pandemic Tourism Economics",
+        "passage": "The macroeconomic landscape of global tourism has altered fundamentally in the wake of recent global disruptions. While raw visitor numbers have rebounded close to historic peaks, the economic contribution of the sector is now characterized by a marked divergence in yield. Inflationary pressures, coupled with rising fuel costs, have driven up the baseline cost of long-haul travel. Consequently, travelers are either truncating their itineraries or opting for domestic destinations, altering traditional revenue streams for international operators.\n\nTo counter these challenges, destination management organizations are pivoting from volume-based metrics to value-based strategies. The focus is no longer purely on maximizing arrivals but rather on increasing the average spend per visitor. This paradigm shift requires a re-evaluation of infrastructure development. Capital investments are increasingly directed toward luxury ecotourism and niche cultural excursions, which attract high-net-worth individuals willing to pay a premium.\n\nHowever, this transition towards high-yield tourism is not without controversy. Critics argue that prioritizing luxury segments risks alienating middle-income travelers, potentially leading to the gentrification of popular destinations. Furthermore, it creates economic vulnerability, as luxury markets are highly sensitive to shifts in global financial stability. Sustainable economic resilience therefore requires a balanced portfolio, combining high-yield premium offerings with robust, accessible mass-tourism options that support a broader base of local employment.",
+        "question": "The author suggests that a balanced portfolio of tourism offerings is essential for economic resilience.",
+        "options": [
+          "TRUE",
+          "FALSE",
+          "NOT GIVEN"
+        ],
+        "correct": 0,
+        "level": "C1"
+      }
+    ],
+    "listening": [
+      {
+        "id": "L025",
+        "audioFile": "l4c",
+        "level": "B2",
+        "topic": "Customer Complaint",
+        "question": "What compensation is offered?",
+        "options": [
+          "Free night stay",
+          "Complimentary dinner and room upgrade",
+          "50% discount",
+          "Full refund"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L027",
+        "audioFile": "l4c",
+        "level": "B2",
+        "topic": "Customer Complaint",
+        "question": "Who does the guest speak to?",
+        "options": [
+          "Receptionist",
+          "Duty manager",
+          "Housekeeper",
+          "Owner"
+        ],
+        "correct": 1,
+        "audio": "Excuse me, I need to speak with the manager. I have a serious complaint. I'm the duty manager. How can I help you, sir? When I checked in this afternoon, my room hadn't been cleaned. There were dirty towels on the floor and the bed wasn't made. I'm terribly sorry about that. That's completely unacceptable. Let me arrange a different room for you immediately. I've already waited thirty minutes. This is very disappointing for a four-star hotel. You're absolutely right, and I sincerely apologize. As compensation, I'd like to offer you a complimentary dinner at our restaurant tonight and a room upgrade. Well, I appreciate that. Thank you for handling this quickly."
+      },
+      {
+        "id": "L029",
+        "audioFile": "l5",
+        "level": "B2",
+        "topic": "Industry Keynote",
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you.",
+        "question": "What is the projected market value by 2028?",
+        "options": [
+          "$200 billion",
+          "$320 billion",
+          "$420 billion",
+          "$500 billion"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L030",
+        "audioFile": "l5",
+        "level": "B2",
+        "topic": "Industry Keynote",
+        "question": "How fast is experiential travel growing?",
+        "options": [
+          "5% annually",
+          "10% annually",
+          "15% annually",
+          "20% annually"
+        ],
+        "correct": 2,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L031",
+        "audioFile": "l5",
+        "level": "C1",
+        "topic": "Industry Keynote",
+        "question": "What percentage of travelers prefer eco-friendly options?",
+        "options": [
+          "53%",
+          "63%",
+          "73%",
+          "83%"
+        ],
+        "correct": 2,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L032",
+        "audioFile": "l5",
+        "level": "B2",
+        "topic": "Industry Keynote",
+        "question": "How many key trends does the speaker mention?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L033",
+        "audioFile": "l5",
+        "level": "C1",
+        "topic": "Industry Keynote",
+        "question": "What do companies gain from investing in technology?",
+        "options": [
+          "10% more revenue",
+          "25% higher satisfaction",
+          "50% more bookings",
+          "Lower costs"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L034",
+        "audioFile": "l5",
+        "level": "B2",
+        "topic": "Industry Keynote",
+        "question": "What type of event is this?",
+        "options": [
+          "Training session",
+          "Annual conference",
+          "Board meeting",
+          "Webinar"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L035",
+        "audioFile": "l5",
+        "level": "B2",
+        "topic": "Industry Keynote",
+        "question": "What region is discussed?",
+        "options": [
+          "Europe",
+          "North America",
+          "Southeast Asia",
+          "Middle East"
+        ],
+        "correct": 2,
+        "audio": "Good morning, everyone. Thank you for joining us at the Annual Tourism Industry Conference. Today I want to talk about the future of sustainable tourism in Southeast Asia. The market is projected to reach four hundred and twenty billion dollars by twenty twenty-eight. Three key trends are shaping our industry. First, experiential travel is growing at fifteen percent annually. Travelers want authentic local experiences, not just sightseeing. Second, digital transformation is essential. Companies that invest in technology see twenty-five percent higher customer satisfaction scores. Third, sustainability is no longer optional. Seventy-three percent of travelers say they would choose an eco-friendly option even if it costs more. The companies that embrace these trends will lead the industry in the next decade. Thank you."
+      },
+      {
+        "id": "L048",
+        "audioFile": "l7c",
+        "level": "B2",
+        "topic": "Tour Guide Briefing",
+        "question": "Why might some visitors wait outside?",
+        "options": [
+          "Too hot",
+          "Claustrophobia",
+          "Physical disability",
+          "Fear of dark"
+        ],
+        "correct": 1,
+        "audio": "Good morning, everyone! My name is Linh and I'll be your guide today for the Cu Chi Tunnels tour. Before we start, a few important things. The tour takes about three hours. Please stay with the group at all times. The tunnels are quite narrow and dark, so if you're claustrophobic, you can wait outside. There's no obligation to go inside. Please wear comfortable shoes and bring water. It gets very hot underground. We'll have a fifteen-minute break at the souvenir shop halfway through. The bus will depart for the return journey at exactly two PM. Any questions before we begin? No? Great, let's go!"
+      },
+      {
+        "id": "L063",
+        "audioFile": "l9c",
+        "level": "B2",
+        "topic": "Spa Booking",
+        "question": "What type of room is booked?",
+        "options": [
+          "Single room",
+          "Double room",
+          "Couples room",
+          "VIP room"
+        ],
+        "correct": 2,
+        "audio": "Welcome to the Lotus Spa. Do you have an appointment? No, I was hoping to book something for this afternoon. What do you recommend? Our most popular treatment is the Vietnamese herbal massage. It's ninety minutes and costs eighty dollars. That sounds nice. Do you have anything shorter? I have dinner at seven. We have a sixty-minute aromatherapy massage for fifty-five dollars. I can book you in at five PM. Perfect. Can my wife also book at the same time? Let me check. Yes, we have a couples room available at five PM. Shall I book both? Yes, please. Room four twelve, the name is Henderson. Wonderful. We'll see you and Mrs. Henderson at five PM. Enjoy your afternoon!"
+      },
+      {
+        "id": "L064",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright.",
+        "question": "What is the biggest change in Vietnam tourism?",
+        "options": [
+          "More hotels",
+          "Shift to experiential tourism",
+          "Lower prices",
+          "More flights"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L065",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "question": "What percentage of bookings are online?",
+        "options": [
+          "45%",
+          "55%",
+          "65%",
+          "75%"
+        ],
+        "correct": 2,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "L066",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "question": "What has become the primary marketing channel?",
+        "options": [
+          "Television",
+          "Newspapers",
+          "Social media",
+          "Radio"
+        ],
+        "correct": 2,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "L067",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "question": "What challenge is mentioned about infrastructure?",
+        "options": [
+          "Too expensive",
+          "Has not kept pace with demand",
+          "Too old",
+          "Poorly designed"
+        ],
+        "correct": 1,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "L068",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "question": "What do modern travelers want?",
+        "options": [
+          "Luxury hotels",
+          "Cheap flights",
+          "Authentic local experiences",
+          "Package tours"
+        ],
+        "correct": 2,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "L069",
+        "audioFile": "l10c",
+        "level": "C1",
+        "topic": "Industry Interview",
+        "question": "What other challenge is mentioned?",
+        "options": [
+          "Pollution",
+          "Skilled labor shortage",
+          "Competition",
+          "Weather"
+        ],
+        "correct": 1,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "L070",
+        "audioFile": "l10c",
+        "level": "B2",
+        "topic": "Industry Interview",
+        "question": "How many main questions does the interviewer ask?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct": 1,
+        "audio": "Thank you for joining us today. Can you tell us about the biggest changes in Vietnam's tourism industry over the past decade? Certainly. The most significant change has been the shift toward experiential tourism. Visitors no longer want to just see famous sites — they want to cook local food, learn traditional crafts, and interact with communities. How has technology impacted the industry? Enormously. Online booking now accounts for sixty-five percent of all reservations. Social media has become the primary marketing channel. And artificial intelligence is beginning to personalize travel recommendations at scale. What challenges remain for the sector? Infrastructure development hasn't kept pace with demand. We also need more trained professionals who can deliver international-standard service while maintaining authentic Vietnamese hospitality. Thank you for those valuable insights. My pleasure. The future of Vietnam's tourism is very bright."
+      },
+      {
+        "id": "LM001_1",
+        "audioFile": "lm1",
+        "level": "B2",
+        "topic": "Q3 Report & Charter Negotiation",
+        "question": "What was Vietravel's total revenue in Q3 and its growth rate quarter-on-quarter?",
+        "options": [
+          "$12.5 million, a 14% increase",
+          "$14.5 million, a 12% increase",
+          "$12.5 million, a 12% decrease",
+          "$4.8 million, a 14% increase"
+        ],
+        "correct": 0,
+        "audio": "Sophia: Welcome to our Q3 performance review meeting, Alex. Let's start with the sales figures for our chartered flights to Japan and Europe. What's the latest update?\nAlex: Sure, Sophia. In Q3, our total revenue reached twelve point five million dollars, which is a fourteen percent increase quarter-on-quarter. Our Tokyo charter route achieved an ninety-two percent occupancy rate, generating four.eight million dollars alone. However, the Paris route faced some headwinds. We only reached seventy-four percent occupancy due to the late slot allocation, resulting in a minor loss of one hundred and twenty thousand dollars.\nSophia: I see. A seventy-four percent occupancy rate is indeed below our target of eighty-five percent. If we want to secure those slots for Q4, the airline requires an upfront deposit of three hundred thousand dollars, up from the usual two hundred thousand. How do we negotiate this?\nAlex: Three hundred thousand is too high. I propose we offer a two hundred and fifty thousand dollar deposit, but guarantee at least twelve flights instead of ten. This reduces their risk on empty seats and gives us leverage to demand better slot times. We also need to negotiate a five percent volume discount if we exceed fifteen flights in Q4.\nSophia: That's a logical proposal. A guarantee of twelve flights should give them enough confidence to accept the lower deposit of two hundred and fifty thousand. I will schedule a meeting with their procurement director tomorrow to finalize the agreement. Let's aim to sign by Friday."
+      },
+      {
+        "id": "LM001_2",
+        "audioFile": "lm1",
+        "level": "B2",
+        "topic": "Q3 Report & Charter Negotiation",
+        "question": "Why did the Paris charter route face a minor loss of $120,000?",
+        "options": [
+          "Due to poor hotel partnership selections",
+          "Because of late flight slot allocation",
+          "Due to an unexpected volume discount",
+          "Because of high fuel surcharges"
+        ],
+        "correct": 1,
+        "audio": "Sophia: Welcome to our Q3 performance review meeting, Alex. Let's start with the sales figures for our chartered flights to Japan and Europe. What's the latest update?\nAlex: Sure, Sophia. In Q3, our total revenue reached twelve point five million dollars, which is a fourteen percent increase quarter-on-quarter. Our Tokyo charter route achieved an ninety-two percent occupancy rate, generating four.eight million dollars alone. However, the Paris route faced some headwinds. We only reached seventy-four percent occupancy due to the late slot allocation, resulting in a minor loss of one hundred and twenty thousand dollars.\nSophia: I see. A seventy-four percent occupancy rate is indeed below our target of eighty-five percent. If we want to secure those slots for Q4, the airline requires an upfront deposit of three hundred thousand dollars, up from the usual two hundred thousand. How do we negotiate this?\nAlex: Three hundred thousand is too high. I propose we offer a two hundred and fifty thousand dollar deposit, but guarantee at least twelve flights instead of ten. This reduces their risk on empty seats and gives us leverage to demand better slot times. We also need to negotiate a five percent volume discount if we exceed fifteen flights in Q4.\nSophia: That's a logical proposal. A guarantee of twelve flights should give them enough confidence to accept the lower deposit of two hundred and fifty thousand. I will schedule a meeting with their procurement director tomorrow to finalize the agreement. Let's aim to sign by Friday."
+      },
+      {
+        "id": "LM001_3",
+        "audioFile": "lm1",
+        "level": "C1",
+        "topic": "Q3 Report & Charter Negotiation",
+        "question": "What was the original upfront deposit required by the airline for Q4 slots?",
+        "options": [
+          "$200,000",
+          "$250,000",
+          "$300,000",
+          "$350,000"
+        ],
+        "correct": 2,
+        "audio": "Sophia: Welcome to our Q3 performance review meeting, Alex. Let's start with the sales figures for our chartered flights to Japan and Europe. What's the latest update?\nAlex: Sure, Sophia. In Q3, our total revenue reached twelve point five million dollars, which is a fourteen percent increase quarter-on-quarter. Our Tokyo charter route achieved an ninety-two percent occupancy rate, generating four.eight million dollars alone. However, the Paris route faced some headwinds. We only reached seventy-four percent occupancy due to the late slot allocation, resulting in a minor loss of one hundred and twenty thousand dollars.\nSophia: I see. A seventy-four percent occupancy rate is indeed below our target of eighty-five percent. If we want to secure those slots for Q4, the airline requires an upfront deposit of three hundred thousand dollars, up from the usual two hundred thousand. How do we negotiate this?\nAlex: Three hundred thousand is too high. I propose we offer a two hundred and fifty thousand dollar deposit, but guarantee at least twelve flights instead of ten. This reduces their risk on empty seats and gives us leverage to demand better slot times. We also need to negotiate a five percent volume discount if we exceed fifteen flights in Q4.\nSophia: That's a logical proposal. A guarantee of twelve flights should give them enough confidence to accept the lower deposit of two hundred and fifty thousand. I will schedule a meeting with their procurement director tomorrow to finalize the agreement. Let's aim to sign by Friday."
+      },
+      {
+        "id": "LM001_4",
+        "audioFile": "lm1",
+        "level": "C1",
+        "topic": "Q3 Report & Charter Negotiation",
+        "question": "How does Alex propose to negotiate the Q4 deposit down to $250,000?",
+        "options": [
+          "By reducing the number of flights to ten",
+          "By paying the entire deposit in cash",
+          "By guaranteeing at least twelve flights instead of ten",
+          "By requesting a 5% discount on all seats"
+        ],
+        "correct": 2,
+        "audio": "Sophia: Welcome to our Q3 performance review meeting, Alex. Let's start with the sales figures for our chartered flights to Japan and Europe. What's the latest update?\nAlex: Sure, Sophia. In Q3, our total revenue reached twelve point five million dollars, which is a fourteen percent increase quarter-on-quarter. Our Tokyo charter route achieved an ninety-two percent occupancy rate, generating four.eight million dollars alone. However, the Paris route faced some headwinds. We only reached seventy-four percent occupancy due to the late slot allocation, resulting in a minor loss of one hundred and twenty thousand dollars.\nSophia: I see. A seventy-four percent occupancy rate is indeed below our target of eighty-five percent. If we want to secure those slots for Q4, the airline requires an upfront deposit of three hundred thousand dollars, up from the usual two hundred thousand. How do we negotiate this?\nAlex: Three hundred thousand is too high. I propose we offer a two hundred and fifty thousand dollar deposit, but guarantee at least twelve flights instead of ten. This reduces their risk on empty seats and gives us leverage to demand better slot times. We also need to negotiate a five percent volume discount if we exceed fifteen flights in Q4.\nSophia: That's a logical proposal. A guarantee of twelve flights should give them enough confidence to accept the lower deposit of two hundred and fifty thousand. I will schedule a meeting with their procurement director tomorrow to finalize the agreement. Let's aim to sign by Friday."
+      },
+      {
+        "id": "LM001_5",
+        "audioFile": "lm1",
+        "level": "C1",
+        "topic": "Q3 Report & Charter Negotiation",
+        "question": "Under what condition would Vietravel get a 5% volume discount in Q4?",
+        "options": [
+          "If the total revenue exceeds $12.5 million",
+          "If the number of flights exceeds fifteen",
+          "If they maintain an occupancy rate of 92%",
+          "If they sign the contract before Friday"
+        ],
+        "correct": 1,
+        "audio": "Sophia: Welcome to our Q3 performance review meeting, Alex. Let's start with the sales figures for our chartered flights to Japan and Europe. What's the latest update?\nAlex: Sure, Sophia. In Q3, our total revenue reached twelve point five million dollars, which is a fourteen percent increase quarter-on-quarter. Our Tokyo charter route achieved an ninety-two percent occupancy rate, generating four.eight million dollars alone. However, the Paris route faced some headwinds. We only reached seventy-four percent occupancy due to the late slot allocation, resulting in a minor loss of one hundred and twenty thousand dollars.\nSophia: I see. A seventy-four percent occupancy rate is indeed below our target of eighty-five percent. If we want to secure those slots for Q4, the airline requires an upfront deposit of three hundred thousand dollars, up from the usual two hundred thousand. How do we negotiate this?\nAlex: Three hundred thousand is too high. I propose we offer a two hundred and fifty thousand dollar deposit, but guarantee at least twelve flights instead of ten. This reduces their risk on empty seats and gives us leverage to demand better slot times. We also need to negotiate a five percent volume discount if we exceed fifteen flights in Q4.\nSophia: That's a logical proposal. A guarantee of twelve flights should give them enough confidence to accept the lower deposit of two hundred and fifty thousand. I will schedule a meeting with their procurement director tomorrow to finalize the agreement. Let's aim to sign by Friday."
+      },
+      {
+        "id": "L1201",
+        "audioFile": "l12c",
+        "level": "B2",
+        "topic": "Marketing Strategy Meeting",
+        "audio": "Let's get started. As you know, our summer campaign launch is just six weeks away. Today, we need to finalize our budget allocation. We have a total budget of eighty thousand dollars. After analyzing last year's campaign, we decided to allocate forty percent to social media influencers, as they brought in the highest conversion rates. We will put twenty-five percent into search engine ads, and fifteen percent into email marketing campaigns. The remaining twenty percent will be kept as a reserve for emergency promotions. In addition, our creative team is designing three different ad variations for the launch. We will run A/B testing during the first week to see which performs best. Our goal is to increase online bookings by thirty percent. Let's make sure everyone meets their deadlines by next Friday.",
+        "question": "How far away is the summer campaign launch?",
+        "options": [
+          "Four weeks away",
+          "Six weeks away",
+          "Eight weeks away",
+          "Ten weeks away"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1202",
+        "audioFile": "l12c",
+        "level": "B2",
+        "topic": "Marketing Strategy Meeting",
+        "audio": "Let's get started. As you know, our summer campaign launch is just six weeks away. Today, we need to finalize our budget allocation. We have a total budget of eighty thousand dollars. After analyzing last year's campaign, we decided to allocate forty percent to social media influencers, as they brought in the highest conversion rates. We will put twenty-five percent into search engine ads, and fifteen percent into email marketing campaigns. The remaining twenty percent will be kept as a reserve for emergency promotions. In addition, our creative team is designing three different ad variations for the launch. We will run A/B testing during the first week to see which performs best. Our goal is to increase online bookings by thirty percent. Let's make sure everyone meets their deadlines by next Friday.",
+        "question": "What is the total budget allocated for the upcoming summer campaign?",
+        "options": [
+          "Sixty thousand dollars",
+          "Seventy thousand dollars",
+          "Eighty thousand dollars",
+          "Ninety thousand dollars"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L1203",
+        "audioFile": "l12c",
+        "level": "B2",
+        "topic": "Marketing Strategy Meeting",
+        "audio": "Let's get started. As you know, our summer campaign launch is just six weeks away. Today, we need to finalize our budget allocation. We have a total budget of eighty thousand dollars. After analyzing last year's campaign, we decided to allocate forty percent to social media influencers, as they brought in the highest conversion rates. We will put twenty-five percent into search engine ads, and fifteen percent into email marketing campaigns. The remaining twenty percent will be kept as a reserve for emergency promotions. In addition, our creative team is designing three different ad variations for the launch. We will run A/B testing during the first week to see which performs best. Our goal is to increase online bookings by thirty percent. Let's make sure everyone meets their deadlines by next Friday.",
+        "question": "Which channel receives the largest budget share due to last year's performance?",
+        "options": [
+          "Social media influencers",
+          "Search engine advertisements",
+          "Email marketing campaigns",
+          "Emergency promotional reserves"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "L1204",
+        "audioFile": "l12c",
+        "level": "B2",
+        "topic": "Marketing Strategy Meeting",
+        "audio": "Let's get started. As you know, our summer campaign launch is just six weeks away. Today, we need to finalize our budget allocation. We have a total budget of eighty thousand dollars. After analyzing last year's campaign, we decided to allocate forty percent to social media influencers, as they brought in the highest conversion rates. We will put twenty-five percent into search engine ads, and fifteen percent into email marketing campaigns. The remaining twenty percent will be kept as a reserve for emergency promotions. In addition, our creative team is designing three different ad variations for the launch. We will run A/B testing during the first week to see which performs best. Our goal is to increase online bookings by thirty percent. Let's make sure everyone meets their deadlines by next Friday.",
+        "question": "When will A/B testing of the three ad variations be conducted?",
+        "options": [
+          "During the first week of the launch",
+          "During the first two weeks of the launch",
+          "Throughout the entire summer campaign",
+          "In the month preceding the launch"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "L1205",
+        "audioFile": "l12c",
+        "level": "B2",
+        "topic": "Marketing Strategy Meeting",
+        "audio": "Let's get started. As you know, our summer campaign launch is just six weeks away. Today, we need to finalize our budget allocation. We have a total budget of eighty thousand dollars. After analyzing last year's campaign, we decided to allocate forty percent to social media influencers, as they brought in the highest conversion rates. We will put twenty-five percent into search engine ads, and fifteen percent into email marketing campaigns. The remaining twenty percent will be kept as a reserve for emergency promotions. In addition, our creative team is designing three different ad variations for the launch. We will run A/B testing during the first week to see which performs best. Our goal is to increase online bookings by thirty percent. Let's make sure everyone meets their deadlines by next Friday.",
+        "question": "What is the primary target increase for online bookings?",
+        "options": [
+          "Fifteen percent increase",
+          "Twenty percent increase",
+          "Twenty-five percent increase",
+          "Thirty percent increase"
+        ],
+        "correct": 3
+      },
+      {
+        "id": "L1301",
+        "audioFile": "l13c",
+        "level": "C1",
+        "topic": "CEO Address on International Expansion",
+        "audio": "Good evening, colleagues and shareholders. Today, I am proud to announce our strategic expansion into the European market, marking a pivotal milestone in our company's history. Over the past eighteen months, our market research division has conducted a comprehensive feasibility study, identifying strong demand for our premium travel packages in Germany and France. Initially, we will establish regional offices in Frankfurt and Paris to coordinate local operations and foster B2B partnerships with European travel agents. To fund this venture, we have secured a capital injection of twelve million dollars from our primary investment partners. While we anticipate initial operational challenges due to regulatory differences, we project that the European market will contribute twenty-two percent of our total revenue by the end of fiscal year twenty twenty-seven. This expansion is not merely about growth; it represents a commitment to transforming our brand into a global leader. Thank you for your continued dedication.",
+        "question": "What is the primary business announcement made by the CEO?",
+        "options": [
+          "A corporate merger with an international competitor",
+          "Strategic expansion of services into the European market",
+          "A restructuring of the board of directors and executive officers",
+          "The deployment of a proprietary digital booking application"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1302",
+        "audioFile": "l13c",
+        "level": "C1",
+        "topic": "CEO Address on International Expansion",
+        "audio": "Good evening, colleagues and shareholders. Today, I am proud to announce our strategic expansion into the European market, marking a pivotal milestone in our company's history. Over the past eighteen months, our market research division has conducted a comprehensive feasibility study, identifying strong demand for our premium travel packages in Germany and France. Initially, we will establish regional offices in Frankfurt and Paris to coordinate local operations and foster B2B partnerships with European travel agents. To fund this venture, we have secured a capital injection of twelve million dollars from our primary investment partners. While we anticipate initial operational challenges due to regulatory differences, we project that the European market will contribute twenty-two percent of our total revenue by the end of fiscal year twenty twenty-seven. This expansion is not merely about growth; it represents a commitment to transforming our brand into a global leader. Thank you for your continued dedication.",
+        "question": "What was the duration of the market feasibility study conducted prior to this decision?",
+        "options": [
+          "Twelve months of intensive analysis",
+          "Eighteen months of comprehensive research",
+          "Two full years of market investigation",
+          "Three years of continuous data collection"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1303",
+        "audioFile": "l13c",
+        "level": "C1",
+        "topic": "CEO Address on International Expansion",
+        "audio": "Good evening, colleagues and shareholders. Today, I am proud to announce our strategic expansion into the European market, marking a pivotal milestone in our company's history. Over the past eighteen months, our market research division has conducted a comprehensive feasibility study, identifying strong demand for our premium travel packages in Germany and France. Initially, we will establish regional offices in Frankfurt and Paris to coordinate local operations and foster B2B partnerships with European travel agents. To fund this venture, we have secured a capital injection of twelve million dollars from our primary investment partners. While we anticipate initial operational challenges due to regulatory differences, we project that the European market will contribute twenty-two percent of our total revenue by the end of fiscal year twenty twenty-seven. This expansion is not merely about growth; it represents a commitment to transforming our brand into a global leader. Thank you for your continued dedication.",
+        "question": "Which European cities are selected for establishing the company's initial regional offices?",
+        "options": [
+          "Berlin and Lyon",
+          "Munich and Nice",
+          "Frankfurt and Paris",
+          "Hamburg and Marseille"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "L1304",
+        "audioFile": "l13c",
+        "level": "C1",
+        "topic": "CEO Address on International Expansion",
+        "audio": "Good evening, colleagues and shareholders. Today, I am proud to announce our strategic expansion into the European market, marking a pivotal milestone in our company's history. Over the past eighteen months, our market research division has conducted a comprehensive feasibility study, identifying strong demand for our premium travel packages in Germany and France. Initially, we will establish regional offices in Frankfurt and Paris to coordinate local operations and foster B2B partnerships with European travel agents. To fund this venture, we have secured a capital injection of twelve million dollars from our primary investment partners. While we anticipate initial operational challenges due to regulatory differences, we project that the European market will contribute twenty-two percent of our total revenue by the end of fiscal year twenty twenty-seven. This expansion is not merely about growth; it represents a commitment to transforming our brand into a global leader. Thank you for your continued dedication.",
+        "question": "What is the source of funding secured for this international expansion project?",
+        "options": [
+          "A public offering of additional corporate shares",
+          "A capital injection of twelve million dollars from investment partners",
+          "A commercial bank loan backed by physical assets",
+          "Reinvested corporate reserves accumulated over five years"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "L1305",
+        "audioFile": "l13c",
+        "level": "C1",
+        "topic": "CEO Address on International Expansion",
+        "audio": "Good evening, colleagues and shareholders. Today, I am proud to announce our strategic expansion into the European market, marking a pivotal milestone in our company's history. Over the past eighteen months, our market research division has conducted a comprehensive feasibility study, identifying strong demand for our premium travel packages in Germany and France. Initially, we will establish regional offices in Frankfurt and Paris to coordinate local operations and foster B2B partnerships with European travel agents. To fund this venture, we have secured a capital injection of twelve million dollars from our primary investment partners. While we anticipate initial operational challenges due to regulatory differences, we project that the European market will contribute twenty-two percent of our total revenue by the end of fiscal year twenty twenty-seven. This expansion is not merely about growth; it represents a commitment to transforming our brand into a global leader. Thank you for your continued dedication.",
+        "question": "What is the projected revenue contribution of the European market by the end of FY2027?",
+        "options": [
+          "Fifteen percent of total corporate revenue",
+          "Eighteen percent of total corporate revenue",
+          "Twenty-two percent of total corporate revenue",
+          "Twenty-five percent of total corporate revenue"
+        ],
+        "correct": 2
+      }
+    ],
+    "writing": [
+      {
+        "id": "W_1",
+        "type": "fill_blank",
+        "question": "The new marketing strategy ____ a significant increase in sales over the last quarter.",
+        "blanks": [
+          "has resulted in",
+          "resulted in",
+          "led to"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_2",
+        "type": "error_correction",
+        "question": "She have been working at the company for over five years.",
+        "original": "have",
+        "correction": "has",
+        "level": 1
+      },
+      {
+        "id": "W_3",
+        "type": "sentence_order",
+        "question": "Arrange the words to form a correct sentence.",
+        "words": [
+          "project",
+          "The",
+          "completed",
+          "time",
+          "was",
+          "on"
+        ],
+        "correctOrder": [
+          "The",
+          "project",
+          "was",
+          "completed",
+          "on",
+          "time"
+        ],
+        "level": 1
+      },
+      {
+        "id": "W_4",
+        "type": "sentence_transform",
+        "question": "Rewrite the sentence so it has the same meaning: 'They will finish the work by tomorrow.'",
+        "prompt": "The work",
+        "answers": [
+          "will be finished by tomorrow",
+          "will be finished by them tomorrow"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_5",
+        "type": "fill_blank",
+        "question": "Despite the heavy rain, the outdoor event ____ as planned.",
+        "blanks": [
+          "proceeded",
+          "went ahead",
+          "took place"
+        ],
+        "level": 3
+      },
+      {
+        "id": "W_6",
+        "type": "error_correction",
+        "question": "The manager asked me to quickly reviewing the report before the meeting.",
+        "original": "reviewing",
+        "correction": "review",
+        "level": 2
+      },
+      {
+        "id": "W_7",
+        "type": "sentence_order",
+        "question": "Arrange the words to form a correct sentence.",
+        "words": [
+          "to",
+          "We",
+          "forward",
+          "from",
+          "hearing",
+          "look",
+          "you"
+        ],
+        "correctOrder": [
+          "We",
+          "look",
+          "forward",
+          "to",
+          "hearing",
+          "from",
+          "you"
+        ],
+        "level": 2
+      },
+      {
+        "id": "W_8",
+        "type": "sentence_transform",
+        "question": "Rewrite the sentence: 'It's a pity I didn't study harder.'",
+        "prompt": "I wish",
+        "answers": [
+          "I had studied harder"
+        ],
+        "level": 3
+      }
+    ]
+  }
+}

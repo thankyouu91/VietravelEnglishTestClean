@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<script>
+  window.onerror = function(message, source, lineno, colno, error) {
+    const errText = "JS Error: " + message + " at " + source + ":" + lineno + ":" + colno;
+    console.error(errText);
+    alert(errText);
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.style.position = 'fixed';
+      div.style.top = '0';
+      div.style.left = '0';
+      div.style.width = '100%';
+      div.style.zIndex = '999999';
+      div.style.background = '#e11d48';
+      div.style.color = 'white';
+      div.style.padding = '20px';
+      div.style.fontFamily = 'monospace';
+      div.innerHTML = "<h3>🚨 Frontend Javascript Error:</h3><p>" + message + "</p><p>File: " + source + "</p><p>Line: " + lineno + ", Col: " + colno + "</p><p>Please press Ctrl+F5 to hard reload.</p>";
+      document.body.appendChild(div);
+    }, 500);
+  };
+</script>
+<script>
+  if(localStorage.getItem('theme')==='dark'||(!localStorage.getItem('theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+    document.documentElement.classList.add('dark');
+  }else{
+    document.documentElement.classList.remove('dark');
+  }
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vietravel English Placement Test</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Be Vietnam Pro', 'sans-serif'] },
+        colors: {
+          brand: { DEFAULT:'#0C2340', light:'#1A73E8', pale:'#F8FAFC', gold:'#D4AF37', teal:'#0D9488', rose:'#E11D48' },
+        }
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="exam.css">
+<style>
+  body { font-family: 'Be Vietnam Pro', sans-serif; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+  .track { display: none; }
+  .track.active { display: block; }
+  .tab-active { background: linear-gradient(135deg,#0C2340,#1A73E8) !important; color: white !important; border-color: transparent !important; box-shadow: 0 4px 12px rgba(26,115,232,0.15); }
+  .option-selected { border-color: #1A73E8 !important; background: #F8FAFC !important; color: #0C2340 !important; font-weight: 700; box-shadow: 0 4px 12px rgba(26,115,232,0.05); }
+  .option-selected .opt-letter { background: #1A73E8 !important; color: white !important; }
+  .card-answered { border-color: #0D9488 !important; }
+  .timer-warn { color: #D4AF37 !important; }
+  .timer-danger { color: #E11D48 !important; animation: blink 1s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .cefr-pass   { background:#F0FDFA; color:#0D9488; }
+  .cefr-review { background:#FEF3C7; color:#B45309; }
+  .cefr-fail   { background:#FFF1F2; color:#E11D48; }
+  .spinner { width:44px;height:44px;border:4px solid #E2E8F0;border-top-color:#1A73E8;border-radius:50%;animation:spin .8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg) } }
+  /* Anti-cheat: disable text selection in question areas */
+  .no-select { user-select: none; -webkit-user-select: none; }
+  /* Passage renders HTML safely */
+  .passage-content p { margin-bottom: 8px; }
+  .passage-content strong { font-weight: 700; }
+  
+  /* Animated gradient background for login screen */
+  .animated-bg {
+    background: linear-gradient(-45deg, #0C2340, #1A73E8, #0D9488, #0C2340);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+  }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Glassmorphism panel */
+  .login-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .dark .login-glass {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+</style>
+</head>
+<body class="bg-slate-100 dark:bg-slate-950 text-gray-800 dark:text-slate-200 min-h-screen">
+
+<!-- ══════════════════════════════════════
+     SCREEN 1: ĐĂNG KÝ
+ ══════════════════════════════════════ -->
+<div id="screen-register" class="screen active">
+  <div class="min-h-screen flex items-center justify-center p-4 md:p-8 animated-bg relative overflow-hidden">
+    <!-- Floating decorative blur circles -->
+    <div class="absolute w-80 h-80 rounded-full bg-blue-500/20 blur-3xl -top-20 -left-20 pointer-events-none"></div>
+    <div class="absolute w-80 h-80 rounded-full bg-teal-500/10 blur-3xl -bottom-20 -right-20 pointer-events-none"></div>
+    
+    <!-- Main Premium container -->
+    <div class="w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl login-glass grid grid-cols-1 lg:grid-cols-12 fade-in relative z-10">
+      
+      <!-- Cột Trái: Trải nghiệm & Giới thiệu Vietravel (5 columns) -->
+      <div class="lg:col-span-5 bg-brand text-white p-8 md:p-10 flex flex-col justify-between relative overflow-hidden"
+           style="background: linear-gradient(135deg, rgba(12, 35, 64, 0.95), rgba(26, 115, 232, 0.85)), url('https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg') center/cover no-repeat;">
+        
+        <!-- Logo & Title -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <img src="/logo-vietravel.svg" alt="Vietravel Logo" class="h-10 brightness-0 invert">
+          </div>
+          
+          <div class="space-y-3 pt-6">
+            <h2 class="text-3xl font-extrabold tracking-tight leading-tight">
+              Khát Vọng Vươn Tầm <br>
+              <span class="text-yellow-400">Vietravel HR</span>
+            </h2>
+            <div class="w-16 h-1 bg-yellow-400 rounded-full"></div>
+          </div>
+          
+          <!-- Introduction Paragraphs -->
+          <div class="space-y-4 text-sm text-blue-100 leading-relaxed font-medium pt-4">
+            <p>
+              <strong>Vietravel</strong> là Tập đoàn Lữ hành hàng đầu Châu Á, tiên phong kiến tạo những hành trình du lịch đẳng cấp quốc tế. Chúng tôi tin rằng nhân sự là tài sản quý giá nhất làm nên chất lượng dịch vụ vượt trội.
+            </p>
+            <p>
+              Trong xu thế hội nhập toàn cầu, tiếng Anh là chìa khóa kết nối và phục vụ khách hàng từ khắp nơi trên thế giới. Vietravel áp dụng hệ thống kiểm tra năng lực Anh ngữ nhằm chuẩn hóa chất lượng đội ngũ nhân sự, hướng tới sự chuyên nghiệp và phát triển bền vững của đội ngũ nhân sự.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Footer badge -->
+        <div class="pt-8 border-t border-white/20 mt-8 flex items-center justify-between text-xs text-blue-200">
+          <span>Global Integration</span>
+          <span>© 2026 Vietravel HR</span>
+        </div>
+      </div>
+      
+      <!-- Cột Phải: Form Đăng ký (7 columns) -->
+      <div class="lg:col-span-7 p-8 md:p-10 bg-white/95 dark:bg-slate-900/95 flex flex-col justify-center">
+        <div class="mb-6">
+          <h1 class="text-2xl font-black text-brand dark:text-slate-100 mb-1">Bắt đầu bài kiểm tra</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400">Vui lòng điền đầy đủ thông tin bên dưới để bắt đầu làm bài đánh giá năng lực tiếng Anh.</p>
+        </div>
+        
+        <form id="registerForm" autocomplete="off" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1.5">Họ và tên <span class="text-rose-500">*</span></label>
+              <input id="f-name" type="text" placeholder="Nguyễn Văn A" required autocomplete="name"
+                class="w-full px-4 py-3 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-150 rounded-xl text-sm focus:outline-none focus:border-brand-light focus:ring-4 focus:ring-brand-light/10 transition">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1.5">Email <span class="text-rose-500">*</span></label>
+              <input id="f-email" type="email" placeholder="email@vietravel.com" required autocomplete="email"
+                class="w-full px-4 py-3 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-150 rounded-xl text-sm focus:outline-none focus:border-brand-light focus:ring-4 focus:ring-brand-light/10 transition">
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1.5">Vị trí ứng tuyển <span class="text-rose-500">*</span></label>
+            <select id="f-position" required
+              class="w-full px-4 py-3 border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-150 rounded-xl text-sm focus:outline-none focus:border-brand-light focus:ring-4 focus:ring-brand-light/10 transition bg-white">
+              <option value="">— Chọn vị trí —</option>
+              <option value="staff">Nhân viên (Staff)</option>
+              <option value="manager">Quản lý (Manager)</option>
+            </select>
+          </div>
+          
+          <!-- Rules Accordion/Box -->
+          <div class="bg-brand-pale dark:bg-slate-800/40 border border-blue-100 dark:border-slate-800 rounded-xl p-4 space-y-2">
+            <span class="text-xs font-bold text-brand dark:text-brand-light flex items-center gap-1.5">
+              <span>📋</span> Lưu ý trước khi thi:
+            </span>
+            <ul class="text-[11px] text-gray-600 dark:text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
+              <li>Thời gian thi: <strong>20 phút</strong> gồm 20 câu hỏi (Nghe/Đọc/Viết).</li>
+              <li>Mỗi đoạn âm thanh chỉ được phát tối đa <strong>2 lần</strong>.</li>
+              <li>Không reload (F5) trang thi. Tuyệt đối không chuyển tab hoặc copy/paste.</li>
+              <li>Bài thi sẽ tự động được thu và chấm điểm khi hết thời gian đếm ngược.</li>
+            </ul>
+          </div>
+
+          <div class="pt-2">
+            <label class="flex gap-3 items-start cursor-pointer">
+              <input type="checkbox" id="f-consent" required class="mt-0.5 w-4 h-4 flex-shrink-0 accent-brand-light">
+              <span class="text-xs text-gray-600 dark:text-slate-300 leading-normal">
+                Tôi đồng ý cho Vietravel thu thập và xử lý thông tin cá nhân cho mục đích tuyển dụng theo quy định của pháp luật Việt Nam.
+              </span>
+            </label>
+          </div>
+
+          <div id="reg-error" class="hidden bg-rose-50 text-rose-700 rounded-xl px-4 py-3 text-xs"></div>
+          
+          <button type="submit" id="reg-btn"
+            class="w-full py-3.5 rounded-xl font-bold text-white text-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-light/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            style="background:linear-gradient(135deg,#0C2340,#1A73E8)">
+            Bắt đầu làm bài thi →
+          </button>
+        </form>
+        <div class="text-center mt-5 text-[11px] text-gray-400 dark:text-slate-500 font-medium">
+          Bài tập trên nền tảng được phát triển bởi MM Publications Vietnam
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 2: BÀI THI
+══════════════════════════════════════ -->
+<div id="screen-exam" class="screen">
+
+  <!-- Header sticky -->
+  <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <div class="flex items-center gap-3 px-5 py-2.5 flex-wrap">
+      <!-- Brand -->
+      <div class="flex items-center gap-2 min-w-[130px]">
+        <img src="/logo-vietravel.svg" alt="Vietravel" class="h-7">
+        <span id="hdr-name" class="font-bold text-brand text-sm truncate max-w-[100px]">—</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-1.5 flex-1 justify-center order-last sm:order-none w-full sm:w-auto">
+        <button class="tab flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-xs font-bold text-gray-500 transition tab-active" data-track="listening" onclick="switchTrack('listening')">
+          🎧 Listening <span id="prog-listening" class="bg-white/30 rounded-full px-2 py-0.5 text-[10px]">0/10</span>
+        </button>
+        <button class="tab flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-xs font-bold text-gray-500 transition" data-track="reading" onclick="switchTrack('reading')">
+          📖 Reading <span id="prog-reading" class="bg-gray-100 rounded-full px-2 py-0.5 text-[10px] text-gray-500">0/5</span>
+        </button>
+        <button class="tab flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-xs font-bold text-gray-500 transition" data-track="writing" onclick="switchTrack('writing')">
+          ✍️ Writing <span id="prog-writing" class="bg-gray-100 rounded-full px-2 py-0.5 text-[10px] text-gray-500">0/5</span>
+        </button>
+        <!-- speaking disabled temporarily
+        <button class="tab flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-xs font-bold text-gray-500 transition" data-track="speaking" onclick="switchTrack('speaking')">
+          🎤 Speaking <span id="prog-speaking" class="bg-gray-100 rounded-full px-2 py-0.5 text-[10px] text-gray-500">—</span>
+        </button>
+        -->
+      </div>
+
+      <!-- Timer + Submit -->
+      <div class="flex items-center gap-2.5 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-gray-500 dark:text-gray-400 transition" title="Chuyển chế độ sáng/tối">
+          🌙
+        </button>
+        <div id="timer" class="text-xl font-black text-brand dark:text-brand-light tabular-nums min-w-[58px] text-right">20:00</div>
+        <button onclick="confirmSubmit()"
+          class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition">
+          Nộp bài
+        </button>
+      </div>
+    </div>
+
+    <!-- Anti-cheat warning bar -->
+    <div id="cheat-warn" class="hidden bg-red-600 text-white text-xs font-bold text-center py-1.5 px-4 animate-pulse">
+      ⚠️ Cảnh báo: Phát hiện hành vi gian lận! Hành động này đã được ghi lại.
+    </div>
+  </header>
+
+  <main class="max-w-[1400px] mx-auto px-4 lg:px-8 py-7 pb-16">
+
+    <!-- LISTENING -->
+    <section id="track-listening" class="track active">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Cột 1: Audio Player & Transcript (6 columns, sticky) -->
+        <div class="lg:col-span-6 lg:sticky top-6">
+          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            <div class="relative h-[320px] bg-slate-900 overflow-hidden flex items-center justify-center">
+              <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm pointer-events-none">
+              
+              <button id="ls-play-btn" class="relative z-10 w-20 h-20 bg-brand text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-105 transition hover:bg-brand-light focus:outline-none disabled:opacity-50" onclick="toggleListeningAudio()">
+                <svg id="ls-icon-play" class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="ls-icon-pause" class="w-8 h-8 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              <div id="ls-player-title" class="absolute bottom-6 left-0 right-0 text-center text-white font-bold text-lg drop-shadow-md">Phần nghe: Part 1</div>
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-gray-500 font-bold mb-4">
+                <span id="ls-time">00:00 / 00:00</span>
+                <span id="ls-remains" class="flex items-center gap-1 text-brand">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> 
+                  Số lần nghe còn lại: <span id="ls-listen-count">2/2</span>
+                </span>
+              </div>
+              <div class="relative h-2.5 bg-gray-100 rounded-full overflow-hidden mb-2" id="ls-progress-bar-container">
+                <div id="ls-progress-bar" class="absolute top-0 left-0 h-full bg-brand rounded-full w-0 transition-all duration-200"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Danh sách câu hỏi (6 columns) -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="bg-slate-800 text-white px-5 py-3 rounded-xl flex items-center justify-between shadow-md">
+            <div class="font-bold text-sm tracking-wide" id="ls-question-range">QUESTIONS</div>
+            <div class="text-xs font-medium text-slate-300">Listening Comprehension</div>
+          </div>
+          <div id="listening-questions-container" class="space-y-6">
+            <!-- Danh sách câu hỏi nghe sẽ render ở đây -->
+          </div>
+          
+          <!-- Phân trang Listening -->
+          <div class="flex justify-between items-center pt-4 border-t border-gray-200 mt-8" id="ls-pagination">
+            <button id="ls-btn-prev" onclick="navListening(-1)" class="px-5 py-2.5 rounded-xl border-2 border-slate-200 text-sm font-bold text-slate-500 hover:border-brand hover:text-brand transition disabled:opacity-50 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              Bài Nghe Trước
+            </button>
+            <button id="ls-btn-next" onclick="navListening(1)" class="px-5 py-2.5 rounded-xl bg-brand text-white text-sm font-bold shadow-md hover:bg-brand-light transition disabled:opacity-50 flex items-center gap-2">
+              Bài Nghe Tiếp
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Hidden audio element for API playback -->
+      <audio id="ls-audio-el" class="hidden"></audio>
+    </section>
+
+      <!-- READING -->
+      <section id="track-reading" class="track">
+        <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-5">
+          <h2 class="text-lg font-black text-brand mb-1">📖 Phần 2 — Reading</h2>
+          <p class="text-sm text-gray-500">Đọc đoạn văn và trả lời các câu hỏi tương ứng.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start relative">
+          <!-- Cột trái: Passage -->
+          <div class="bg-white border border-gray-200 rounded-2xl shadow-sm lg:sticky top-6 h-[calc(100vh-100px)] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-slate-50 rounded-t-2xl">
+              <h3 id="rd-passage-title" class="font-bold text-slate-800 text-lg">Passage Title</h3>
+              <div class="flex gap-2">
+                <button class="px-3 py-1.5 bg-white border border-gray-200 rounded text-xs font-bold text-slate-600 hover:text-brand transition flex items-center gap-1 shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                  Highlight
+                </button>
+                <button class="px-3 py-1.5 bg-white border border-gray-200 rounded text-xs font-bold text-slate-600 hover:text-brand transition shadow-sm">TT A⁺</button>
+              </div>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1 custom-scrollbar">
+              <div id="rd-passage-content" class="text-sm text-gray-700 leading-loose">
+                <!-- Nội dung đoạn văn -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Cột phải: Questions -->
+          <div class="space-y-6">
+            <div class="bg-slate-800 text-white px-5 py-3 rounded-xl flex items-center justify-between shadow-md">
+              <div class="font-bold text-sm tracking-wide" id="rd-question-range">QUESTIONS</div>
+              <div class="text-xs font-medium text-slate-300">Reading Comprehension</div>
+            </div>
+            <div id="reading-questions-container" class="space-y-8">
+              <!-- Danh sách câu hỏi render ở đây -->
+            </div>
+            
+            <!-- Phân trang (Nếu có nhiều hơn 1 passage) -->
+            <div class="flex justify-between items-center pt-4 border-t border-gray-200 mt-8" id="rd-pagination">
+              <button id="rd-btn-prev" onclick="navReading(-1)" class="px-5 py-2.5 rounded-xl border-2 border-slate-200 text-sm font-bold text-slate-500 hover:border-brand hover:text-brand transition disabled:opacity-50 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Passage Trước
+              </button>
+              <button id="rd-btn-next" onclick="navReading(1)" class="px-5 py-2.5 rounded-xl bg-brand text-white text-sm font-bold shadow-md hover:bg-brand-light transition disabled:opacity-50 flex items-center gap-2">
+                Passage Tiếp
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- WRITING -->
+    <section id="track-writing" class="track">
+      <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-5">
+        <h2 class="text-lg font-black text-brand mb-1">✍️ Phần 3 — Writing</h2>
+        <p class="text-sm text-gray-500">Viết câu trả lời bằng tiếng Anh theo yêu cầu. Không được copy/paste.</p>
+      </div>
+      <div id="writing-questions"></div>
+    </section>
+
+    <footer class="text-center pt-8 text-[11px] text-gray-400 dark:text-slate-500 font-medium">
+      Bài tập trên nền tảng được phát triển bởi MM Publications Vietnam
+    </footer>
+  </main>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3: KẾT QUẢ
+══════════════════════════════════════ -->
+<div id="screen-result" class="screen">
+  <div class="min-h-screen flex items-center justify-center p-6 bg-slate-100">
+    <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md text-center">
+      <div class="mb-5">
+        <svg class="w-20 h-20 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <h2 class="text-2xl font-black text-brand mb-4">Cảm ơn bạn đã hoàn thành bài thi!</h2>
+      <p class="text-slate-600 mb-8 leading-relaxed">Kết quả bài thi của bạn đã được ghi nhận thành công trên hệ thống. Phòng Nhân sự (HR) sẽ tiến hành đánh giá và gửi kết quả chi tiết về email của bạn trong thời gian sớm nhất.</p>
+      <div class="border-t border-gray-100 pt-4 text-[11px] text-gray-400 font-medium">
+        Bài tập trên nền tảng được phát triển bởi MM Publications Vietnam
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL: XÁC NHẬN NỘP BÀI
+══════════════════════════════════════ -->
+<div id="submitModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeSubmitModal()"></div>
+  <div class="relative bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl">
+    <h3 class="text-lg font-black text-brand mb-2">Xác nhận nộp bài</h3>
+    <p id="submit-warn-text" class="text-sm text-gray-500 mb-6 leading-relaxed">Bạn có chắc muốn nộp bài không?</p>
+    <div class="flex gap-3 justify-end">
+      <button onclick="closeSubmitModal()" class="px-4 py-2 border border-gray-200 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-50 transition">Tiếp tục làm bài</button>
+      <button onclick="doSubmit()" class="px-4 py-2 rounded-xl text-sm font-bold text-white transition"
+        style="background:linear-gradient(135deg,#1F4E79,#2E75B6)">Nộp bài ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading overlay -->
+<div id="loading-overlay" class="hidden fixed inset-0 z-[9999] bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center gap-4">
+  <div class="spinner"></div>
+  <div id="loading-text" class="text-sm font-bold text-brand">Đang xử lý…</div>
+</div>
+
+<script src="exam.js"></script>
+</body>
+</html>

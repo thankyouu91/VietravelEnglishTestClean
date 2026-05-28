@@ -1,0 +1,84 @@
+{
+  "BANK_STAFF": {
+    "listening": [
+      {
+        "id": "L1Q1",
+        "audioFile": "l1c",
+        "level": "A2",
+        "topic": "Hotel Check-in",
+        "audio": "Receptionist welcomes Mr. Tanaka at The Sunrise Resort.",
+        "question": "What time is breakfast served at the hotel?",
+        "options": ["6:00 - 9:00 AM","7:00 - 10:00 AM","8:00 - 11:00 AM","5:00 - 8:00 AM"],
+        "correct": 1
+      },
+      {
+        "id": "L1Q2", "audioFile": "l1c", "level": "A2", "topic": "Hotel Check-in",
+        "audio": "Receptionist welcomes Mr. Tanaka at The Sunrise Resort.",
+        "question": "What is the guest's room number?",
+        "options": ["507","705","507A","507B"], "correct": 0
+      },
+      {
+        "id": "L2Q1", "audioFile": "l2c", "level": "B1", "topic": "Tour Booking",
+        "audio": "Customer books a city tour package.",
+        "question": "How many people are in the booking?",
+        "options": ["Two","Three","Four","Five"], "correct": 2
+      }
+    ],
+    "reading": [
+      {
+        "id": "R1Q1", "level": "A2", "topic": "Hotel Policy",
+        "passage": "Welcome to The Sunrise Resort. Check-in time is 2 PM and check-out time is 12 noon. Breakfast is included with your stay and is served at the Lotus Restaurant on the 2nd floor from 7 AM to 10 AM. Free WiFi is available in all rooms.",
+        "question": "What is the check-out time?",
+        "options": ["10 AM","11 AM","12 noon","1 PM"], "correct": 2
+      },
+      {
+        "id": "R2Q1", "level": "B1", "topic": "Tour Description",
+        "passage": "The Mekong Delta day tour includes a boat ride through floating markets, a visit to a coconut candy workshop, lunch at a local family restaurant, and stops at fruit orchards. The tour departs at 7:30 AM and returns to Ho Chi Minh City around 6 PM.",
+        "question": "Which of the following is NOT part of the tour?",
+        "options": ["Floating market visit","Visit to coconut candy workshop","Overnight stay","Lunch at a local restaurant"],
+        "correct": 2
+      }
+    ],
+    "writing": [
+      {
+        "id": "W1Q1", "level": "A2", "topic": "Email Reply",
+        "prompt": "Viết email trả lời khách yêu cầu xác nhận đặt phòng 2 đêm cho 2 người lớn tại khách sạn 4 sao ở Đà Nẵng, check-in 15/06.",
+        "keywords": ["confirm","booking","Da Nang","June","2 nights","check-in","double room"],
+        "minWords": 40
+      },
+      {
+        "id": "W2Q1", "level": "B1", "topic": "Complaint Handling",
+        "prompt": "Trả lời email của khách than phiền về việc phòng chưa được dọn dẹp khi check-in.",
+        "keywords": ["apologize","inconvenience","resolve","clean","manager","compensation"],
+        "minWords": 50
+      }
+    ]
+  },
+
+  "BANK_OFFICE_MGR": {
+    "listening": [
+      {
+        "id": "ML1Q1", "audioFile": "l5", "level": "B2", "topic": "Team Meeting",
+        "audio": "Manager discusses Q3 sales targets with the team.",
+        "question": "What growth target is mentioned for Q3?",
+        "options": ["10%","15%","20%","25%"], "correct": 1
+      }
+    ],
+    "reading": [
+      {
+        "id": "MR1Q1", "level": "C1", "topic": "Business Proposal",
+        "passage": "We propose a strategic partnership to develop adventure tourism products targeting the European market. Initial investment is estimated at 2.5M USD with projected ROI of 18% within 24 months. The partnership leverages our local expertise and your distribution network.",
+        "question": "What is the projected return on investment timeframe?",
+        "options": ["12 months","18 months","24 months","36 months"], "correct": 2
+      }
+    ],
+    "writing": [
+      {
+        "id": "MW1Q1", "level": "C1", "topic": "Strategic Memo",
+        "prompt": "Viết bản memo đề xuất chiến lược mở rộng dịch vụ MICE (Meetings, Incentives, Conferences, Exhibitions) tại thị trường Đông Nam Á.",
+        "keywords": ["MICE","strategy","Southeast Asia","expansion","competitive","ROI","stakeholders"],
+        "minWords": 80
+      }
+    ]
+  }
+}

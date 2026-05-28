@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đăng nhập · Vietravel Exam Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Be Vietnam Pro','sans-serif']}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Be Vietnam Pro',sans-serif}</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-5"
+      style="background:url('https://wallpapercave.com/wp/wp12501526.jpg') center/cover no-repeat fixed;">
+
+  <form id="loginForm" class="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-10 w-full max-w-sm">
+    <div class="flex items-center justify-center mb-7">
+      <img src="/logo-vietravel.svg" alt="Vietravel" class="h-12">
+    </div>
+
+    <h1 class="text-xl font-black text-[#1F4E79] text-center mb-1">Đăng nhập quản trị</h1>
+    <p class="text-xs text-gray-400 text-center mb-7">Hệ thống quản lý bài thi tiếng Anh</p>
+
+    <div class="mb-4">
+      <label class="block text-xs font-bold text-gray-600 mb-1.5">Tên đăng nhập</label>
+      <input id="u" name="username" type="text" required autocomplete="username"
+        class="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2E75B6] focus:ring-2 focus:ring-blue-100 transition">
+    </div>
+    <div class="mb-6">
+      <label class="block text-xs font-bold text-gray-600 mb-1.5">Mật khẩu</label>
+      <input id="p" name="password" type="password" required autocomplete="current-password"
+        class="w-full px-3.5 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2E75B6] focus:ring-2 focus:ring-blue-100 transition">
+    </div>
+
+    <button type="submit" id="submit"
+      class="w-full py-3 rounded-xl font-bold text-white text-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+      style="background:linear-gradient(135deg,#1F4E79,#2E75B6)">
+      Đăng nhập
+    </button>
+
+    <div id="err" class="hidden mt-4 bg-red-50 text-red-700 rounded-xl px-4 py-3 text-xs text-center"></div>
+    <p class="text-center text-[11px] text-gray-400 mt-6">© Vietravel · Recruitment 2026</p>
+  </form>
+
+<script>
+const form = document.getElementById('loginForm');
+const err  = document.getElementById('err');
+const btn  = document.getElementById('submit');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  err.classList.add('hidden');
+  btn.disabled = true; btn.textContent = 'Đang đăng nhập…';
+  try {
+    const r = await fetch('/admin/api/login', {
+      method:'POST', credentials:'include',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ username: u.value.trim(), password: p.value }),
+    });
+    if (!r.ok) { const j = await r.json().catch(()=>({})); throw new Error(j.message||'Sai tên đăng nhập hoặc mật khẩu.'); }
+    location.href = '/admin/';
+  } catch(e) {
+    err.textContent = e.message; err.classList.remove('hidden');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Đăng nhập';
+  }
+});
+</script>
+</body>
+</html>

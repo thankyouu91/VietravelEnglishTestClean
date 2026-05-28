@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vietravel Exam Admin · Chấm Viết</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">VTV</div>
+      <div>
+        <div class="brand-name">Vietravel</div>
+        <div class="brand-sub">Exam Admin · Chấm phần Viết</div>
+      </div>
+    </div>
+    <nav class="nav-tabs">
+      <a class="nav-tab" href="index.html">Phiên thi</a>
+      <a class="nav-tab active" href="review.html">Chấm Viết <span id="navPendingBadge" class="nav-badge" hidden>0</span></a>
+      <a class="nav-tab" href="items.html">Ngân hàng</a>
+    </nav>
+    <div class="right">
+      <span id="userBadge" class="user-badge"></span>
+      <button class="btn btn-ghost" onclick="logout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <main class="container container-wide">
+    <section class="card">
+      <div class="card-head">
+        <h2>Hàng chờ chấm phần Viết</h2>
+        <div class="note">
+          Các phiên thi xuất hiện ở đây khi hệ thống chấm tự động gặp lỗi hoặc chưa hoàn tất chấm điểm.
+          Sau khi nhập điểm thủ công, phiên sẽ chuyển sang trạng thái <strong>Đã nộp</strong> kèm điểm CEFR cuối cùng.
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã thi</th>
+              <th>Ứng viên</th>
+              <th>Vị trí</th>
+              <th>Nộp lúc</th>
+              <th class="num">L</th>
+              <th class="num">R</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="pendingRows"><tr><td colspan="7" class="loading">Đang tải…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="reviewModal" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeReview()"></div>
+    <div class="modal-body modal-body-wide">
+      <div class="modal-head">
+        <h3 id="reviewTitle">Chấm Viết</h3>
+        <button class="close" onclick="closeReview()">✕</button>
+      </div>
+      <div id="reviewContent">Đang tải…</div>
+      <div class="modal-foot">
+        <div id="reviewSummary" class="review-summary"></div>
+        <button class="btn btn-primary" onclick="finalizeReview()">Lưu điểm cuối</button>
+      </div>
+    </div>
+  </div>
+
+<script src="review.js"></script>
+</body>
+</html>

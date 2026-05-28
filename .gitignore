@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.local
+*.log
+.DS_Store
+
+# DB files (production uses Railway Volume, dev uses ./data/)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# Generated audio files (created server-side by scripts/gen_audio_edge.py)
+# Do NOT delete these via git clean — they are regenerated from the script
+public/audio/*.mp3
+public/audio_enc/*.vta
