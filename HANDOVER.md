@@ -6,6 +6,9 @@ Chào mừng bạn đến với hệ thống Đánh giá Năng lực Tiếng Anh
 > [!IMPORTANT]
 > **Bản quyền học liệu:** Bài tập trên nền tảng được phát triển bởi **MM Publications Vietnam**.
 
+> [!NOTE]
+> **Phát triển hệ thống:** Phần mềm và mã nguồn hệ thống được phát triển bởi **tranlong@cdimex.com.vn**.
+
 ---
 
 ## 1. TỔNG QUAN HỆ THỐNG & KIẾN TRÚC

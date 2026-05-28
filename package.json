@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "description": "Vietravel English Placement Test — backend + admin dashboard (Railway-ready)",
-  "author": "Vietravel HR",
+  "author": "tranlong@cdimex.com.vn",
   "main": "server.js",
   "scripts": {
     "start": "node scripts/init.js && node server.js",
