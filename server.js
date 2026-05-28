@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet       = require('helmet');
 const rateLimit    = require('express-rate-limit');
 const path         = require('path');
+const fs           = require('fs');
 
 const db = require('./src/lib/db');
 require('./src/lib/bank').loadBanks();
@@ -17,15 +18,29 @@ const speakingRoutes = require('./src/routes/speaking');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.set('trust proxy', 1);
+// M4: Dynamic proxy hops configuration
+const trustProxyHops = process.env.TRUST_PROXY_HOPS ? parseInt(process.env.TRUST_PROXY_HOPS, 10) : 1;
+app.set('trust proxy', trustProxyHops);
+
+// H1: Middleware to generate cryptographic nonce per request
+app.use((req, res, next) => {
+  const crypto = require('crypto');
+  res.locals.nonce = crypto.randomBytes(16).toString('base64');
+  next();
+});
 
 // Content Security Policy configuration
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net"],
-      scriptSrcAttr: ["'unsafe-inline'"],
+      // H1: Strict CSP without unsafe-inline or unsafe-eval, whitelisting scripts with nonces
+      scriptSrc: [
+        "'self'",
+        (req, res) => `'nonce-${res.locals.nonce}'`,
+        "https://cdn.jsdelivr.net"
+      ],
+      scriptSrcAttr: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https://images.pexels.com", "https://images.unsplash.com", "https://*.pexels.com"],
@@ -33,6 +48,8 @@ app.use(helmet({
       mediaSrc: ["'self'", "data:"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
+      // L7: CSP violation reporting
+      reportUri: ["/api/csp-report"]
     },
   },
   crossOriginEmbedderPolicy: false,
@@ -57,7 +74,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json({ limit: '256kb' }));
+// L7: Allow parsing application/csp-report content type
+app.use(express.json({ limit: '256kb', type: ['application/json', 'application/csp-report'] }));
 app.use(cookieParser());
 
 // Rate limiting configurations
@@ -76,6 +94,21 @@ const adminLoginLimiter = rateLimit({
   message: { error: 'too_many_login_attempts', message: 'Quá nhiều lần đăng nhập sai, đợi 15 phút.' },
 });
 
+// H2: Double-Submit Cookie CSRF check middleware
+function csrfCheck(req, res, next) {
+  if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
+    if (req.path === '/login' || req.path === '/login/mfa-verify') {
+      return next();
+    }
+    const cookieToken = req.cookies?.admin_csrf;
+    const headerToken = req.headers['x-admin-csrf'];
+    if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+      return res.status(403).json({ error: 'csrf_invalid', message: 'Yêu cầu không hợp lệ (CSRF verification failed).' });
+    }
+  }
+  next();
+}
+
 app.use('/api/exam/start', examStartLimiter);
 app.use('/api/exam',  examLimiter, examRoutes);
 app.use('/api/audio', audioRoutes);
@@ -83,14 +116,57 @@ app.use('/api/ai',   examLimiter, aiRoutes);
 app.use('/api/speaking', examLimiter, speakingRoutes);
 
 app.use('/admin/api/login', adminLoginLimiter);
-app.use('/admin/api', adminRoutes);
-app.use('/admin/api/bank', require('./src/routes/bank-manager'));
+app.use('/admin/api', csrfCheck, adminRoutes);
+app.use('/admin/api/bank', csrfCheck, require('./src/routes/bank-manager'));
 
+// L7: CSP violation reporting endpoint
+app.post('/api/csp-report', (req, res) => {
+  console.warn('[CSP Violation]', req.body?.['csp-report'] || req.body);
+  res.sendStatus(204);
+});
+
+// H1: Dynamic HTML file serving with nonce injection
+function serveHtmlWithNonce(filePath) {
+  return (req, res) => {
+    try {
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).send('Not Found');
+      }
+      let html = fs.readFileSync(filePath, 'utf8');
+      const nonce = res.locals.nonce;
+      // Inject nonce to all script tags dynamically
+      html = html.replace(/<script(\s|>)/gi, (match, p1) => {
+        return `<script nonce="${nonce}"${p1}`;
+      });
+      res.setHeader('Content-Type', 'text/html');
+      res.send(html);
+    } catch (e) {
+      console.error(`Failed to serve HTML with nonce: ${filePath}`, e);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+}
+
+// Serve main entry HTMLs dynamically to inject CSP nonces
+app.get('/', serveHtmlWithNonce(path.join(__dirname, 'public', 'index.html')));
+app.get('/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'index.html')));
+app.get('/exam', (req, res) => res.redirect('/exam/'));
+app.get('/exam/', serveHtmlWithNonce(path.join(__dirname, 'public', 'exam', 'index.html')));
+app.get('/exam/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'exam', 'index.html')));
+app.get('/admin', (req, res) => res.redirect('/admin/'));
+app.get('/admin/', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'index.html')));
+app.get('/admin/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'index.html')));
+app.get('/admin/login.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'login.html')));
+app.get('/admin/review.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'review.html')));
+app.get('/admin/items.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'items.html')));
+
+// Serve other static assets statically
 app.use('/admin', express.static(path.join(__dirname, 'public', 'admin')));
 app.use('/',      express.static(path.join(__dirname, 'public')));
 
+// L4: Sanitized health endpoint
 app.get('/health', (req, res) => {
-  res.json({ ok: true, ts: Date.now(), db: db.prepare('SELECT 1 AS x').get().x === 1 });
+  res.json({ ok: true });
 });
 
 // Global error handler

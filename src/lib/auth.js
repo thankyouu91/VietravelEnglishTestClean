@@ -49,7 +49,7 @@ function validatePasswordStrength(pw) {
 }
 
 async function hashPassword(pw) {
-  return bcrypt.hash(pw, 10);
+  return bcrypt.hash(pw, 12);
 }
 async function verifyPassword(pw, hash) {
   return bcrypt.compare(pw, hash);
@@ -68,12 +68,43 @@ function adminRequired(req, res, next) {
 
 function audit(action, target, detail, actor, ipAddress) {
   try {
+    const crypto = require('crypto');
+    // Fetch last row to get its row_hash
+    const lastRow = db.prepare('SELECT row_hash FROM audit_log ORDER BY id DESC LIMIT 1').get();
+    const prevHash = lastRow ? lastRow.row_hash : 'genesis';
+
+    const ts = Date.now();
+    const actorStr = actor || '';
+    const targetStr = target || '';
+    const detailStr = detail ? JSON.stringify(detail) : '';
+    const ipStr = ipAddress || '';
+
+    // Calculate cryptographic HMAC hash for integrity chaining
+    const hashInput = `${ts}|${actorStr}|${action}|${targetStr}|${detailStr}|${ipStr}|${prevHash}`;
+    const rowHash = crypto.createHmac('sha256', ADMIN_SECRET).update(hashInput).digest('hex');
+
     db.prepare(
-      'INSERT INTO audit_log (ts, actor, action, target, detail, ip_address) VALUES (?, ?, ?, ?, ?, ?)'
-    ).run(Date.now(), actor || null, action, target || null, detail ? JSON.stringify(detail) : null, ipAddress || null);
+      'INSERT INTO audit_log (ts, actor, action, target, detail, ip_address, prev_hash, row_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+    ).run(ts, actor || null, action, target || null, detail ? JSON.stringify(detail) : null, ipAddress || null, prevHash, rowHash);
   } catch (e) {
     console.error('[audit] Failed to write audit log:', e.message);
   }
+}
+
+function verifyAuditLogChain() {
+  const crypto = require('crypto');
+  const rows = db.prepare('SELECT * FROM audit_log ORDER BY id ASC').all();
+  let expectedPrevHash = 'genesis';
+  for (const r of rows) {
+    const detailStr = r.detail ? r.detail : '';
+    const hashInput = `${r.ts}|${r.actor || ''}|${r.action}|${r.target || ''}|${r.detail_str || detailStr}|${r.ip_address || ''}|${expectedPrevHash}`;
+    const rowHash = crypto.createHmac('sha256', ADMIN_SECRET).update(hashInput).digest('hex');
+    if (rowHash !== r.row_hash) {
+      return { ok: false, failedId: r.id };
+    }
+    expectedPrevHash = r.row_hash;
+  }
+  return { ok: true };
 }
 
 // Access tiers, lowest → highest. Higher tiers inherit all lower-tier rights.
@@ -99,5 +130,5 @@ module.exports = {
   signExamToken, verifyExamToken,
   signAdminToken, verifyAdminToken,
   genExamId, hashPassword, verifyPassword, validatePasswordStrength,
-  adminRequired, requireAdminRole, requireRole, ROLE_LEVEL, audit,
+  adminRequired, requireAdminRole, requireRole, ROLE_LEVEL, audit, verifyAuditLogChain,
 };

@@ -10,7 +10,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev
+RUN npm ci
+
+# Copy source files to compile Tailwind CSS offline
+COPY . .
+RUN npx tailwindcss -i ./src/input.css -o ./public/tailwind-built.css --minify
+
+# Prune development dependencies
+RUN npm prune --production
 
 # ------- Final runtime image -------
 FROM node:20-bookworm-slim
@@ -19,7 +26,9 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Copy built node_modules and Tailwind stylesheet
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/public/tailwind-built.css ./public/tailwind-built.css
 COPY . .
 
 # Bundle bank/seed data into /app/seed/ — this directory is NOT affected by
@@ -28,6 +37,10 @@ RUN cp -r /app/data /app/seed
 
 # Default data directory; Railway should mount a volume at /app/data
 ENV DATA_DIR=/app/data
+
+# L1: Set up node user permissions for directory access
+RUN mkdir -p /app/data && chown -R node:node /app
+USER node
 
 EXPOSE 3000
 

@@ -16,6 +16,9 @@ function examAuth(req, res, next) {
   if (!decoded) return res.status(401).json({ error: 'token_invalid' });
   const session = db.prepare('SELECT * FROM sessions WHERE id = ?').get(decoded.sid);
   if (!session) return res.status(404).json({ error: 'session_not_found' });
+  if (session.status !== 'in_progress') {
+    return res.status(403).json({ error: 'session_closed', message: 'Bài thi đã nộp hoặc không còn trong thời gian làm bài.' });
+  }
   req.session = session;
   req.decoded = decoded;
   next();

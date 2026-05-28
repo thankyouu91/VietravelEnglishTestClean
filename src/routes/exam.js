@@ -4,6 +4,7 @@ const db = require('../lib/db');
 const { positionInfo, sampleQuestions, shieldForClient, scoreAnswers, calcCEFR } = require('../lib/scoring');
 const { signExamToken, verifyExamToken, genExamId, audit } = require('../lib/auth');
 const { getBank } = require('../lib/bank');
+const { encryptPII, hashEmail } = require('../lib/crypto');
 
 const router = express.Router();
 const EXAM_DURATION_SEC = parseInt(process.env.EXAM_DURATION_SEC || '1800', 10);
@@ -33,12 +34,19 @@ const startExamTx = db.transaction((sData, inviteCode) => {
     INSERT INTO sessions (
       id, exam_id, candidate_name, candidate_email, candidate_position,
       position_label, is_management, ip_address, user_agent,
-      consent_given, consent_at, started_at, question_ids, answers, status
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, '{}', 'in_progress')
+      consent_given, consent_at, started_at, question_ids, answers, status,
+      candidate_email_hash
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, '{}', 'in_progress', ?)
   `).run(
-    sData.sessionId, sData.examId, sData.name, sData.email, sData.position,
-    sData.posLabel, sData.isManagement, sData.ip, sData.userAgent,
-    sData.now, sData.now, sData.questionIds
+    sData.sessionId, sData.examId,
+    encryptPII(sData.name),
+    encryptPII(sData.email),
+    sData.position,
+    sData.posLabel, sData.isManagement,
+    encryptPII(sData.ip),
+    encryptPII(sData.userAgent),
+    sData.now, sData.now, sData.questionIds,
+    hashEmail(sData.email)
   );
 });
 
@@ -62,8 +70,8 @@ router.post('/start', (req, res) => {
   const fifteenMinsAgo = Date.now() - 15 * 60 * 1000;
   const startsCount = db.prepare(`
     SELECT COUNT(*) c FROM sessions
-    WHERE candidate_email = ? AND started_at > ?
-  `).get(email.toLowerCase(), fifteenMinsAgo).c;
+    WHERE candidate_email_hash = ? AND started_at > ?
+  `).get(hashEmail(email), fifteenMinsAgo).c;
 
   if (startsCount >= 3) {
     return res.status(429).json({
@@ -74,9 +82,9 @@ router.post('/start', (req, res) => {
 
   const recent = db.prepare(`
     SELECT id, submitted_at FROM sessions
-    WHERE candidate_email = ? AND status = 'submitted'
+    WHERE candidate_email_hash = ? AND status = 'submitted'
     ORDER BY submitted_at DESC LIMIT 1
-  `).get(email.toLowerCase());
+  `).get(hashEmail(email));
 
   if (recent && Date.now() - recent.submitted_at < 24 * 3600 * 1000) {
     return res.status(429).json({
@@ -279,15 +287,19 @@ router.post('/submit', async (req, res) => {
     decoded.sid
   );
 
+  const { decryptPII } = require('../lib/crypto');
+  const decryptedEmail = decryptPII(session.candidate_email);
+  const decryptedName = decryptPII(session.candidate_name);
+
   audit('exam.submit', decoded.sid,
     { total, cefr: cefr.level, status: newStatus },
-    session.candidate_email, req.ip);
+    decryptedEmail, req.ip);
 
   res.json({
     examId: session.exam_id,
     candidate: {
-      name: session.candidate_name,
-      email: session.candidate_email,
+      name: decryptedName,
+      email: decryptedEmail,
       position: session.position_label,
     },
     score: { ...scores, total, max: 30 },

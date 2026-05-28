@@ -5,8 +5,23 @@
 
 let current = null; // detail of the session currently being reviewed
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return '';
+}
+
 async function api(url, opts = {}) {
-  const r = await fetch(url, { credentials: 'include', ...opts });
+  const method = (opts.method || 'GET').toUpperCase();
+  const headers = opts.headers || {};
+  if (['POST', 'PUT', 'DELETE'].includes(method)) {
+    const csrfToken = getCookie('admin_csrf');
+    if (csrfToken) {
+      headers['X-Admin-CSRF'] = csrfToken;
+    }
+  }
+  const r = await fetch(url, { credentials: 'include', ...opts, headers });
   if (r.status === 401) { location.href = '/admin/login.html'; throw new Error('unauthorized'); }
   if (!r.ok) {
     let j; try { j = await r.json(); } catch { j = { error: r.statusText }; }

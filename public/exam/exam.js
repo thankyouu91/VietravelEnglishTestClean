@@ -27,21 +27,27 @@ async function apiGet(url){
   return j;
 }
 
-// ── Invitation auto-fill ───────────────────────────────────
+// ── Invitation check ───────────────────────────────────────
 (async function checkInvite(){
   const params=new URLSearchParams(window.location.search);
   const inviteId=params.get('invite');
   if(!inviteId)return;
   try{
     const data=await apiGet(`/admin/api/invitation-check/${inviteId}`);
-    if(data.name)document.getElementById('f-name').value=data.name;
-    if(data.email)document.getElementById('f-email').value=data.email;
     if(data.position)document.getElementById('f-position').value=data.position;
     // Store invite ID to mark as used after exam starts
     examState.inviteId=inviteId;
+    
+    if(data.email){
+      const hintEl=document.createElement('div');
+      hintEl.className='bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 text-xs text-blue-800 dark:bg-slate-900/60 dark:border-slate-800 dark:text-slate-300';
+      hintEl.innerHTML=`<strong>🔑 Link mời hợp lệ:</strong> Link này dành riêng cho ứng viên có email dạng <code>${escHtml(data.email)}</code>. Vui lòng nhập đúng Họ tên và Email của bạn để bắt đầu làm bài.`;
+      document.getElementById('registerForm').prepend(hintEl);
+    }
+    
     if(data.message){
       const msgEl=document.createElement('div');
-      msgEl.className='bg-brand-pale border border-blue-200 rounded-xl p-4 mb-4 text-xs text-blue-800';
+      msgEl.className='bg-brand-pale border border-blue-200 rounded-xl p-4 mb-4 text-xs text-blue-800 dark:bg-slate-900/40 dark:border-slate-800 dark:text-slate-300';
       msgEl.innerHTML=`<strong>📨 Lời nhắn từ HR:</strong> ${escHtml(data.message)}`;
       document.getElementById('registerForm').prepend(msgEl);
     }

@@ -38,9 +38,15 @@ router.get('/:type/:file', (req, res) => {
     sessionId = decoded.sid;
   }
 
-  const session = db.prepare('SELECT id, status, candidate_position, question_ids, audio_listens FROM sessions WHERE id = ?').get(sessionId);
+  const session = db.prepare('SELECT id, status, candidate_position, question_ids, audio_listens, ip_address FROM sessions WHERE id = ?').get(sessionId);
   if (!session) return res.status(404).send('Session not found');
   if (session.status === 'submitted') return res.status(409).send('Session closed');
+
+  const { decryptPII } = require('../lib/crypto');
+  const decryptedIp = decryptPII(session.ip_address);
+  if (decryptedIp && decryptedIp !== req.ip) {
+    return res.status(403).send('Access denied: IP mismatch');
+  }
 
   // Verify that the file belongs to the session's assigned questions
   const posInfo = positionInfo(session.candidate_position);

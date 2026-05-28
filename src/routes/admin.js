@@ -11,30 +11,89 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body || {};
   if (!username || !password) return res.status(400).json({ error: 'missing_fields' });
 
-  const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
+  const normUser = username.trim().toLowerCase();
+  const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(normUser);
   if (!admin) {
     await new Promise(r => setTimeout(r, 300));
-    return res.status(401).json({ error: 'invalid_credentials' });
+    return res.status(401).json({ error: 'invalid_credentials', message: 'Tên đăng nhập hoặc mật khẩu không đúng.' });
   }
-  const ok = await verifyPassword(password, admin.password_hash);
-  if (!ok) return res.status(401).json({ error: 'invalid_credentials' });
 
-  db.prepare('UPDATE admins SET last_login_at = ? WHERE id = ?').run(Date.now(), admin.id);
+  // Check account lockout
+  if (admin.locked_until && admin.locked_until > Date.now()) {
+    const minsLeft = Math.ceil((admin.locked_until - Date.now()) / (60 * 1000));
+    return res.status(423).json({
+      error: 'account_locked',
+      message: `Tài khoản tạm thời bị khóa do đăng nhập sai quá nhiều lần. Vui lòng thử lại sau ${minsLeft} phút.`
+    });
+  }
+
+  const ok = await verifyPassword(password, admin.password_hash);
+  if (!ok) {
+    const attempts = (admin.failed_login_attempts || 0) + 1;
+    if (attempts >= 5) {
+      const lockedUntil = Date.now() + 30 * 60 * 1000; // 30 minutes
+      db.prepare('UPDATE admins SET failed_login_attempts = 0, locked_until = ? WHERE id = ?')
+        .run(lockedUntil, admin.id);
+      audit('admin.lockout', String(admin.id), { username: admin.username }, admin.username, req.ip);
+      return res.status(423).json({
+        error: 'account_locked',
+        message: 'Tài khoản đã bị khóa 30 phút do nhập sai mật khẩu 5 lần.'
+      });
+    } else {
+      db.prepare('UPDATE admins SET failed_login_attempts = ? WHERE id = ?')
+        .run(attempts, admin.id);
+      await new Promise(r => setTimeout(r, 300));
+      return res.status(401).json({
+        error: 'invalid_credentials',
+        message: `Tên đăng nhập hoặc mật khẩu không đúng. Còn ${5 - attempts} lần thử.`
+      });
+    }
+  }
+
+  // Check if MFA/2FA is enabled
+  if (admin.mfa_enabled === 1) {
+    const jwt = require('jsonwebtoken');
+    const ADMIN_SECRET = process.env.ADMIN_JWT_SECRET;
+    const tempToken = jwt.sign({ adminId: admin.id, t: 'mfa_pending' }, ADMIN_SECRET, { expiresIn: '5m' });
+    return res.json({ mfaRequired: true, tempToken });
+  }
+
+  db.prepare('UPDATE admins SET last_login_at = ?, failed_login_attempts = 0, locked_until = NULL WHERE id = ?')
+    .run(Date.now(), admin.id);
   audit('admin.login', String(admin.id), null, admin.username, req.ip);
 
   const token = signAdminToken(admin.id);
   const secureCookie = process.env.COOKIE_SECURE === 'true' || process.env.NODE_ENV === 'production';
+  
+  // Set CSRF token cookie
+  const { nanoid } = require('nanoid');
+  const csrfToken = nanoid(32);
+  res.cookie('admin_csrf', csrfToken, {
+    httpOnly: false,
+    sameSite: 'strict',
+    secure: secureCookie,
+    maxAge: 8 * 3600 * 1000,
+  });
+
   res.cookie('admin_session', token, {
     httpOnly: true,
     sameSite: 'strict',
     secure: secureCookie,
     maxAge: 8 * 3600 * 1000,
   });
+  
   res.json({ ok: true, admin: { id: admin.id, username: admin.username, displayName: admin.display_name } });
 });
 
 router.post('/logout', (req, res) => {
   const secureCookie = process.env.COOKIE_SECURE === 'true' || process.env.NODE_ENV === 'production';
+  
+  res.clearCookie('admin_csrf', {
+    httpOnly: false,
+    sameSite: 'strict',
+    secure: secureCookie,
+  });
+
   res.clearCookie('admin_session', {
     httpOnly: true,
     sameSite: 'strict',
@@ -45,11 +104,120 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', adminRequired, (req, res) => res.json(req.admin));
 
+router.post('/login/mfa-verify', async (req, res) => {
+  const { code, tempToken } = req.body || {};
+  if (!code || !tempToken) {
+    return res.status(400).json({ error: 'missing_fields', message: 'Mã xác thực và token là bắt buộc.' });
+  }
+
+  const jwt = require('jsonwebtoken');
+  const ADMIN_SECRET = process.env.ADMIN_JWT_SECRET;
+  const { verifyTOTP } = require('../lib/totp');
+
+  try {
+    const decoded = jwt.verify(tempToken, ADMIN_SECRET);
+    if (!decoded || decoded.t !== 'mfa_pending') {
+      return res.status(401).json({ error: 'token_invalid', message: 'Token xác thực không hợp lệ hoặc đã hết hạn.' });
+    }
+
+    const admin = db.prepare('SELECT * FROM admins WHERE id = ?').get(decoded.adminId);
+    if (!admin || !admin.mfa_secret || admin.mfa_enabled !== 1) {
+      return res.status(401).json({ error: 'invalid_mfa_setup', message: 'Cấu hình MFA không hợp lệ.' });
+    }
+
+    if (admin.locked_until && admin.locked_until > Date.now()) {
+      return res.status(423).json({ error: 'account_locked', message: 'Tài khoản đang bị khóa.' });
+    }
+
+    const verified = verifyTOTP(code, admin.mfa_secret);
+    if (!verified) {
+      return res.status(401).json({ error: 'invalid_mfa_code', message: 'Mã xác thực 2FA không chính xác.' });
+    }
+
+    db.prepare('UPDATE admins SET last_login_at = ?, failed_login_attempts = 0, locked_until = NULL WHERE id = ?')
+      .run(Date.now(), admin.id);
+    audit('admin.login_mfa', String(admin.id), null, admin.username, req.ip);
+
+    const token = signAdminToken(admin.id);
+    const secureCookie = process.env.COOKIE_SECURE === 'true' || process.env.NODE_ENV === 'production';
+
+    const { nanoid } = require('nanoid');
+    const csrfToken = nanoid(32);
+    res.cookie('admin_csrf', csrfToken, {
+      httpOnly: false,
+      sameSite: 'strict',
+      secure: secureCookie,
+      maxAge: 8 * 3600 * 1000,
+    });
+
+    res.cookie('admin_session', token, {
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: secureCookie,
+      maxAge: 8 * 3600 * 1000,
+    });
+
+    res.json({ ok: true, admin: { id: admin.id, username: admin.username, displayName: admin.display_name } });
+  } catch (err) {
+    res.status(401).json({ error: 'token_invalid', message: 'Token xác thực đã hết hạn hoặc không hợp lệ.' });
+  }
+});
+
+router.post('/mfa/setup', adminRequired, (req, res) => {
+  const { generateSecret } = require('../lib/totp');
+  const secret = generateSecret(16);
+  
+  db.prepare('UPDATE admins SET mfa_secret = ? WHERE id = ?').run(secret, req.admin.id);
+  
+  const qrCodeUrl = `otpauth://totp/VietravelHR:${encodeURIComponent(req.admin.username)}?secret=${secret}&issuer=VietravelHR`;
+  res.json({ ok: true, secret, qrCodeUrl });
+});
+
+router.post('/mfa/enable', adminRequired, (req, res) => {
+  const { code } = req.body || {};
+  if (!code) return res.status(400).json({ error: 'missing_code', message: 'Mã xác thực là bắt buộc.' });
+
+  const admin = db.prepare('SELECT mfa_secret FROM admins WHERE id = ?').get(req.admin.id);
+  if (!admin || !admin.mfa_secret) {
+    return res.status(400).json({ error: 'mfa_not_setup', message: 'Vui lòng thực hiện thiết lập MFA trước.' });
+  }
+
+  const { verifyTOTP } = require('../lib/totp');
+  const verified = verifyTOTP(code, admin.mfa_secret);
+  if (!verified) {
+    return res.status(400).json({ error: 'invalid_code', message: 'Mã xác thực không đúng.' });
+  }
+
+  db.prepare('UPDATE admins SET mfa_enabled = 1 WHERE id = ?').run(req.admin.id);
+  audit('admin.mfa_enable', String(req.admin.id), null, req.admin.username, req.ip);
+  res.json({ ok: true });
+});
+
+router.post('/mfa/disable', adminRequired, (req, res) => {
+  const { code } = req.body || {};
+  if (!code) return res.status(400).json({ error: 'missing_code', message: 'Mã xác thực là bắt buộc.' });
+
+  const admin = db.prepare('SELECT mfa_secret, mfa_enabled FROM admins WHERE id = ?').get(req.admin.id);
+  if (!admin || !admin.mfa_enabled) {
+    return res.status(400).json({ error: 'mfa_not_enabled', message: 'MFA chưa được kích hoạt.' });
+  }
+
+  const { verifyTOTP } = require('../lib/totp');
+  const verified = verifyTOTP(code, admin.mfa_secret);
+  if (!verified) {
+    return res.status(400).json({ error: 'invalid_code', message: 'Mã xác thực không đúng.' });
+  }
+
+  db.prepare('UPDATE admins SET mfa_enabled = 0, mfa_secret = NULL WHERE id = ?').run(req.admin.id);
+  audit('admin.mfa_disable', String(req.admin.id), null, req.admin.username, req.ip);
+  res.json({ ok: true });
+});
+
 router.get('/sessions', adminRequired, (req, res) => {
   const limit  = Math.min(parseInt(req.query.limit, 10) || 50, 200);
   const offset = parseInt(req.query.offset, 10) || 0;
   const status = req.query.status || null;
-  const q      = req.query.q ? `%${req.query.q}%` : null;
+  const q      = req.query.q ? req.query.q.trim().toLowerCase() : null;
   const position = req.query.position || null;
   const startDate = req.query.startDate ? parseInt(req.query.startDate, 10) : null;
   const endDate   = req.query.endDate ? parseInt(req.query.endDate, 10) : null;
@@ -60,29 +228,64 @@ router.get('/sessions', adminRequired, (req, res) => {
   if (position) { where.push('candidate_position = ?'); params.push(position); }
   if (startDate) { where.push('started_at >= ?'); params.push(startDate); }
   if (endDate) { where.push('started_at <= ?'); params.push(endDate); }
-  if (q) {
-    where.push('(candidate_name LIKE ? OR candidate_email LIKE ? OR exam_id LIKE ?)');
-    params.push(q, q, q);
-  }
+
   const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
+  const { decryptPII } = require('../lib/crypto');
 
-  const rows = db.prepare(`
-    SELECT id, exam_id, candidate_name, candidate_email, position_label,
-           started_at, submitted_at, elapsed_seconds,
-           score_total, score_listening, score_reading, score_writing,
-           cefr_level, cefr_status, status, cheat_events
-      FROM sessions ${whereSql}
-     ORDER BY COALESCE(submitted_at, started_at) DESC
-     LIMIT ? OFFSET ?
-  `).all(...params, limit, offset);
+  if (q) {
+    let rows = db.prepare(`
+      SELECT id, exam_id, candidate_name, candidate_email, position_label,
+             started_at, submitted_at, elapsed_seconds,
+             score_total, score_listening, score_reading, score_writing,
+             cefr_level, cefr_status, status, cheat_events
+        FROM sessions ${whereSql}
+       ORDER BY COALESCE(submitted_at, started_at) DESC
+    `).all(...params);
 
-  const total = db.prepare(`SELECT COUNT(*) AS c FROM sessions ${whereSql}`).get(...params).c;
-  res.json({ rows, total, limit, offset });
+    rows = rows.map(r => ({
+      ...r,
+      candidate_name: decryptPII(r.candidate_name),
+      candidate_email: decryptPII(r.candidate_email)
+    })).filter(r => 
+      r.candidate_name.toLowerCase().includes(q) ||
+      r.candidate_email.toLowerCase().includes(q) ||
+      r.exam_id.toLowerCase().includes(q)
+    );
+
+    const total = rows.length;
+    const paginated = rows.slice(offset, offset + limit);
+    return res.json({ rows: paginated, total, limit, offset });
+  } else {
+    let rows = db.prepare(`
+      SELECT id, exam_id, candidate_name, candidate_email, position_label,
+             started_at, submitted_at, elapsed_seconds,
+             score_total, score_listening, score_reading, score_writing,
+             cefr_level, cefr_status, status, cheat_events
+        FROM sessions ${whereSql}
+       ORDER BY COALESCE(submitted_at, started_at) DESC
+       LIMIT ? OFFSET ?
+    `).all(...params, limit, offset);
+
+    rows = rows.map(r => ({
+      ...r,
+      candidate_name: decryptPII(r.candidate_name),
+      candidate_email: decryptPII(r.candidate_email)
+    }));
+
+    const total = db.prepare(`SELECT COUNT(*) AS c FROM sessions ${whereSql}`).get(...params).c;
+    return res.json({ rows, total, limit, offset });
+  }
 });
 
 router.get('/sessions/:id', adminRequired, (req, res) => {
   const row = db.prepare('SELECT * FROM sessions WHERE id = ?').get(req.params.id);
   if (!row) return res.status(404).json({ error: 'not_found' });
+
+  const { decryptPII } = require('../lib/crypto');
+  row.candidate_name = decryptPII(row.candidate_name);
+  row.candidate_email = decryptPII(row.candidate_email);
+  row.ip_address = decryptPII(row.ip_address);
+  row.user_agent = decryptPII(row.user_agent);
 
   try { row.question_ids = JSON.parse(row.question_ids || '{}'); } catch {}
   try { row.answers      = JSON.parse(row.answers || '{}'); } catch {}
@@ -123,7 +326,7 @@ router.get('/stats', adminRequired, (req, res) => {
 // Staff+ may export the results list (PII export of candidates they can already view).
 router.get('/export.xlsx', adminRequired, async (req, res) => {
   const status = req.query.status || null;
-  const q      = req.query.q ? `%${req.query.q}%` : null;
+  const q      = req.query.q ? req.query.q.trim().toLowerCase() : null;
   const position = req.query.position || null;
   const startDate = req.query.startDate ? parseInt(req.query.startDate, 10) : null;
   const endDate   = req.query.endDate ? parseInt(req.query.endDate, 10) : null;
@@ -134,13 +337,11 @@ router.get('/export.xlsx', adminRequired, async (req, res) => {
   if (position) { where.push('candidate_position = ?'); params.push(position); }
   if (startDate) { where.push('started_at >= ?'); params.push(startDate); }
   if (endDate) { where.push('started_at <= ?'); params.push(endDate); }
-  if (q) {
-    where.push('(candidate_name LIKE ? OR candidate_email LIKE ? OR exam_id LIKE ?)');
-    params.push(q, q, q);
-  }
   const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
-  const rows = db.prepare(`
+  const { decryptPII } = require('../lib/crypto');
+
+  let rows = db.prepare(`
     SELECT exam_id, candidate_name, candidate_email, position_label,
            is_management, started_at, submitted_at, elapsed_seconds,
            score_listening, score_reading, score_writing, score_total,
@@ -148,6 +349,20 @@ router.get('/export.xlsx', adminRequired, async (req, res) => {
       FROM sessions ${whereSql}
      ORDER BY COALESCE(submitted_at, started_at) DESC
   `).all(...params);
+
+  rows = rows.map(r => ({
+    ...r,
+    candidate_name: decryptPII(r.candidate_name),
+    candidate_email: decryptPII(r.candidate_email)
+  }));
+
+  if (q) {
+    rows = rows.filter(r => 
+      r.candidate_name.toLowerCase().includes(q) ||
+      r.candidate_email.toLowerCase().includes(q) ||
+      r.exam_id.toLowerCase().includes(q)
+    );
+  }
 
   const wb = new ExcelJS.Workbook();
   wb.creator = 'Vietravel HR';
@@ -814,7 +1029,21 @@ router.get('/invitation-check/:id', (req, res) => {
   if (!row) return res.status(404).json({ error: 'not_found', message: 'Link mời không hợp lệ.' });
   if (row.status === 'used') return res.status(410).json({ error: 'already_used', message: 'Link mời đã được sử dụng.' });
   if (row.expires_at && Date.now() > row.expires_at) return res.status(410).json({ error: 'expired', message: 'Link mời đã hết hạn.' });
-  res.json({ ok: true, name: row.name, email: row.email, position: row.position, message: row.message });
+
+  const maskEmail = (email) => {
+    if (!email) return '';
+    const [local, domain] = email.split('@');
+    if (!domain) return '***';
+    if (local.length <= 2) return local[0] + '***@' + domain;
+    return local[0] + '***' + local[local.length - 1] + '@' + domain;
+  };
+  
+  const maskName = (name) => {
+    if (!name) return '';
+    return name.split(' ').map(w => w.length <= 1 ? w : w[0] + '***').join(' ');
+  };
+
+  res.json({ ok: true, name: maskName(row.name), email: maskEmail(row.email), position: row.position, message: row.message });
 });
 
 // Mark invitation as used (called by exam start, legacy endpoint)
@@ -924,7 +1153,7 @@ router.post('/users', adminRequired, requireAdminRole, async (req, res) => {
     if (e.message.includes('UNIQUE')) {
       return res.status(409).json({ error: 'username_taken', message: 'Tên tài khoản đã tồn tại.' });
     }
-    res.status(500).json({ error: 'create_failed', message: e.message });
+    res.status(500).json({ error: 'create_failed', message: 'Tạo tài khoản thất bại do lỗi hệ thống.' });
   }
 });
 

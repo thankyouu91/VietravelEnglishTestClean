@@ -136,4 +136,62 @@ try {
   console.log('[db] Migrated: added role column to admins table');
 }
 
+// Migration: add failed_login_attempts and locked_until to admins
+try {
+  db.prepare("SELECT failed_login_attempts FROM admins LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE admins ADD COLUMN failed_login_attempts INTEGER DEFAULT 0");
+  db.exec("ALTER TABLE admins ADD COLUMN locked_until INTEGER");
+  console.log('[db] Migrated: added lockout columns to admins');
+}
+
+// Migration: add mfa_secret and mfa_enabled to admins
+try {
+  db.prepare("SELECT mfa_secret FROM admins LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE admins ADD COLUMN mfa_secret TEXT");
+  db.exec("ALTER TABLE admins ADD COLUMN mfa_enabled INTEGER DEFAULT 0");
+  console.log('[db] Migrated: added mfa columns to admins');
+}
+
+// Migration: add prev_hash and row_hash to audit_log
+try {
+  db.prepare("SELECT prev_hash FROM audit_log LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE audit_log ADD COLUMN prev_hash TEXT");
+  db.exec("ALTER TABLE audit_log ADD COLUMN row_hash TEXT");
+  console.log('[db] Migrated: added prev_hash and row_hash columns to audit_log table');
+}
+
+// Migration: add candidate_email_hash to sessions
+try {
+  db.prepare("SELECT candidate_email_hash FROM sessions LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE sessions ADD COLUMN candidate_email_hash TEXT");
+  db.exec("CREATE INDEX IF NOT EXISTS idx_sessions_email_hash ON sessions(candidate_email_hash)");
+  console.log('[db] Migrated: added candidate_email_hash column to sessions table');
+}
+
+// Backfill candidate_email_hash for any existing sessions
+try {
+  const unhashed = db.prepare("SELECT id, candidate_email FROM sessions WHERE candidate_email_hash IS NULL OR candidate_email_hash = ''").all();
+  if (unhashed.length > 0) {
+    const { decryptPII, hashEmail } = require('./crypto');
+    const updateStmt = db.prepare("UPDATE sessions SET candidate_email_hash = ? WHERE id = ?");
+    let count = 0;
+    for (const r of unhashed) {
+      const email = decryptPII(r.candidate_email);
+      if (email) {
+        const hash = hashEmail(email);
+        updateStmt.run(hash, r.id);
+        count++;
+      }
+    }
+    console.log(`[db] Backfilled candidate_email_hash for ${count} sessions`);
+  }
+} catch (e) {
+  console.error('[db] Error backfilling candidate_email_hash:', e.message);
+}
+
 module.exports = db;
+
