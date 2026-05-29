@@ -11,7 +11,8 @@
     "seed": "node scripts/seed.js",
     "migrate-bank": "node scripts/migrate-bank.js",
     "init": "node scripts/init.js",
-    "build": "tailwindcss -i ./src/input.css -o ./public/tailwind-built.css --minify"
+    "build": "tailwindcss -i ./src/input.css -o ./public/tailwind-built.css --minify",
+    "test": "node --test"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "3.1053.0",

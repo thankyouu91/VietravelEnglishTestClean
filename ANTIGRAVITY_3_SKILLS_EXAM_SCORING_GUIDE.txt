@@ -1,0 +1,1367 @@
+ANTIGRAVITY GUIDE - 3-SKILL EXAM ENGINE AND SCORING V2
+======================================================
+
+Scope
+-----
+Design and implement a full replacement engine for:
+- Listening
+- Reading
+- Writing
+
+Do NOT include Speaking in the official exam score.
+
+The new engine must replace the current question selection and scoring approach without breaking the existing platform, frontend API, admin dashboards, sessions table, exports, or pending-review flow.
+
+Reviewed codebase state
+-----------------------
+Repository: thankyouu91/VietravelEnglishTestClean
+Reviewed main commit: 82e8ddb
+
+Important local note:
+There may be uncommitted admin route refactor work in src/routes/admin/. Do not mix this exam/scoring work with admin route refactor work.
+
+Current core files:
+- src/routes/exam.js
+- src/lib/scoring.js
+- src/lib/writing-scorer.js
+- src/lib/bank.js
+- data/banks.json
+- data/writing-bank.json
+- public/exam/exam.js
+
+Current API contracts to preserve:
+- POST /api/exam/start
+- POST /api/exam/listen
+- POST /api/exam/submit
+- GET  /api/exam/status/:examId
+
+Current DB fields to preserve:
+- sessions.question_ids
+- sessions.answers
+- sessions.score_listening
+- sessions.score_reading
+- sessions.score_writing
+- sessions.score_total
+- sessions.cefr_level
+- sessions.cefr_status
+- sessions.status
+
+Do not remove existing columns. Do not break old session data.
+
+
+1. Current System Review
+========================
+
+1.1 Current exam generation
+---------------------------
+Current route:
+src/routes/exam.js
+
+Current flow:
+1. POST /api/exam/start validates name/email/position/consent.
+2. positionInfo(position) maps to BANK_STAFF or BANK_OFFICE_MGR.
+3. getBank(posInfo.bank) loads bank.
+4. If exam_configs has fixed config, selected audio/passage/writing are used.
+5. Otherwise sampleQuestions(bank, posInfo.management) is used.
+6. question_ids stores only selected IDs:
+   {
+     listening: [id...],
+     reading: [id...],
+     writing: [id...]
+   }
+7. shieldForClient(questionSet) strips correct answers before returning to frontend.
+
+Current sampleQuestions behavior:
+- Listening: picks 2 audio groups.
+- Reading: picks 1 passage group.
+- Writing: picks 5 random/deduplicated writing items.
+
+Current weakness:
+- No formal exam blueprint.
+- No versioned exam plan.
+- No target score weights per skill except implicit /10 each.
+- No item quality metadata.
+- No reliable skill/subskill coverage.
+- No clear mapping from selected items to CEFR evidence.
+
+
+1.2 Current scoring
+-------------------
+Current scorer:
+src/lib/scoring.js
+
+Current official score:
+- Listening: /10
+- Reading: /10
+- Writing: /10
+- Total: /30
+
+Current listening/reading scoring:
+- MCQ only.
+- correctCount / questionCount * 10, rounded.
+
+Current writing scoring:
+- deterministic types:
+  - fill_blank
+  - error_correction
+  - sentence_order
+  - sentence_transform
+- short_answer uses AI grader if available.
+- if AI fails, short_answer falls back to word count:
+  - >= minWords => 0.8 item score
+  - > 0 words  => 0.4 item score
+
+Critical weakness:
+The length-based writing fallback must not be used for official scoring. Word count alone is not valid evidence of English proficiency.
+
+
+1.3 Current frontend answer shapes
+----------------------------------
+public/exam/exam.js sends:
+
+answers = {
+  listening: {
+    "<questionId>": <optionIndex>
+  },
+  reading: {
+    "<questionId>": <optionIndex>
+  },
+  writing: {
+    "<questionId>": ...
+  },
+  speaking: {}
+}
+
+Writing answer shapes:
+- fill_blank:
+  answers.writing[id] = { "1": "text", "2": "text" }
+- error_correction:
+  answers.writing[id] = { "0": selectedIndex, "1": selectedIndex }
+- sentence_order:
+  answers.writing[id] = [originalIndex, originalIndex, ...]
+- sentence_transform:
+  answers.writing[id] = { "0": "text", "1": "text" }
+- short_answer/free write:
+  answers.writing[id] = "free text"
+
+Compatibility requirement:
+The v2 scorer must accept these existing answer shapes.
+
+
+1.4 Current bank status
+-----------------------
+Observed bank summary:
+
+BANK_STAFF:
+- Listening: 57 items, A2/B1, 9 audio groups.
+- Reading: 15 items, B1, 3 passage groups.
+- Writing: 29 items after writing-bank merge, A2/B1/B2/C1.
+
+BANK_OFFICE_MGR:
+- Listening: 33 items, B2/C1, 8 audio groups.
+- Reading: 20 items, B2/C1, 4 passage groups.
+- Writing: 15 items after writing-bank merge, B2/C1.
+
+Current bank is enough for pilot, but not enough for a high-stakes standardized exam without item calibration, quality metadata, and blueprint controls.
+
+
+2. Product Objective
+====================
+
+Build Exam Engine V2:
+- deterministic
+- versioned
+- auditable
+- compatible with existing frontend/API
+- no official AI scoring
+- no official Speaking score
+- robust pending-review path for uncertain writing
+- clear CEFR-like internal mapping
+
+The system should support:
+- Staff exam blueprint
+- Manager exam blueprint
+- fixed/manual admin config as legacy fallback
+- randomized exam generation with blueprint constraints
+- per-skill scoring breakdown
+- per-item scoring details
+- confidence/review flags
+- shadow mode against current v1
+- rollback to v1 through env flag
+
+
+3. Non-Negotiable Implementation Rules
+======================================
+
+1. Do not remove v1 scoring immediately.
+2. Do not change public API response shape unless adding optional fields.
+3. Do not change frontend first.
+4. Do not change DB schema unless truly needed.
+5. Prefer storing v2 details in sessions.answers JSON.
+6. Keep score_total /30 for compatibility.
+7. Keep skill scores /10 for compatibility.
+8. Do not include Speaking in total score.
+9. Do not use AI score as official score.
+10. Any uncertain writing score must become pending_review.
+11. Add feature flags and shadow mode before making v2 official.
+12. Preserve PII encryption changes in exam.js.
+
+
+4. Feature Flags
+================
+
+Add these env variables:
+
+EXAM_ENGINE_VERSION=v1
+SCORING_VERSION=v1
+SCORING_SHADOW_MODE=false
+WRITING_OFFICIAL_MODE=deterministic
+ALLOW_AI_OFFICIAL_SCORING=false
+ALLOW_LENGTH_BASED_WRITING_FALLBACK=false
+OFFLINE_SCORING_MIN_CONFIDENCE=0.75
+OFFLINE_SCORING_REVIEW_MARGIN=1.5
+EXAM_BLUEPRINT_VERSION=vt_3skills_v1
+
+Meanings:
+
+EXAM_ENGINE_VERSION:
+- v1: existing sampleQuestions() behavior.
+- v2: new blueprint-based generator.
+
+SCORING_VERSION:
+- v1: existing scoreAnswers() behavior, but length fallback must be disabled by default.
+- v2: new score engine.
+
+SCORING_SHADOW_MODE:
+- true: run v2 scoring and store details but keep v1 official response.
+- false: only run selected scoring version.
+
+WRITING_OFFICIAL_MODE:
+- deterministic: only deterministic/rule-based writing contributes official score.
+- review_required: writing free response always becomes pending_review.
+
+ALLOW_AI_OFFICIAL_SCORING:
+- default false.
+- If true in a future experiment, AI score can be shown as advisory only unless explicitly approved.
+
+ALLOW_LENGTH_BASED_WRITING_FALLBACK:
+- default false.
+- Never enable in production unless business explicitly accepts the risk.
+
+
+5. Target Exam Blueprint
+========================
+
+Official exam remains 30 points:
+- Listening: 10
+- Reading: 10
+- Writing: 10
+- Total: 30
+
+Recommended duration:
+- Staff: 30 minutes.
+- Manager: 35-40 minutes if reading/writing is harder.
+
+Do not include Speaking in total.
+
+
+5.1 Staff blueprint
+-------------------
+Target internal level:
+- A2-B1 evidence.
+- Staff pass target: B1 internal band.
+
+Listening /10:
+- 2 audio groups.
+- 8-10 questions total.
+- Mix:
+  - gist/main idea
+  - detail extraction
+  - service context
+  - numbers/time/place
+  - inference/basic intent
+
+Reading /10:
+- 1-2 passage groups.
+- 8-10 questions total.
+- Mix:
+  - main idea
+  - detail
+  - vocabulary in context
+  - true/false/not given if available
+  - basic inference
+
+Writing /10:
+- 5 objective/controlled tasks.
+- No AI official scoring.
+- Recommended mix:
+  - 1 fill_blank
+  - 1 error_correction
+  - 1 sentence_order
+  - 1 sentence_transform
+  - 1 controlled_response OR additional deterministic item
+
+If controlled_response is not ready:
+- Use only deterministic writing item types.
+
+
+5.2 Manager blueprint
+---------------------
+Target internal level:
+- B2-C1 evidence.
+- Manager pass target: C1/B2+ internal band depending policy.
+
+Listening /10:
+- 2 audio groups.
+- 8-10 questions total.
+- Mix:
+  - detailed comprehension
+  - implication
+  - complaint/service recovery
+  - business/tourism context
+  - speaker attitude/intent
+
+Reading /10:
+- 1-2 passage groups.
+- 8-10 questions total.
+- Mix:
+  - main argument
+  - detail
+  - inference
+  - vocabulary in context
+  - purpose/tone if available
+
+Writing /10:
+- 5 objective/controlled tasks.
+- Recommended mix:
+  - 1 fill_blank or advanced cloze
+  - 1 error_correction
+  - 1 sentence_order
+  - 1 sentence_transform
+  - 1 controlled_response with offline rubric
+
+
+5.3 Blueprint JSON design
+-------------------------
+Create:
+data/exam-blueprints.json
+
+Example:
+
+{
+  "vt_3skills_v1": {
+    "version": "vt_3skills_v1",
+    "scoreMax": 30,
+    "skills": {
+      "listening": {
+        "scoreMax": 10,
+        "audioGroups": 2,
+        "minQuestions": 8,
+        "maxQuestions": 10,
+        "targetLevelsByPosition": {
+          "staff": ["A2", "B1"],
+          "manager": ["B2", "C1"]
+        },
+        "subskillTargets": {
+          "gist": 1,
+          "detail": 3,
+          "number_time_place": 1,
+          "inference": 1,
+          "service_context": 2
+        }
+      },
+      "reading": {
+        "scoreMax": 10,
+        "passageGroups": 1,
+        "minQuestions": 5,
+        "maxQuestions": 10,
+        "targetLevelsByPosition": {
+          "staff": ["B1"],
+          "manager": ["B2", "C1"]
+        },
+        "subskillTargets": {
+          "main_idea": 1,
+          "detail": 3,
+          "vocab_context": 1,
+          "inference": 1
+        }
+      },
+      "writing": {
+        "scoreMax": 10,
+        "itemCount": 5,
+        "targetLevelsByPosition": {
+          "staff": ["A2", "B1"],
+          "manager": ["B2", "C1"]
+        },
+        "typeTargets": {
+          "fill_blank": 1,
+          "error_correction": 1,
+          "sentence_order": 1,
+          "sentence_transform": 1,
+          "controlled_response": 1
+        },
+        "fallbackTypeTargets": {
+          "fill_blank": 2,
+          "error_correction": 1,
+          "sentence_order": 1,
+          "sentence_transform": 1
+        }
+      }
+    },
+    "bands": {
+      "staff": [
+        { "min": 27, "level": "B2", "status": "pass", "label": "Upper-Intermediate - excellent staff result" },
+        { "min": 20, "level": "B1", "status": "pass", "label": "Intermediate - meets staff requirement" },
+        { "min": 11, "level": "A2", "status": "review", "label": "Elementary - review recommended" },
+        { "min": 0,  "level": "A1", "status": "fail", "label": "Beginner - below requirement" }
+      ],
+      "manager": [
+        { "min": 27, "level": "C2", "status": "pass", "label": "Proficient - strong manager result" },
+        { "min": 23, "level": "C1", "status": "pass", "label": "Advanced - meets manager requirement" },
+        { "min": 18, "level": "B2", "status": "review", "label": "Upper-Intermediate - review recommended" },
+        { "min": 13, "level": "B1", "status": "review", "label": "Intermediate - below manager target" },
+        { "min": 0,  "level": "A2", "status": "fail", "label": "Elementary - below requirement" }
+      ]
+    }
+  }
+}
+
+Important:
+Call these "internal bands" unless the exam is professionally calibrated against CEFR.
+
+
+6. Item Bank V2 Schema
+=====================
+
+Current item schema should remain valid.
+
+Add optional metadata fields. Existing items without these fields must still work.
+
+Common item fields:
+
+{
+  "id": "L_B1_BOOKING_001",
+  "type": "mcq",
+  "skill": "listening",
+  "level": "B1",
+  "topic": "Hotel booking",
+  "subskill": "detail",
+  "difficulty": 0.52,
+  "discrimination": null,
+  "status": "active",
+  "version": 1,
+  "tags": ["tourism", "hotel", "customer-service"],
+  "points": 1
+}
+
+Listening item:
+
+{
+  "id": "L_B1_BOOKING_001",
+  "skill": "listening",
+  "type": "mcq",
+  "level": "B1",
+  "topic": "Booking confirmation",
+  "subskill": "detail",
+  "audioFile": "l1c",
+  "audioGroupId": "l1c",
+  "question": "What time is check-in?",
+  "options": ["1 PM", "2 PM", "3 PM", "4 PM"],
+  "correct": 1,
+  "transcript": null,
+  "points": 1,
+  "status": "active"
+}
+
+Reading item:
+
+{
+  "id": "R_B1_ITIN_001_Q1",
+  "skill": "reading",
+  "type": "mcq",
+  "level": "B1",
+  "topic": "Tour itinerary",
+  "subskill": "main_idea",
+  "passageId": "R_B1_ITIN_001",
+  "passageTitle": "Mekong Delta Tour",
+  "passage": "...",
+  "question": "...",
+  "options": ["...", "...", "...", "..."],
+  "correct": 0,
+  "points": 1,
+  "status": "active"
+}
+
+Writing deterministic item:
+
+{
+  "id": "W_B1_TRANSFORM_001",
+  "skill": "writing",
+  "type": "sentence_transform",
+  "level": "B1",
+  "topic": "Customer support",
+  "subskill": "grammar_transform",
+  "instruction": "Rewrite the sentences using the given word.",
+  "sentences": [
+    {
+      "original": "The guest asked for a quiet room.",
+      "keyword": "would",
+      "accept": ["The guest would like a quiet room."]
+    }
+  ],
+  "points": 1,
+  "status": "active"
+}
+
+Writing controlled_response item:
+
+{
+  "id": "WCR_B1_EMAIL_001",
+  "skill": "writing",
+  "type": "controlled_response",
+  "level": "B1",
+  "topic": "Hotel booking confirmation",
+  "subskill": "service_email",
+  "instruction": "Write a short email response.",
+  "prompt": "A guest asks you to confirm a booking for three nights. Write a short email confirming the reservation and reminding the guest to bring identification.",
+  "minWords": 70,
+  "maxWords": 110,
+  "format": "email",
+  "rubricVersion": "writing_controlled_v1",
+  "requiredElements": [
+    { "id": "greeting", "weight": 4, "phrases": ["dear", "hello", "good morning"] },
+    { "id": "confirmation", "weight": 8, "phrases": ["confirm", "confirmed", "reservation", "booking"] },
+    { "id": "duration", "weight": 4, "phrases": ["three nights", "3 nights"] },
+    { "id": "identification", "weight": 5, "phrases": ["passport", "id card", "identification"] },
+    { "id": "closing", "weight": 4, "phrases": ["thank you", "best regards", "sincerely"] }
+  ],
+  "domainTerms": ["reservation", "guest", "booking", "check-in", "hotel", "room"],
+  "formalPhrases": ["please", "we are pleased", "would like", "could you"],
+  "points": 1,
+  "status": "active"
+}
+
+
+7. New Module Design
+====================
+
+Create:
+
+src/lib/exam-engine/
+  index.js
+  blueprint-loader.js
+  selector.js
+  shield.js
+  restore.js
+  validators.js
+
+src/lib/scoring-v2/
+  index.js
+  objective.js
+  writing.js
+  rubric.js
+  text-metrics.js
+  confidence.js
+  bands.js
+
+Do not remove src/lib/scoring.js yet.
+
+
+7.1 exam-engine/index.js
+------------------------
+Responsibilities:
+- choose question set from bank using blueprint
+- return both questionSet and examPlan metadata
+- expose old-compatible questionIds
+- shield items for frontend
+
+Suggested API:
+
+function buildExam({ bank, position, positionInfo, config, blueprintVersion }) {
+  return {
+    questionSet,
+    questionIds,
+    examPlan
+  };
+}
+
+examPlan example:
+
+{
+  "engineVersion": "v2",
+  "blueprintVersion": "vt_3skills_v1",
+  "position": "staff",
+  "bank": "BANK_STAFF",
+  "generatedAt": 1710000000000,
+  "skills": {
+    "listening": {
+      "scoreMax": 10,
+      "selectedGroups": ["l1c", "l7c"],
+      "itemIds": ["..."]
+    },
+    "reading": {
+      "scoreMax": 10,
+      "selectedGroups": ["R_B1_ITIN_001"],
+      "itemIds": ["..."]
+    },
+    "writing": {
+      "scoreMax": 10,
+      "itemIds": ["..."]
+    }
+  }
+}
+
+Store this in sessions.question_ids without breaking old restore:
+
+{
+  "listening": ["..."],
+  "reading": ["..."],
+  "writing": ["..."],
+  "_meta": {
+    "engineVersion": "v2",
+    "blueprintVersion": "vt_3skills_v1",
+    "examPlan": { ... }
+  }
+}
+
+Existing code that reads ids.listening still works.
+
+
+7.2 selector.js
+---------------
+Selection rules:
+
+General:
+- only use items with status missing or "active"
+- prefer target levels from blueprint
+- avoid duplicate content fingerprints
+- preserve complete listening audio groups
+- preserve complete reading passage groups
+- enforce max/min question counts
+
+Listening:
+- group by audioGroupId or audioFile.
+- select N audio groups per blueprint.
+- include all items in selected groups, then cap if needed.
+- if group has too many items, select by subskill coverage first.
+
+Reading:
+- group by passageId.
+- select N passage groups.
+- include all items in selected passage group unless too many.
+- prefer passage groups matching target levels and subskill coverage.
+
+Writing:
+- select by typeTargets.
+- if controlled_response not available, use fallbackTypeTargets.
+- never select short_answer for official v2 unless explicitly allowed and it is review-required.
+
+Fallback:
+- If v2 cannot satisfy blueprint, return a clear error in development.
+- In production, fallback to v1 only if EXAM_ENGINE_FALLBACK_TO_V1=true.
+- Log exact missing coverage.
+
+
+7.3 shield.js
+-------------
+Must hide:
+- correct
+- blanks correct answers
+- accepted answers
+- answer keys
+- rubric internals if they reveal expected answer
+
+Must expose:
+- id
+- type
+- level
+- topic
+- instruction
+- prompt/passages/questions/options
+- minWords/maxWords for writing
+- requiredElements only if they are intended as visible checklist; otherwise hide them.
+
+Compatibility:
+public/exam/exam.js currently can render:
+- fill_blank
+- error_correction
+- sentence_order
+- sentence_transform
+- default free write
+
+If adding controlled_response:
+- It can initially render through default free write because it has prompt/minWords/maxWords.
+- Later frontend can add a better renderer.
+
+
+8. Scoring V2 Design
+====================
+
+8.1 Official score model
+------------------------
+Keep compatibility:
+
+scores = {
+  listening: 0-10 integer or one decimal,
+  reading: 0-10 integer or one decimal,
+  writing: 0-10 integer or one decimal
+}
+
+total = listening + reading + writing
+max = 30
+
+Recommended precision:
+- per-item raw score: 0-1
+- skill score: one decimal internally, but response can be rounded if frontend expects integer.
+- Preserve current integer output if required.
+
+Recommended:
+- Use one decimal in details.
+- Store rounded skill score in DB as current INTEGER columns if schema remains unchanged.
+
+
+8.2 Listening scoring
+---------------------
+Input:
+- questionSet.listening
+- answers.listening
+
+Algorithm:
+1. For each item:
+   - compare Number(userAnswer) === Number(q.correct)
+   - itemScore = 1 or 0
+2. raw = sum(itemScore * points) / sum(points)
+3. skillScore = roundToOneDecimal(raw * 10)
+
+Details:
+
+{
+  "id": "...",
+  "skill": "listening",
+  "subskill": "detail",
+  "level": "B1",
+  "userAnswer": 2,
+  "correct": 1,
+  "isCorrect": false,
+  "pointsEarned": 0,
+  "pointsMax": 1
+}
+
+
+8.3 Reading scoring
+-------------------
+Same as listening for MCQ.
+
+Future item types can be added later:
+- true_false_not_given
+- matching_headings
+- short_mcq
+
+Do not implement unsupported item types unless present in bank.
+
+
+8.4 Writing scoring
+-------------------
+Writing v2 has two categories:
+
+A. Objective deterministic writing:
+- fill_blank
+- error_correction
+- sentence_order
+- sentence_transform
+
+B. Controlled response:
+- controlled_response
+
+Official v2 must not use AI.
+Official v2 must not use length-only scoring.
+
+
+8.4.1 fill_blank
+----------------
+Current issue:
+Only exact lowercase string match is supported.
+
+Improve:
+- support accepted alternatives:
+  blanks: { "1": ["reservation", "booking"] }
+- normalize:
+  - trim
+  - lowercase
+  - collapse whitespace
+  - strip harmless punctuation
+
+Score:
+- correct / total
+
+
+8.4.2 error_correction
+----------------------
+Keep current approach:
+- selected index equals s.correct.
+
+Score:
+- correct / total
+
+
+8.4.3 sentence_order
+--------------------
+Current approach:
+- position match only.
+
+Improve optionally:
+- position score: 70%
+- adjacency score: 30%
+
+For low-risk first implementation:
+- keep position score only.
+- add details for future adjacency score.
+
+
+8.4.4 sentence_transform
+------------------------
+Current issue:
+given.includes(acc) or acc.includes(given) can create false positives.
+
+New rule:
+- exact normalized match OR token similarity >= 0.85 for answers with >= 5 tokens.
+- for accepted answers shorter than 5 tokens, require exact normalized match.
+
+Return:
+- acceptedMatched
+- similarity
+- correct boolean
+
+
+8.4.5 controlled_response
+-------------------------
+This is the main replacement for free AI writing.
+
+Rubric total: 100, normalized to 0-1.
+
+Criteria:
+- Task Fulfilment: 30
+- Language Accuracy: 25
+- Vocabulary & Domain Use: 20
+- Coherence & Organization: 15
+- Fluency & Range: 10
+
+Task Fulfilment:
+- requiredElements coverage.
+- prompt relevance.
+- format completion if email/service note.
+
+Language Accuracy:
+Use deterministic penalties only:
+- too few valid English-like tokens
+- no complete sentence
+- excessive punctuation/noise
+- repeated sentence
+- common pattern errors if detectable
+
+Vocabulary:
+- domainTermCoverage.
+- formal phrase usage.
+- avoid keyword stuffing.
+
+Coherence:
+- greeting/closing for email.
+- connector count.
+- paragraph/sentence organization.
+
+Fluency & Range:
+- sentence count.
+- average sentence length.
+- unique token ratio.
+- not all sentences identical/simple.
+
+Confidence:
+- calculated separately.
+- low confidence triggers pending_review.
+
+Do not overclaim grammar accuracy. Rule-based scorer is transparent and conservative.
+
+
+8.5 Pending review rules
+------------------------
+Set flags.writing_pending_review = true if:
+
+- controlled_response confidence < OFFLINE_SCORING_MIN_CONFIDENCE
+- writing score is near pass/fail threshold
+- answer is blank or too short
+- answer copies prompt heavily
+- answer appears non-English
+- answer is suspicious/repetitive
+- item type is short_answer and no deterministic rubric is available
+
+When pending review:
+- score_writing can be null or provisional.
+- score_total must be null to preserve current pending_review behavior.
+- status = pending_review.
+
+Current admin pending-review route already supports manual finalize.
+Do not break it.
+
+
+9. Internal Band Mapping
+========================
+
+Do not claim official CEFR certification.
+Use "internal CEFR-aligned band".
+
+Keep calcCEFR compatibility but add calcBandV2(total, position, skillScores, flags).
+
+Staff:
+- 27-30: B2 / pass / excellent
+- 20-26.9: B1 / pass / meets requirement
+- 11-19.9: A2 / review / borderline
+- 0-10.9: A1 / fail
+
+Manager:
+- 27-30: C2 / pass / strong
+- 23-26.9: C1 / pass / meets requirement
+- 18-22.9: B2 / review / borderline for manager
+- 13-17.9: B1 / review / below manager target
+- 0-12.9: A2 / fail
+
+Additional gating rules:
+- If writing_pending_review: status pending_review.
+- If any skill score < 3: status review even if total passes.
+- If cheatEvents high: status review.
+- If writing score < 4: status review.
+
+Do not add these gating rules directly to v1. Add them to v2 only.
+
+
+10. Mapping To Current Files
+============================
+
+10.1 src/routes/exam.js
+-----------------------
+Modify carefully:
+
+Current:
+const { positionInfo, sampleQuestions, shieldForClient, scoreAnswers, calcCEFR } = require('../lib/scoring');
+
+Target:
+- Keep existing import for v1.
+- Add exam-engine v2 import:
+  const examEngine = require('../lib/exam-engine');
+- Add scoring v2 import through scoring.js wrapper or direct module.
+
+Start route:
+
+if (process.env.EXAM_ENGINE_VERSION === 'v2') {
+  const built = examEngine.buildExam({
+    bank,
+    position,
+    posInfo,
+    config,
+    blueprintVersion: process.env.EXAM_BLUEPRINT_VERSION || 'vt_3skills_v1'
+  });
+  questionSet = built.questionSet;
+  questionIds = built.questionIds; // includes _meta
+} else {
+  existing v1 logic
+}
+
+Submit route:
+- restore must ignore ids._meta.
+- pass session/position/options to scoreAnswers if useful.
+- v2 scoring stores details/flags in answers JSON as current code already does.
+
+Do not change response:
+{
+  examId,
+  candidate,
+  score: { listening, reading, writing, total, max: 30 },
+  cefr,
+  status,
+  pendingReview,
+  elapsedSeconds,
+  submittedAt
+}
+
+Optional additive fields:
+- score.version
+- score.confidence
+- score.breakdown
+
+Only add optional fields after frontend tolerance is confirmed.
+
+
+10.2 src/lib/scoring.js
+-----------------------
+Refactor into wrapper without breaking exports.
+
+Current scoreAnswers becomes scoreAnswersV1.
+
+New scoreAnswers:
+
+async function scoreAnswers(questionSet, answers, options = {}) {
+  const version = process.env.SCORING_VERSION || 'v1';
+  const shadow = String(process.env.SCORING_SHADOW_MODE).toLowerCase() === 'true';
+
+  if (version === 'v2') {
+    return require('./scoring-v2').scoreAnswersV2(questionSet, answers, options);
+  }
+
+  const v1 = await scoreAnswersV1(questionSet, answers, options);
+
+  if (shadow) {
+    try {
+      v1.shadow = await require('./scoring-v2').scoreAnswersV2(questionSet, answers, options);
+      v1.flags = v1.flags || {};
+      v1.flags.shadow_scoring_v2 = true;
+    } catch (err) {
+      v1.flags = v1.flags || {};
+      v1.flags.shadow_scoring_v2_error = err.message;
+    }
+  }
+
+  return v1;
+}
+
+Also change v1 short_answer behavior:
+- default must not length-score.
+- if AI fails and ALLOW_LENGTH_BASED_WRITING_FALLBACK !== "true":
+  flags.writing_pending_review = true
+  details.writing.push({ id, type, pending: true, reason: "grader_unavailable" })
+
+
+10.3 src/lib/writing-scorer.js
+------------------------------
+Can remain for v1.
+For v2, create new src/lib/scoring-v2/objective.js.
+
+Do not edit old scorer heavily unless needed.
+
+
+10.4 src/lib/bank.js
+--------------------
+Extend validateItemShape to accept controlled_response when ready.
+
+Current writing validation rejects any type outside:
+- fill_blank
+- error_correction
+- sentence_order
+- sentence_transform
+- short_answer
+
+Add:
+- controlled_response
+
+Validation requirements:
+- prompt string
+- minWords positive integer
+- maxWords > minWords
+- requiredElements array
+- domainTerms array optional
+- rubricVersion optional
+
+Do not require all old bank items to have v2 metadata.
+
+
+10.5 public/exam/exam.js
+------------------------
+No immediate required change.
+
+controlled_response can render as free write via default renderer if it has:
+- type: "controlled_response"
+- prompt
+- minWords
+- maxWords
+
+Later optional UI:
+- show checklist-style instruction without revealing exact scoring phrases.
+- better word count.
+- hide speaking tab from official flow if product wants 3-skill-only exam.
+
+Important:
+The user requested 3 skills excluding speaking.
+At minimum, do not include speaking in scoring.
+Prefer not to call loadSpeakingQuestions() automatically in official 3-skill mode.
+Add frontend feature flag later:
+ENABLE_SPEAKING=false
+
+
+10.6 Admin impact
+-----------------
+Admin pending-review currently supports writing manual finalize.
+Keep using it.
+
+Future admin additions:
+- show scoring version
+- show review reasons
+- show confidence
+- show writing rubric breakdown
+
+Do not implement admin UI changes in the first scorer patch unless necessary.
+
+
+11. Data Compatibility Strategy
+===============================
+
+sessions.question_ids old:
+
+{
+  "listening": ["L1", "L2"],
+  "reading": ["R1"],
+  "writing": ["W1"]
+}
+
+sessions.question_ids v2:
+
+{
+  "listening": ["L1", "L2"],
+  "reading": ["R1"],
+  "writing": ["W1"],
+  "_meta": {
+    "engineVersion": "v2",
+    "blueprintVersion": "vt_3skills_v1",
+    "examPlan": {}
+  }
+}
+
+All restore code must only read the three skill arrays and ignore _meta.
+
+sessions.answers current:
+
+{
+  "answers": {},
+  "details": {},
+  "flags": {}
+}
+
+sessions.answers v2:
+
+{
+  "answers": {},
+  "details": {},
+  "flags": {
+    "scoring_version": "v2",
+    "blueprintVersion": "vt_3skills_v1",
+    "writing_pending_review": false,
+    "confidence": 0.86,
+    "review_reasons": []
+  },
+  "scoring_v2": {
+    "skillBreakdown": {},
+    "itemBreakdown": {}
+  }
+}
+
+No DB migration required for first version.
+
+
+12. Implementation Phases
+=========================
+
+Phase 1 - Safety patch for current v1
+-------------------------------------
+Goal:
+Remove unsafe length-based official writing fallback.
+
+Changes:
+- In src/lib/scoring.js, short_answer AI failure should set pending_review by default.
+- Add ALLOW_LENGTH_BASED_WRITING_FALLBACK=false default.
+
+Tests:
+- short_answer with no AI must become pending_review.
+- no length-only score is awarded by default.
+
+
+Phase 2 - Add exam blueprint loader and v2 selector
+--------------------------------------------------
+Goal:
+Generate v2 exams without changing API.
+
+Changes:
+- Add data/exam-blueprints.json.
+- Add src/lib/exam-engine/*.
+- Add EXAM_ENGINE_VERSION flag.
+- Start with shadow/dry run if possible.
+
+Tests:
+- staff v2 exam returns listening/reading/writing.
+- manager v2 exam returns target levels.
+- selected question IDs restore correctly.
+- no correct answers leak to client.
+
+
+Phase 3 - Add scoring-v2 deterministic engine
+---------------------------------------------
+Goal:
+Score all current deterministic item types and controlled_response.
+
+Changes:
+- Add src/lib/scoring-v2/*.
+- Add SCORING_VERSION flag.
+- Add shadow mode.
+
+Tests:
+- listening MCQ.
+- reading MCQ.
+- fill_blank alternatives.
+- sentence_transform false positive prevention.
+- controlled_response good answer.
+- controlled_response prompt copy => pending_review.
+
+
+Phase 4 - Add controlled_response items
+---------------------------------------
+Goal:
+Improve writing validity without AI.
+
+Changes:
+- Add a small set of controlled_response items to data/writing-bank.json.
+- Update bank validation.
+- Keep fallback to deterministic writing if not enough controlled_response items.
+
+Tests:
+- controlled_response renders through existing free-write UI.
+- controlled_response scores offline.
+- low confidence goes pending_review.
+
+
+Phase 5 - Enable v2 shadow mode
+-------------------------------
+Goal:
+Collect v2 scores without changing official result.
+
+Env:
+EXAM_ENGINE_VERSION=v1
+SCORING_VERSION=v1
+SCORING_SHADOW_MODE=true
+
+Store:
+- v2 score in answers JSON.
+- no frontend behavior change.
+
+
+Phase 6 - Enable v2 official for internal pilot
+-----------------------------------------------
+Goal:
+Use v2 generation and scoring for pilot only.
+
+Env:
+EXAM_ENGINE_VERSION=v2
+SCORING_VERSION=v2
+SCORING_SHADOW_MODE=false
+
+Rollback:
+Set both flags back to v1.
+
+
+13. Test Plan
+=============
+
+Add scripts in package.json only if acceptable:
+
+"test": "node --test"
+
+Test files:
+
+test/scoring-v2-objective.test.js
+test/scoring-v2-writing.test.js
+test/exam-engine-selector.test.js
+test/exam-flow-v2.test.js
+
+Required unit tests:
+
+1. Listening MCQ scoring returns 10 for all correct.
+2. Listening MCQ scoring returns 0 for all wrong.
+3. Reading MCQ scoring ignores missing answer as wrong.
+4. fill_blank accepts alternative answers.
+5. sentence_transform does not pass on unsafe substring match.
+6. sentence_order scores partial correctly.
+7. controlled_response with all required elements scores high.
+8. controlled_response blank score 0 and low confidence.
+9. controlled_response prompt copy triggers pending_review.
+10. short_answer without deterministic rubric triggers pending_review.
+11. calcBandV2 returns staff B1 pass at total 20.
+12. calcBandV2 returns manager C1 pass at total 23.
+
+Integration tests:
+
+1. POST /api/exam/start with EXAM_ENGINE_VERSION=v2 returns 3 skills.
+2. response questions do not expose correct/blanks/accept.
+3. POST /api/exam/submit with answers returns score /30.
+4. pending review status works when writing is uncertain.
+5. old v1 mode still works.
+
+
+14. Acceptance Criteria
+======================
+
+The work is complete only when:
+
+1. v1 remains available through env flags.
+2. v2 exam generation works for staff and manager.
+3. v2 scoring works without AI.
+4. Speaking is not included in official score.
+5. Official total remains /30.
+6. Public API response remains compatible.
+7. Existing frontend can render v2 questions.
+8. Existing admin pending review still works.
+9. No correct answers leak to client.
+10. short_answer no longer receives word-count score by default.
+11. controlled_response low confidence becomes pending_review.
+12. Tests cover objective scoring, controlled writing, selector, and submit flow.
+13. Rollback to v1 requires only env change.
+
+
+15. What Not To Do
+==================
+
+Do not:
+- rewrite frontend first
+- remove current scoring.js
+- change session table columns for first release
+- include speaking in total score
+- call AI official score
+- keep length-based official fallback
+- mix this with admin route refactor
+- mix this with PII crypto redesign
+- rename existing API fields
+- change admin export format in this patch
+
+
+16. Recommended Commit Split
+============================
+
+Commit 1:
+fix(scoring): disable length-based writing fallback by default
+
+Commit 2:
+feat(exam): add blueprint-based 3-skill exam engine
+
+Commit 3:
+feat(scoring): add offline scoring v2 for three-skill exam
+
+Commit 4:
+feat(bank): add controlled writing item support
+
+Commit 5:
+test(exam): cover v2 selection and scoring
+
+Keep each commit reviewable.
+
+
+17. Final Product Notes
+=======================
+
+This system should be described as:
+"CEFR-aligned internal English placement test"
+
+Do not describe it as:
+"official CEFR certification"
+
+The v2 design improves validity by:
+- separating blueprint from random sampling
+- making score evidence explicit
+- reducing AI dependency
+- removing length-only grading
+- routing uncertain writing to manual review
+- keeping rollback compatibility
+

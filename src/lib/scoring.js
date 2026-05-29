@@ -113,7 +113,7 @@ function shieldForClient(questionSet) {
   };
 }
 
-async function scoreAnswers(questionSet, answers) {
+async function scoreAnswersV1(questionSet, answers) {
   const scores = { listening: 0, reading: 0, writing: 0 };
   const details = { listening: [], reading: [], writing: [] };
   const flags = { writing_pending_review: false };
@@ -159,29 +159,42 @@ async function scoreAnswers(questionSet, answers) {
       }
       
       if (!graded) {
-        const text = typeof userAnswer === 'string' ? userAnswer.trim() : '';
-        const wordCount = text ? text.split(/\s+/).filter(Boolean).length : 0;
-        const minWords = q.minWords || 50;
-        
-        let score = 0;
-        let comment = 'Không có bài làm hoặc bài quá ngắn.';
-        if (wordCount >= minWords) {
-          score = 0.8; // 80% points for meeting length requirement
-          comment = 'Bài làm đạt yêu cầu độ dài. Điểm tự động theo độ dài câu từ.';
-        } else if (wordCount > 0) {
-          score = 0.4; // 40% points
-          comment = 'Bài làm chưa đạt yêu cầu độ dài tối thiểu. Điểm tự động theo độ dài câu từ.';
+        const allowFallback = String(process.env.ALLOW_LENGTH_BASED_WRITING_FALLBACK).toLowerCase() === 'true';
+        if (!allowFallback) {
+          flags.writing_pending_review = true;
+          details.writing.push({
+            id: q.id,
+            type: q.type,
+            points: 0,
+            pending: true,
+            reason: 'grader_unavailable',
+            feedback: 'Không có module chấm điểm tự động. Đang chờ chấm điểm thủ công.'
+          });
+        } else {
+          const text = typeof userAnswer === 'string' ? userAnswer.trim() : '';
+          const wordCount = text ? text.split(/\s+/).filter(Boolean).length : 0;
+          const minWords = q.minWords || 50;
+          
+          let score = 0;
+          let comment = 'Không có bài làm hoặc bài quá ngắn.';
+          if (wordCount >= minWords) {
+            score = 0.8; // 80% points for meeting length requirement
+            comment = 'Bài làm đạt yêu cầu độ dài. Điểm tự động theo độ dài câu từ.';
+          } else if (wordCount > 0) {
+            score = 0.4; // 40% points
+            comment = 'Bài làm chưa đạt yêu cầu độ dài tối thiểu. Điểm tự động theo độ dài câu từ.';
+          }
+          
+          writingTotal += score;
+          details.writing.push({
+            id: q.id,
+            type: q.type,
+            points: score,
+            pending: false,
+            comment,
+            feedback: `Chế độ chấm điểm tự động (độ dài: ${wordCount}/${minWords} từ).`
+          });
         }
-        
-        writingTotal += score;
-        details.writing.push({
-          id: q.id,
-          type: q.type,
-          points: score,
-          pending: false,
-          comment,
-          feedback: `Chế độ chấm điểm tự động (độ dài: ${wordCount}/${minWords} từ).`
-        });
       }
     } else {
       // Fallback — mark as 0 if no grader available
@@ -200,6 +213,31 @@ async function scoreAnswers(questionSet, answers) {
     : scores.listening + scores.reading + scores.writing;
 
   return { scores, total, details, flags };
+}
+
+async function scoreAnswers(questionSet, answers, options = {}) {
+  const version = process.env.SCORING_VERSION || 'v1';
+  const shadow = String(process.env.SCORING_SHADOW_MODE).toLowerCase() === 'true';
+
+  if (version === 'v2') {
+    return require('./scoring-v2').scoreAnswersV2(questionSet, answers, options);
+  }
+
+  const v1 = await scoreAnswersV1(questionSet, answers, options);
+
+  if (shadow) {
+    try {
+      v1.shadow = await require('./scoring-v2').scoreAnswersV2(questionSet, answers, options);
+      v1.flags = v1.flags || {};
+      v1.flags.shadow_scoring_v2 = true;
+      v1.scoring_v2 = v1.shadow.scoring_v2; // Keep it clean for the DB JSON
+    } catch (err) {
+      v1.flags = v1.flags || {};
+      v1.flags.shadow_scoring_v2_error = err.message;
+    }
+  }
+
+  return v1;
 }
 
 function calcCEFR(total, isManagement) {

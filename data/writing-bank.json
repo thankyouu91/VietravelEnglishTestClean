@@ -362,6 +362,83 @@
           "answer": "The guest asked if I could help with their bags."
         }
       ]
+    },
+    {
+      "id": "WCR_B1_EMAIL_001",
+      "skill": "writing",
+      "type": "controlled_response",
+      "level": "B1",
+      "topic": "Hotel booking confirmation",
+      "subskill": "service_email",
+      "instruction": "Write a short email response.",
+      "prompt": "A guest asks you to confirm a booking for three nights. Write a short email confirming the reservation and reminding the guest to bring identification.",
+      "minWords": 30,
+      "maxWords": 110,
+      "format": "email",
+      "rubricVersion": "writing_controlled_v1",
+      "requiredElements": [
+        {
+          "id": "greeting",
+          "weight": 4,
+          "phrases": [
+            "dear",
+            "hello",
+            "good morning"
+          ]
+        },
+        {
+          "id": "confirmation",
+          "weight": 8,
+          "phrases": [
+            "confirm",
+            "confirmed",
+            "reservation",
+            "booking"
+          ]
+        },
+        {
+          "id": "duration",
+          "weight": 4,
+          "phrases": [
+            "three nights",
+            "3 nights"
+          ]
+        },
+        {
+          "id": "identification",
+          "weight": 5,
+          "phrases": [
+            "passport",
+            "id card",
+            "identification"
+          ]
+        },
+        {
+          "id": "closing",
+          "weight": 4,
+          "phrases": [
+            "thank you",
+            "best regards",
+            "sincerely"
+          ]
+        }
+      ],
+      "domainTerms": [
+        "reservation",
+        "guest",
+        "booking",
+        "check-in",
+        "hotel",
+        "room"
+      ],
+      "formalPhrases": [
+        "please",
+        "we are pleased",
+        "would like",
+        "could you"
+      ],
+      "points": 1,
+      "status": "active"
     }
   ],
   "BANK_STAFF_EXTRA": [

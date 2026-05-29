@@ -1,3 +1,9 @@
+/**
+ * Vietravel English Test - Exam & Admin Server
+ * Source code developed by: tranlong@cdimex.com.vn
+ * Exam content developed by: MM Publications Vietnam
+ */
+
 require('dotenv').config();
 const express      = require('express');
 const cookieParser = require('cookie-parser');

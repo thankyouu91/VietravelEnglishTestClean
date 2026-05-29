@@ -207,9 +207,14 @@ function validateItemShape(track, item) {
     return;
   }
   if (track === 'writing') {
-    if (item.type && item.type !== 'short_answer') {
+    if (item.type === 'controlled_response') {
+      must(typeof item.prompt === 'string' && item.prompt.trim().length > 0, 'prompt is required');
+      must(Number.isInteger(item.minWords) && item.minWords > 0, 'minWords must be a positive integer');
+      must(Number.isInteger(item.maxWords) && item.maxWords > item.minWords, 'maxWords must exceed minWords');
+      must(Array.isArray(item.requiredElements), 'requiredElements must be an array');
+    } else if (item.type && item.type !== 'short_answer') {
       const valid = ['fill_blank', 'error_correction', 'sentence_order', 'sentence_transform'];
-      must(valid.includes(item.type), `writing item type must be short_answer or one of ${valid.join(', ')}`);
+      must(valid.includes(item.type), `writing item type must be short_answer, controlled_response, or one of ${valid.join(', ')}`);
     } else {
       must(!item.type || item.type === 'short_answer', 'writing items must have type "short_answer"');
       must(typeof item.prompt === 'string' && item.prompt.trim().length > 0, 'prompt is required');

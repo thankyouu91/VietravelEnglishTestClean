@@ -1,0 +1,77 @@
+{
+  "vt_3skills_v1": {
+    "version": "vt_3skills_v1",
+    "scoreMax": 30,
+    "skills": {
+      "listening": {
+        "scoreMax": 10,
+        "audioGroups": 2,
+        "minQuestions": 8,
+        "maxQuestions": 10,
+        "targetLevelsByPosition": {
+          "staff": ["A2", "B1"],
+          "manager": ["B2", "C1"]
+        },
+        "subskillTargets": {
+          "gist": 1,
+          "detail": 3,
+          "number_time_place": 1,
+          "inference": 1,
+          "service_context": 2
+        }
+      },
+      "reading": {
+        "scoreMax": 10,
+        "passageGroups": 1,
+        "minQuestions": 5,
+        "maxQuestions": 10,
+        "targetLevelsByPosition": {
+          "staff": ["B1"],
+          "manager": ["B2", "C1"]
+        },
+        "subskillTargets": {
+          "main_idea": 1,
+          "detail": 3,
+          "vocab_context": 1,
+          "inference": 1
+        }
+      },
+      "writing": {
+        "scoreMax": 10,
+        "itemCount": 5,
+        "targetLevelsByPosition": {
+          "staff": ["A2", "B1"],
+          "manager": ["B2", "C1"]
+        },
+        "typeTargets": {
+          "fill_blank": 1,
+          "error_correction": 1,
+          "sentence_order": 1,
+          "sentence_transform": 1,
+          "controlled_response": 1
+        },
+        "fallbackTypeTargets": {
+          "fill_blank": 2,
+          "error_correction": 1,
+          "sentence_order": 1,
+          "sentence_transform": 1
+        }
+      }
+    },
+    "bands": {
+      "staff": [
+        { "min": 27, "level": "B2", "status": "pass", "label": "Upper-Intermediate - excellent staff result" },
+        { "min": 20, "level": "B1", "status": "pass", "label": "Intermediate - meets staff requirement" },
+        { "min": 11, "level": "A2", "status": "review", "label": "Elementary - review recommended" },
+        { "min": 0,  "level": "A1", "status": "fail", "label": "Beginner - below requirement" }
+      ],
+      "manager": [
+        { "min": 27, "level": "C2", "status": "pass", "label": "Proficient - strong manager result" },
+        { "min": 23, "level": "C1", "status": "pass", "label": "Advanced - meets manager requirement" },
+        { "min": 18, "level": "B2", "status": "review", "label": "Upper-Intermediate - review recommended" },
+        { "min": 13, "level": "B1", "status": "review", "label": "Intermediate - below manager target" },
+        { "min": 0,  "level": "A2", "status": "fail", "label": "Elementary - below requirement" }
+      ]
+    }
+  }
+}

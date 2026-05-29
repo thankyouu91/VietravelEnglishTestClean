@@ -105,26 +105,41 @@ router.post('/start', (req, res) => {
   const bank = getBank(posInfo.bank);
   
   let questionSet;
-  const config = db.prepare("SELECT * FROM exam_configs WHERE position = ?").get(position);
-  if (config && config.config_type === 'fixed') {
-    const listeningQs = bank.listening.filter(q => q.audioFile === config.selected_audio);
-    const readingQs = bank.reading.filter(q => (q.passageId || q.passage || q.id) === config.selected_passage);
-    const writingQs = bank.writing.filter(q => q.id === config.selected_writing);
-    
-    const randomSet = sampleQuestions(bank, posInfo.management);
-    questionSet = {
-      listening: listeningQs.length > 0 ? listeningQs : randomSet.listening,
-      reading: readingQs.length > 0 ? readingQs : randomSet.reading,
-      writing: writingQs.length > 0 ? writingQs : randomSet.writing
-    };
+  let questionIds;
+
+  if (process.env.EXAM_ENGINE_VERSION === 'v2') {
+    const examEngine = require('../lib/exam-engine');
+    const built = examEngine.buildExam({
+      bank,
+      position,
+      positionInfo: posInfo,
+      config: db.prepare("SELECT * FROM exam_configs WHERE position = ?").get(position),
+      blueprintVersion: process.env.EXAM_BLUEPRINT_VERSION || 'vt_3skills_v1'
+    });
+    questionSet = built.questionSet;
+    questionIds = built.questionIds;
   } else {
-    questionSet = sampleQuestions(bank, posInfo.management);
+    const config = db.prepare("SELECT * FROM exam_configs WHERE position = ?").get(position);
+    if (config && config.config_type === 'fixed') {
+      const listeningQs = bank.listening.filter(q => q.audioFile === config.selected_audio);
+      const readingQs = bank.reading.filter(q => (q.passageId || q.passage || q.id) === config.selected_passage);
+      const writingQs = bank.writing.filter(q => q.id === config.selected_writing);
+      
+      const randomSet = sampleQuestions(bank, posInfo.management);
+      questionSet = {
+        listening: listeningQs.length > 0 ? listeningQs : randomSet.listening,
+        reading: readingQs.length > 0 ? readingQs : randomSet.reading,
+        writing: writingQs.length > 0 ? writingQs : randomSet.writing
+      };
+    } else {
+      questionSet = sampleQuestions(bank, posInfo.management);
+    }
+    questionIds = {
+      listening: questionSet.listening.map(q => q.id),
+      reading:   questionSet.reading.map(q => q.id),
+      writing:   questionSet.writing.map(q => q.id),
+    };
   }
-  const questionIds = {
-    listening: questionSet.listening.map(q => q.id),
-    reading:   questionSet.reading.map(q => q.id),
-    writing:   questionSet.writing.map(q => q.id),
-  };
 
   const sessionId = nanoid(21);
   const examId    = genExamId();
@@ -174,7 +189,9 @@ router.post('/start', (req, res) => {
     maxListens:  MAX_LISTENS,
     isManagement: posInfo.management,
     positionLabel: posInfo.label,
-    questions: shieldForClient(questionSet),
+    questions: process.env.EXAM_ENGINE_VERSION === 'v2'
+                 ? require('../lib/exam-engine').shieldForClientV2(questionSet)
+                 : shieldForClient(questionSet),
   });
 });
 
@@ -257,7 +274,7 @@ router.post('/submit', async (req, res) => {
 
   let scoring;
   try {
-    scoring = await scoreAnswers(questionSet, answers || {});
+    scoring = await scoreAnswers(questionSet, answers || {}, { session, posInfo, bank });
   } catch (err) {
     return res.status(500).json({ error: 'scoring_failed', message: err.message });
   }
@@ -265,9 +282,14 @@ router.post('/submit', async (req, res) => {
 
   const pendingReview = !!flags.writing_pending_review;
   const newStatus = pendingReview ? 'pending_review' : 'submitted';
-  const cefr = pendingReview
-    ? { level: null, status: 'pending_review', label: 'Đang chờ chấm điểm phần Viết' }
-    : calcCEFR(total, !!session.is_management);
+  let cefr;
+  if (pendingReview) {
+    cefr = { level: null, status: 'pending_review', label: 'Đang chờ chấm điểm phần Viết' };
+  } else if (process.env.SCORING_VERSION === 'v2') {
+    cefr = require('../lib/scoring-v2/bands').calcBandV2(total, session.is_management ? 'manager' : 'staff', scores, flags);
+  } else {
+    cefr = require('../lib/scoring').calcCEFR(total, !!session.is_management);
+  }
 
   const now = Date.now();
   const elapsed = Math.floor((now - session.started_at) / 1000);
