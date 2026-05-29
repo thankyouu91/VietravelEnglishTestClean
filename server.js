@@ -156,10 +156,17 @@ function serveHtmlWithNonce(filePath) {
 // Serve main entry HTMLs dynamically to inject CSP nonces
 app.get('/', serveHtmlWithNonce(path.join(__dirname, 'public', 'index.html')));
 app.get('/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'index.html')));
-app.get('/exam', (req, res) => res.redirect('/exam/'));
+app.get('/exam', (req, res, next) => {
+  if (req.path === '/exam') return res.redirect('/exam/');
+  next();
+});
 app.get('/exam/', serveHtmlWithNonce(path.join(__dirname, 'public', 'exam', 'index.html')));
 app.get('/exam/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'exam', 'index.html')));
-app.get('/admin', (req, res) => res.redirect('/admin/'));
+
+app.get('/admin', (req, res, next) => {
+  if (req.path === '/admin') return res.redirect('/admin/');
+  next();
+});
 app.get('/admin/', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'index.html')));
 app.get('/admin/index.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'index.html')));
 app.get('/admin/login.html', serveHtmlWithNonce(path.join(__dirname, 'public', 'admin', 'login.html')));
