@@ -304,14 +304,26 @@ window.toggleListeningAudio = async function() {
       }
     }
   } else {
-    if(audioEl.paused) {
-      audioEl.play();
-      playIcon.classList.add('hidden');
-      pauseIcon.classList.remove('hidden');
-    } else {
-      audioEl.pause();
+    try {
+      if(audioEl.paused) {
+        await audioEl.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } else {
+        audioEl.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+    } catch (err) {
+      console.warn('Play failed in else block:', err);
       playIcon.classList.remove('hidden');
       pauseIcon.classList.add('hidden');
+      // If the audio source is dead or expired, clear it so they can fetch a new token
+      if (err.name === 'NotSupportedError' || err.name === 'NotAllowedError') {
+        audioEl.src = '';
+        audioEl.removeAttribute('data-af');
+        alert('Có lỗi khi phát audio. Vui lòng bấm Nghe lại.');
+      }
     }
   }
 };

@@ -235,7 +235,7 @@ router.post('/listen', (req, res) => {
 
   // Generate short-lived audio token
   const audioToken = nanoid(32);
-  const expiresAt = Date.now() + 60 * 1000; // 60 seconds
+  const expiresAt = Date.now() + 60 * 60 * 1000; // 1 hour
   db.prepare('DELETE FROM audio_tokens WHERE expires_at < ?').run(Date.now());
   db.prepare('INSERT INTO audio_tokens (token, session_id, audio_file, expires_at) VALUES (?, ?, ?, ?)')
     .run(audioToken, decoded.sid, safeName, expiresAt);
