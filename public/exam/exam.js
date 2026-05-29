@@ -88,11 +88,18 @@ function blockPasteOnWriting(){
 
 // ── Timer ──────────────────────────────────────────────────
 function startTimer(s){
-  examState.secondsLeft=s;renderTimer();
-  examState.timerInterval=setInterval(()=>{
-    examState.secondsLeft--;renderTimer();
-    if(examState.secondsLeft<=0){clearInterval(examState.timerInterval);autoSubmit();}
-  },1000);
+  examState.endTime = Date.now() + s * 1000;
+  examState.secondsLeft = s;
+  renderTimer();
+  examState.timerInterval = setInterval(() => {
+    const remaining = Math.max(0, Math.floor((examState.endTime - Date.now()) / 1000));
+    examState.secondsLeft = remaining;
+    renderTimer();
+    if(examState.secondsLeft <= 0){
+      clearInterval(examState.timerInterval);
+      autoSubmit();
+    }
+  }, 1000);
 }
 function renderTimer(){
   const s=examState.secondsLeft,el=$('timer');
