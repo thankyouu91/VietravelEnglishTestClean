@@ -275,18 +275,26 @@ window.toggleListeningAudio = async function() {
       audioEl.src = `/api/audio/plain/${af}.mp3?${atParam}`;
       audioEl.setAttribute('data-af', af);
       audioEl.load();
-      await audioEl.play();
+      try {
+        await audioEl.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } catch (playErr) {
+        console.warn('Autoplay prevented by browser:', playErr);
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
       btn.disabled = false;
-      playIcon.classList.add('hidden');
-      pauseIcon.classList.remove('hidden');
       updateAudioUI();
     } catch(err) {
       btn.disabled = false;
       console.error('Audio toggle error:', err);
-      if(err.message.includes('max_listens')){
+      if(err.message && err.message.includes('max_listens')){
          examState.listenCounts[af] = examState.maxListens;
          updateAudioUI();
-      } else { alert('Lỗi tải audio: ' + err.message); }
+      } else { 
+         alert('Lỗi tải audio: ' + err.message); 
+      }
     }
   } else {
     if(audioEl.paused) {
